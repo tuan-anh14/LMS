@@ -1,0 +1,53 @@
+{
+    "sEmptyTable": "Không có dữ liệu trong bảng",
+    "sInfo": "Đang hiển thị _START_ đến _END_ trong tổng số _TOTAL_ bản ghi",
+    "sInfoEmpty": "Hiển thị 0 đến 0 trong tổng số 0 bản ghi",
+    "sInfoFiltered": "(được lọc từ tổng số _MAX_ bản ghi)",
+    "sInfoPostFix": "",
+    "sInfoThousands": ",",
+    "sLengthMenu": "Hiển thị _MENU_ bản ghi",
+    "sLoadingRecords": "Đang tải...",
+    "sProcessing": "Đang xử lý...",
+    "sSearch": "Tìm kiếm:",
+    "sSearchPlaceholder": "Nhập từ khóa tìm kiếm...",
+    "sThousands": ",",
+    "sUrl": "",
+    "sZeroRecords": "Không tìm thấy kết quả nào phù hợp",
+    "oPaginate": {
+        "sFirst": "Đầu",
+        "sLast": "Cuối",
+        "sNext": "Tiếp",
+        "sPrevious": "Trước"
+    },
+    "oAria": {
+        "sSortAscending": ": sắp xếp cột theo thứ tự tăng dần",
+        "sSortDescending": ": sắp xếp cột theo thứ tự giảm dần"
+    },
+    "select": {
+        "rows": {
+            "_": "Đã chọn %d dòng",
+            "0": "Nhấp vào một dòng để chọn",
+            "1": "Đã chọn 1 dòng"
+        }
+    },
+    "buttons": {
+        "copy": "Sao chép",
+        "colvis": "Hiển thị cột",
+        "collection": "Bộ sưu tập",
+        "colvisRestore": "Khôi phục hiển thị",
+        "copyKeys": "Nhấn Ctrl hoặc u2318 + C để sao chép dữ liệu bảng vào clipboard.<br><br>Để hủy, click vào thông báo này hoặc nhấn ESC.",
+        "copySuccess": {
+            "1": "Đã sao chép 1 dòng vào clipboard",
+            "_": "Đã sao chép %d dòng vào clipboard"
+        },
+        "copyTitle": "Sao chép vào Clipboard",
+        "csv": "CSV",
+        "excel": "Excel",
+        "pageLength": {
+            "-1": "Hiển thị tất cả dòng",
+            "_": "Hiển thị %d dòng"
+        },
+        "pdf": "PDF",
+        "print": "In"
+    }
+}

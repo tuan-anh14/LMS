@@ -1,0 +1,25 @@
+<?php
+
+return [
+    'settings' => 'Cài đặt',
+    'general' => 'Chung',
+    'social_links' => 'Liên kết mạng xã hội',
+    'mobile_links' => 'Liên kết ứng dụng di động',
+    'keywords' => 'Từ khóa',
+    'description' => 'Mô tả',
+    'logo' => 'Logo',
+    'fav_icon' => 'Biểu tượng',
+    'title' => 'Tiêu đề',
+    'email' => 'Email',
+    'phone' => 'Số điện thoại',
+    'address' => 'Địa chỉ',
+    'facebook' => 'Facebook',
+    'twitter' => 'Twitter',
+    'instagram' => 'Instagram',
+    'youtube' => 'Youtube',
+    'linkedin' => 'LinkedIn',
+    'android' => 'Android',
+    'ios' => 'iOS',
+    'google_map_api_key' => 'Khóa API Google Maps',
+    'general_settings' => 'Cài đặt chung',
+]; 

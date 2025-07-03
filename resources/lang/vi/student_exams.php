@@ -1,0 +1,26 @@
+<?php
+
+return [
+    'student_exams' => 'Bài kiểm tra học sinh',
+    'student_exam' => 'Bài kiểm tra học sinh',
+    'statuses' => 'Trạng thái',
+    'status' => 'Trạng thái',
+    'requested' => 'Đã yêu cầu',
+    'assigned_to_examiner' => 'Đã giao cho giám khảo',
+    'date_time_set' => 'Đã đặt thời gian',
+    'date_time' => 'Ngày giờ',
+    'date' => 'Ngày',
+    'time' => 'Giờ',
+    'set_date_time' => 'Đặt ngày giờ',
+    'add_assessment' => 'Thêm đánh giá',
+    'superiority' => 'Xuất sắc',
+    'excellent' => 'Tuyệt vời',
+    'very_good' => 'Rất tốt',
+    'good' => 'Tốt',
+    'repeat' => 'Lặp lại',
+    'assessment' => 'Đánh giá',
+    'assessment_added' => 'Đã thêm đánh giá',
+    'no_assessment' => 'Chưa đánh giá',
+    'notes' => 'Ghi chú',
+
+]; 
