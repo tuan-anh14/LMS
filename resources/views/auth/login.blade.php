@@ -155,7 +155,7 @@
                                 <a href="{{route('/')}}" class="app-brand-link">
                                     <span class="app-brand-logo demo">
 
-                                        <img src="{{--{{asset('images/login_logo.jpg')}}--}}{{ Storage::url('uploads/' . setting('logo')) }}" alt="" width="150">
+                                        <img src="{{ asset('storage/uploads/logo.png') }}" alt="" width="150">
 
                                     </span>
                                     {{--<span class="app-brand-text demo text-heading fw-bold">معراج للتعليم والتنمية</span>--}}

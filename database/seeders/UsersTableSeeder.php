@@ -17,7 +17,7 @@ class UsersTableSeeder extends Seeder
             'email' => 'admin@webseity.com',
             'password' => bcrypt('demo1234'),
             'type' => 'super_admin',
-            'image' => 'profile.png',
+            'image' => 'profile.jpg',
         ]);
 
         $user->attachRole('super_admin');

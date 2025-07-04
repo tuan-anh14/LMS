@@ -51,7 +51,7 @@
                                 <div class="form-group">
                                     <label>@lang('settings.logo')</label>
                                     <input type="file" name="logo" class="form-control load-image">
-                                    <img src="{{ Storage::url('uploads/' . setting('logo')) }}" class="loaded-image"
+                                    <img src="{{ asset('storage/uploads/logo.png') }}" class="loaded-image"
                                          alt=""
                                          style="display: {{ setting('logo') ? 'block' : 'none' }}; width: 100px; margin: 10px 0;">
                                 </div>

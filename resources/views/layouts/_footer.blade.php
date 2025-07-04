@@ -4,9 +4,9 @@
             <div class="f-items">
                 <div class="col-md-4 item">
                     <div class="f-item">
-                        <img src="{{ Storage::url('uploads/' . setting('logo')) }}" alt="Logo" style="width: 100px !important;">
-                        {{--<img class="footer-logo" src="{{asset('images/footer_logo.jpg')}}" alt="Logo">--}}
-                        <p>
+                        <img class="footer-logo" src="{{asset('images/footer_logo.jpg')}}" alt="Logo">
+                        <!-- <img src="{{ asset('storage/uploads/logo.png') }}" alt="Logo" style="width: 100px !important;"> -->
+                        <p></p>
                             {{setting('description')}}
                         </p>
                     </div>
