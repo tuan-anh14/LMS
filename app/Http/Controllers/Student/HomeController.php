@@ -36,4 +36,18 @@ class HomeController extends Controller
 
     }// end of lectures
 
+    public function leaveImpersonate()
+    {
+        if (session()->has('impersonate')) {
+
+            session()->forget('impersonate');
+
+            return redirect()->route('admin.home');
+
+        }//end of if
+
+        return redirect()->route('student.home');
+
+    }// end of leaveImpersonate
+
 }//end of controller
