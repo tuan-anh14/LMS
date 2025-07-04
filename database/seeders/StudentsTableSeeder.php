@@ -17,7 +17,7 @@ class StudentsTableSeeder extends Seeder
             [
                 'country_id' => 1,
                 'governorate_id' => 1,
-                'first_name' => 'طالب ',
+                'first_name' => 'Học sinh',
                 'second_name' => '1',
                 'email' => 'student1@app.com',
                 'password' => bcrypt('password'),
@@ -35,7 +35,7 @@ class StudentsTableSeeder extends Seeder
             [
                 'country_id' => 1,
                 'governorate_id' => 1,
-                'first_name' => 'طالب',
+                'first_name' => 'Học sinh',
                 'second_name' => '2',
                 'email' => 'student2@app.com',
                 'password' => bcrypt('password'),
@@ -53,7 +53,7 @@ class StudentsTableSeeder extends Seeder
             [
                 'country_id' => 1,
                 'governorate_id' => 1,
-                'first_name' => 'طالب',
+                'first_name' => 'Học sinh',
                 'second_name' => '3',
                 'email' => 'student3@app.com',
                 'password' => bcrypt('password'),
@@ -72,7 +72,7 @@ class StudentsTableSeeder extends Seeder
             [
                 'country_id' => 1,
                 'governorate_id' => 1,
-                'first_name' => 'طالب',
+                'first_name' => 'Học sinh',
                 'second_name' => '4',
                 'email' => 'student4@app.com',
                 'password' => bcrypt('password'),
@@ -90,7 +90,7 @@ class StudentsTableSeeder extends Seeder
             [
                 'country_id' => 1,
                 'governorate_id' => 1,
-                'first_name' => 'طالب',
+                'first_name' => 'Học sinh',
                 'second_name' => '5',
                 'email' => 'student5@app.com',
                 'password' => bcrypt('password'),

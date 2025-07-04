@@ -10,13 +10,13 @@ class ExamsTableSeeder extends Seeder
     public function run(): void
     {
         $exams = [
-            ['name' => 'اختبار 1.1', 'project_id' => 1,],
-            ['name' => 'اختبار 1.2', 'project_id' => 1,],
-            ['name' => 'اختبار 1.3', 'project_id' => 1,],
+            ['name' => 'Bài kiểm tra 1.1', 'project_id' => 1,],
+            ['name' => 'Bài kiểm tra 1.2', 'project_id' => 1,],
+            ['name' => 'Bài kiểm tra 1.3', 'project_id' => 1,],
 
-            ['name' => 'اختبار 2.1', 'project_id' => 2,],
-            ['name' => 'اختبار 2.2', 'project_id' => 2,],
-            ['name' => 'اختبار 2.3', 'project_id' => 2,],
+            ['name' => 'Bài kiểm tra 2.1', 'project_id' => 2,],
+            ['name' => 'Bài kiểm tra 2.2', 'project_id' => 2,],
+            ['name' => 'Bài kiểm tra 2.3', 'project_id' => 2,],
         ];
 
         foreach ($exams as $exam) {

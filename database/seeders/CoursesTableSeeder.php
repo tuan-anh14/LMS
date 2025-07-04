@@ -11,21 +11,21 @@ class CoursesTableSeeder extends Seeder
     {
         $courses = [
             [
-                'title' => 'مشروع 1',
-                'short_description' => 'هذا النص مثال لنص اخر يمكن استبداله',
-                'description' => 'هذا النص مثال لنص اخر يمكن استبداله',
+                'title' => 'Khóa học 1',
+                'short_description' => 'Đây là mô tả ngắn cho khóa học 1',
+                'description' => 'Đây là mô tả chi tiết cho khóa học 1',
                 'image' => 'course1.jpg',
             ],
             [
-                'title' => 'مشروع 2',
-                'short_description' => 'هذا النص مثال لنص اخر يمكن استبداله',
-                'description' => 'هذا النص مثال لنص اخر يمكن استبداله',
+                'title' => 'Khóa học 2',
+                'short_description' => 'Đây là mô tả ngắn cho khóa học 2',
+                'description' => 'Đây là mô tả chi tiết cho khóa học 2',
                 'image' => 'course2.jpg',
             ],
             [
-                'title' => 'مشروع 3',
-                'short_description' => 'هذا النص مثال لنص اخر يمكن استبداله',
-                'description' => 'هذا النص مثال لنص اخر يمكن استبداله',
+                'title' => 'Khóa học 3',
+                'short_description' => 'Đây là mô tả ngắn cho khóa học 3',
+                'description' => 'Đây là mô tả chi tiết cho khóa học 3',
                 'image' => 'course3.jpg',
             ],
 

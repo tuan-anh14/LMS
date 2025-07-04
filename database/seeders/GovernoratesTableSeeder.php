@@ -10,7 +10,7 @@ class GovernoratesTableSeeder extends Seeder
     public function run(): void
     {
         $governorates = [
-            ['name' => 'اسطنبول', 'country_id' => 1],
+            ['name' => 'Hồ Chí Minh', 'country_id' => 1],
         ];
 
         foreach ($governorates as $governorate) {

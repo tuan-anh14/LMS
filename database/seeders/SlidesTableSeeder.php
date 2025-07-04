@@ -11,14 +11,14 @@ class SlidesTableSeeder extends Seeder
     {
         $slides = [
             [
-                'upper_title' => 'ويبسايتي',
-                'title' => 'ويبسايتي',
+                'upper_title' => 'Nền tảng học tập',
+                'title' => 'Hệ thống quản lý học tập',
                 'image' => 'slide1.jpg',
                 'link' => '#',
             ],
             [
-                'upper_title' => 'ويبسايتي',
-                'title' => 'ويبسايتي',
+                'upper_title' => 'Nền tảng học tập',
+                'title' => 'Hệ thống quản lý học tập',
                 'image' => 'slide2.jpg',
                 'link' => '#',
             ],

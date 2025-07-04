@@ -14,7 +14,7 @@ class Localization
 
         $firstSegment = array_shift($segments);
 
-        if (in_array($firstSegment, ['en', 'ar', 'vi'])) {
+        if (in_array($firstSegment, ['en', 'vi'])) {
             
             return redirect()->to(implode('/', $segments));
         }

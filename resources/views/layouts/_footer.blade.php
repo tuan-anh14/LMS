@@ -16,21 +16,21 @@
                         <h4>@lang('site.links')</h4>
                         <ul>
                             <li>
-                                <a href="{{route('/')}}">الرئيسية</a>
+                                <a href="{{route('/')}}">Trang chủ</a>
                             </li>
                             <li>
-                                <a href="{{route('courses')}}">الدورات</a>
+                                <a href="{{route('courses')}}">Khóa học</a>
                             </li>
                             <li>
-                                <a href="{{route('contact-us')}}">تواصل معنا</a>
+                                <a href="{{route('contact-us')}}">Liên hệ</a>
                             </li>
                             <li>
-                                <a href="{{route('about-us')}}">من نحن</a>
+                                <a href="{{route('about-us')}}">Về chúng tôi</a>
                             </li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-md-2 col-sm-6 item">
+                <div class="col-md-2 col-sm-6 item"></div>
                     <div class="f-item link">
                         <h4>@lang('site.courses')</h4>
                         <ul>

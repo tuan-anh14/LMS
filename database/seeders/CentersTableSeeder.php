@@ -10,11 +10,11 @@ class CentersTableSeeder extends Seeder
     public function run(): void
     {
         $centers = [
-            ['name' => 'مركز 1',],
+            ['name' => 'Trung tâm 1',],
 
-            ['name' => 'مركز 2',],
+            ['name' => 'Trung tâm 2',],
 
-            ['name' => 'مركز 3',],
+            ['name' => 'Trung tâm 3',],
         ];
 
         foreach ($centers as $center) {

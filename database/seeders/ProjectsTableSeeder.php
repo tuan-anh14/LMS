@@ -12,7 +12,7 @@ class ProjectsTableSeeder extends Seeder
         $projects = [
             [
                 'book_id' => 1,
-                'name' => 'مشروع 1',
+                'name' => 'Dự án 1',
                 'center_ids' => [1, 2],
                 'has_tajweed_lectures' => 1,
                 'has_upbringing_lectures' => 1,
@@ -20,13 +20,13 @@ class ProjectsTableSeeder extends Seeder
 
             [
                 'book_id' => 2,
-                'name' => 'مشروع 2',
+                'name' => 'Dự án 2',
                 'center_ids' => [1, 2],
             ],
 
             [
                 'book_id' => 3,
-                'name' => 'مشروع 3',
+                'name' => 'Dự án 3',
                 'center_ids' => [1, 2],
             ],
         ];

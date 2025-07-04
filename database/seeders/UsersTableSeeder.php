@@ -24,14 +24,14 @@ class UsersTableSeeder extends Seeder
 
         $admins = [
             [
-                'first_name' => 'ادمن 1',
+                'first_name' => 'Quản trị 1',
                 'second_name' => null,
                 'email' => 'admin1@app.com',
                 'password' => bcrypt('password'),
                 'type' => UserTypeEnum::ADMIN,
             ],
             [
-                'first_name' => 'ادمن 2',
+                'first_name' => 'Quản trị 2',
                 'second_name' => null,
                 'email' => 'admin2@app.com',
                 'password' => bcrypt('password'),

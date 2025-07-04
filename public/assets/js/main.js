@@ -194,7 +194,7 @@
             # Featured Courses Carousel
          ===============================================*/
         $('.featured-courses-carousel').owlCarousel({
-            rtl: true,
+            rtl: window.isRTL || false,
             loop: false,
             nav: true,
             dots: false,
@@ -210,7 +210,7 @@
             # Courses Carousel
          ===============================================*/
         $('.popular-courses-carousel').owlCarousel({
-            rtl: true,
+            rtl: window.isRTL || false,
             loop: false,
             margin: 30,
             nav: true,
@@ -237,7 +237,7 @@
             # Advisor Carousel
          ===============================================*/
         $('.advisor-carousel').owlCarousel({
-            rtl: true,
+            rtl: window.isRTL || false,
             loop: false,
             margin: 30,
             nav: true,
@@ -264,7 +264,7 @@
             # Advisor Carousel Version 2
          ===============================================*/
         $('.advisor-carousel-solid').owlCarousel({
-            rtl: true,
+            rtl: window.isRTL || false,
             loop: false,
             margin: 30,
             nav: true,
@@ -292,7 +292,7 @@
             # Event Carousel
          ===============================================*/
         $('.event-carousel').owlCarousel({
-            rtl: true,
+            rtl: window.isRTL || false,
             loop: false,
             margin: 30,
             nav: true,
@@ -320,7 +320,7 @@
             # Clients Review Carousel
          ===============================================*/
         $('.clients-review-carousel').owlCarousel({
-            rtl: true,
+            rtl: window.isRTL || false,
             loop: false,
             margin: 30,
             nav: true,
@@ -348,7 +348,7 @@
             # Clients Carousel
          ===============================================*/
         $('.clients-items').owlCarousel({
-            rtl: true,
+            rtl: window.isRTL || false,
             loop: false,
             margin: 30,
             nav: false,
@@ -421,11 +421,11 @@
                         .attr('disabled', 'disabled');
 
                     $.post(action, {
-                            name: $('#name').val(),
-                            email: $('#email').val(),
-                            phone: $('#phone').val(),
-                            comments: $('#comments').val()
-                        },
+                        name: $('#name').val(),
+                        email: $('#email').val(),
+                        phone: $('#phone').val(),
+                        comments: $('#comments').val()
+                    },
                         function (data) {
                             document.getElementById('message').innerHTML = data;
                             $('#message').slideDown('slow');

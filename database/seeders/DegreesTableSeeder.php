@@ -10,9 +10,9 @@ class DegreesTableSeeder extends Seeder
     public function run(): void
     {
         $degrees = [
-            ['name' => 'بكالوريوس'],
-            ['name' => 'ماجستير'],
-            ['name' => 'دكتوراه'],
+            ['name' => 'Cử nhân'],
+            ['name' => 'Thạc sĩ'],
+            ['name' => 'Tiến sĩ'],
         ];
 
         foreach ($degrees as $degree) {

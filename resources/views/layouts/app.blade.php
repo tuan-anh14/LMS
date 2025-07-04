@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="{{ app()->getLocale() }}" dir="{{ in_array(app()->getLocale(), ['ar']) ? 'rtl' : 'ltr' }}">
 
 <head>
     <!-- ========== Meta Tags ========== -->
@@ -40,6 +40,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
           rel="stylesheet">
+
+    <!-- ========== Direction Config ========== -->
+    <script>
+        window.isRTL = {{ in_array(app()->getLocale(), ['ar']) ? 'true' : 'false' }};
+    </script>
 
 </head>
 
