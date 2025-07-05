@@ -15,7 +15,6 @@ class LanguagesTableSeeder extends Seeder
     {
         $languages = [
             ['name' => 'Tiếng Việt', 'code' => 'vi', 'country_flag_code' => 'vn', 'active' => 1],
-            ['name' => 'Arabic', 'code' => 'ar', 'country_flag_code' => 'sa', 'active' => 1],
             ['name' => 'English', 'code' => 'en', 'country_flag_code' => 'us', 'active' => 1],
             ['name' => 'French', 'code' => 'fr', 'country_flag_code' => 'fr', 'active' => 0],
             ['name' => 'Italian', 'code' => 'it', 'country_flag_code' => 'it', 'active' => 0],

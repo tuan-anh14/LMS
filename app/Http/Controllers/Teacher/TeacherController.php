@@ -193,7 +193,7 @@ class TeacherController extends Controller
     public function switchLanguage(Request $request)
     {
         request()->validate([
-            'locale' => 'required|in:' . implode(',', array_keys(config('localization.supportedLocales'))),
+            'locale' => 'required|in:vi,en',
         ]);
 
         auth()->user()->update(['locale' => $request['locale']]);

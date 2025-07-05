@@ -55,16 +55,17 @@ class AppServiceProvider extends ServiceProvider
         $translatableLocales = [];
 
         foreach ($activeLanguages as $activeLanguage) {
+            // Loại bỏ tiếng Ả Rập, chỉ giữ tiếng Việt và tiếng Anh
+            if ($activeLanguage->code !== 'ar') {
+                $supportedLocales[$activeLanguage->code] = [
+                    'name' => $activeLanguage->name,
+                    'native' => $activeLanguage->name,
+                    'country_flag_code' => $activeLanguage->country_flag_code,
+                    'script' => $activeLanguage->code == 'ar' ? 'Arab' : 'Latn',
+                ];
 
-            $supportedLocales[$activeLanguage->code] = [
-                'name' => $activeLanguage->name,
-                'native' => $activeLanguage->name,
-                'country_flag_code' => $activeLanguage->country_flag_code,
-                'script' => $activeLanguage->code == 'ar' ? 'Arab' : 'qwe',
-            ];
-
-            $translatableLocales[] = $activeLanguage->code;
-
+                $translatableLocales[] = $activeLanguage->code;
+            }
         }//end of for each
 
         config(['localization.supportedLocales' => $supportedLocales]);

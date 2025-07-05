@@ -7,7 +7,7 @@ return [
     'code' => 'code',
     'active' => 'active',
     'en' => 'English',
-    'ar' => 'Arabic',
+    'vi' => 'Vietnamese',
     'fr' => 'French',
     'it' => 'Italian',
     'de' => 'German',
