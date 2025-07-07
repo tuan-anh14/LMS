@@ -31,6 +31,7 @@ return new class extends Migration {
                 StudentExamStatusEnum::ASSIGNED_TO_EXAMINER,
                 StudentExamStatusEnum::DATE_TIME_SET,
                 StudentExamStatusEnum::ASSESSMENT_ADDED,
+                StudentExamStatusEnum::SUBMITTED,
             ])->index();
 
             $table->enum('assessment', [

@@ -9,6 +9,9 @@ use App\Models\Country;
 use App\Models\StudentExam;
 use App\Models\User;
 use Yajra\DataTables\DataTables;
+use App\Models\Exam;
+use App\Models\Project;
+use Illuminate\Http\Request;
 
 class ExamController extends Controller
 {
@@ -23,11 +26,9 @@ class ExamController extends Controller
 
     public function index()
     {
-        $projects = session('selected_center')->projects;
-
-        return view('teacher.exams.index', compact('projects'));
-
-    }// end of index
+        $exams = Exam::with('project')->whereIn('project_id', session('selected_center')->projects->pluck('id'))->get();
+        return view('teacher.exams.index', compact('exams'));
+    }
 
     public function data(User $teacher)
     {
@@ -74,95 +75,40 @@ class ExamController extends Controller
 
     public function create()
     {
-        $this->authorize('center_manager', session('selected_center'));
-
-        $countries = Country::query()
-            ->get();
-
         $projects = session('selected_center')->projects;
+        return view('teacher.exams.create', compact('projects'));
+    }
 
-        return view('teacher.exams.create', compact('countries', 'projects'));
-
-    }// end of create
-
-    public function store(StudentRequest $request)
+    public function store(Request $request)
     {
-        $this->authorize('center_manager', session('selected_center'));
-
-        $requestData = $request->validated();
-
-        $requestData['password'] = bcrypt($request->password);
-
-        $exam = User::create($requestData);
-
-        $exam->attachRole(UserTypeEnum::STUDENT);
-
-        session()->flash('success', __('site.added_successfully'));
-
-        return response()->json([
-            'redirect_to' => route('teacher.exams.index'),
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'project_id' => 'required|exists:projects,id',
         ]);
+        Exam::create($request->only('name', 'project_id'));
+        return redirect()->route('teacher.exams.index')->with('success', __('site.added_successfully'));
+    }
 
-    }// end of store
-
-    public function edit(User $exam)
+    public function edit(Exam $exam)
     {
-        $exam->load(['governorate']);
-
-        $countries = Country::query()
-            ->get();
-
-        $governorates = $exam->country->governorates;
-
         $projects = session('selected_center')->projects;
+        return view('teacher.exams.edit', compact('exam', 'projects'));
+    }
 
-        $sections = $exam->examCenter->sections;
-
-        return view('teacher.exams.edit', compact('countries', 'governorates', 'projects', 'sections', 'exam'));
-
-    }// end of edit
-
-    public function update(StudentRequest $request, User $exam)
+    public function update(Request $request, Exam $exam)
     {
-        $exam->update($request->validated());
-
-        session()->flash('success', __('site.updated_successfully'));
-
-        return response()->json([
-            'redirect_to' => route('teacher.exams.index'),
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'project_id' => 'required|exists:projects,id',
         ]);
+        $exam->update($request->only('name', 'project_id'));
+        return redirect()->route('teacher.exams.index')->with('success', __('site.updated_successfully'));
+    }
 
-    }// end of update
-
-    public function destroy(User $exam)
-    {
-        $this->delete($exam);
-
-        return response()->json([
-            'success_message' => __('site.deleted_successfully'),
-        ]);
-
-    }// end of destroy
-
-    public function bulkDelete()
-    {
-        foreach (json_decode(request()->record_ids) as $recordId) {
-
-            $exam = Teacher::FindOrFail($recordId);
-            $this->delete($exam);
-
-        }//end of for each
-
-        return response()->json([
-            'success_message' => __('site.deleted_successfully'),
-        ]);
-
-    }// end of bulkDelete
-
-    private function delete(User $exam)
+    public function destroy(Exam $exam)
     {
         $exam->delete();
-
-    }// end of delete
+        return redirect()->route('teacher.exams.index')->with('success', __('site.deleted_successfully'));
+    }
 
 }//end of controller

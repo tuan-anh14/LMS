@@ -20,6 +20,7 @@ return [
     'repeat' => 'Lặp lại',
     'assessment' => 'Đánh giá',
     'assessment_added' => 'Đã thêm đánh giá',
+    'submitted' => 'Đã nộp bài',
     'no_assessment' => 'Chưa đánh giá',
     'notes' => 'Ghi chú',
 

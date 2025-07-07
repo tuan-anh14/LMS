@@ -27,6 +27,9 @@ Route::middleware(['auth', 'role:student', 'localization'])->group(function () {
         //student_exam routes
         Route::get('/student_exams/data', [StudentExamController::class, 'data'])->name('student_exams.data');
         Route::resource('student_exams', StudentExamController::class)->only(['index', 'show']);
+        Route::get('student_exams/{studentExam}/take', [StudentExamController::class, 'take'])->name('student_exams.take');
+        Route::post('student_exams/{studentExam}/submit', [StudentExamController::class, 'submit'])->name('student_exams.submit');
+        Route::get('student_exams/{studentExam}/results', [StudentExamController::class, 'results'])->name('student_exams.results');
 
         //profile routes
         Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');

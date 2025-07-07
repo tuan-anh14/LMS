@@ -101,6 +101,15 @@
                 </li>
             @endif
 
+            {{--exams--}}
+            @if (auth()->user()->hasPermission('read_exams', session('selected_center')['id']))
+                <li class="{{ request()->is('*exams*') ? 'active' : '' }} nav-item">
+                    <a class="d-flex align-items-center" href="{{ route('teacher.exams.index') }}" wire:navigate>
+                        <i data-feather="file-text"></i><span class="menu-title text-truncate">@lang('exams.exams')</span>
+                    </a>
+                </li>
+            @endif
+
             {{--sample--}}
             {{--            @if (auth()->user()->hasPermission('read_students'))--}}
             {{--                <li class="{{ request()->is('*students*') ? 'active' : '' }} nav-item">--}}

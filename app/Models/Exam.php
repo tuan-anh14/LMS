@@ -37,6 +37,11 @@ class Exam extends Model
 
     }// end of studentExams
 
+    public function questions()
+    {
+        return $this->hasMany(Question::class);
+    }
+
     //fun
 
 }//end of model

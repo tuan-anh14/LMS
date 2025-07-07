@@ -7,6 +7,7 @@ abstract class StudentExamStatusEnum
     public const ASSIGNED_TO_EXAMINER = 'assigned_to_examiner';
     public const DATE_TIME_SET = 'date_time_set';
     public const ASSESSMENT_ADDED = 'assessment_added';
+    public const SUBMITTED = 'submitted';
 
     public static function getConstants()
     {

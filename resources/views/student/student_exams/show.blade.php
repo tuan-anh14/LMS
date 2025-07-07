@@ -115,6 +115,43 @@
 
                                     </table>
 
+                                    @php
+                                        $now = \Carbon\Carbon::now();
+                                        $expired = $studentExam->date_time && $now->gt($studentExam->date_time);
+                                    @endphp
+
+                                    @if ($expired)
+                                        <div class="alert alert-danger">
+                                            Đã quá thời hạn nộp bài kiểm tra!
+                                        </div>
+                                    @elseif ($studentExam->status !== 'submitted')
+                                        <a href="{{ route('student.student_exams.take', $studentExam) }}" class="btn btn-success btn-block">
+                                            <i data-feather="edit"></i> Làm bài kiểm tra
+                                        </a>
+                                    @endif
+
+                                    @if ($studentExam->status === 'submitted')
+                                        <div class="alert alert-info">
+                                            <i data-feather="check-circle"></i>
+                                            Bạn đã nộp bài thành công!
+                                        </div>
+                                        
+                                        @php
+                                            $hasScores = $studentExam->answers()->whereNotNull('score')->exists();
+                                        @endphp
+                                        
+                                        @if ($hasScores || $studentExam->assessment)
+                                            <a href="{{ route('student.student_exams.results', $studentExam) }}" class="btn btn-primary btn-block">
+                                                <i data-feather="file-text"></i> Xem kết quả bài kiểm tra
+                                            </a>
+                                        @else
+                                            <div class="alert alert-warning">
+                                                <i data-feather="clock"></i>
+                                                Đang chờ giám khảo chấm điểm...
+                                            </div>
+                                        @endif
+                                    @endif
+
                                     @if (auth()->user()->hasRole('examiner') && $studentExam->examiner_id == auth()->user()->id)
 
                                         @if ($studentExam->status == StudentExamStatusEnum::ASSIGNED_TO_EXAMINER)

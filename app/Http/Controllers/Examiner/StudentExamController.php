@@ -24,9 +24,9 @@ class StudentExamController extends Controller
     public function data()
     {
         $exams = StudentExam::query()
-            ->with(['teacher', 'student', 'section', 'project'])
+            ->with(['teacher', 'student', 'section', 'project', 'exam'])
+            ->where('examiner_id', auth()->id()) // Chỉ hiển thị bài của examiner hiện tại
             ->whenTeacherId(request()->teacher_id)
-            ->whenExaminerId(request()->examiner_id)
             ->whenStudentId(request()->student_id)
             ->whenSectionId(request()->section_id)
             ->whenProjectId(request()->project_id)
@@ -42,10 +42,10 @@ class StudentExamController extends Controller
                 return $exam->examiner?->name;
             })
             ->addColumn('student', function (StudentExam $exam) {
-                return $exam->student->name;
+                return $exam->student?->name;
             })
             ->addColumn('mobile', function (StudentExam $exam) {
-                return $exam->student->mobile;
+                return $exam->student?->mobile;
             })
             ->addColumn('project', function (StudentExam $exam) {
                 return $exam->project->name;
@@ -55,6 +55,9 @@ class StudentExamController extends Controller
             })
             ->addColumn('status', function (StudentExam $exam) {
                 return __('student_exams.' . $exam->status);
+            })
+            ->addColumn('assessment', function (StudentExam $exam) {
+                return $exam->assessment ? __('student_exams.' . $exam->assessment) : '';
             })
             ->editColumn('created_at', function (StudentExam $exam) {
                 return $exam->created_at->format('Y-m-d');
@@ -70,18 +73,14 @@ class StudentExamController extends Controller
 
     }// end of data
 
-    public function create(Request $request)
+    public function create()
     {
-        $request->validate([
-            'student_id' => 'required|exists:users,id',
-        ]);
-
         $student = User::query()
-            ->with(['studentProject.exams'])
-            ->where('id', $request->student_id)
-            ->first();
+            ->where('id', request()->student_id)
+            ->firstOrFail();
 
-        $exams = $student->studentProject->exams;
+        $exams = $student->studentProject->exams()
+            ->get();
 
         $examiners = User::query()
             ->whereRoleIs('examiner')
@@ -162,6 +161,66 @@ class StudentExamController extends Controller
         ]);
 
     }// end of updateAssessment
+
+    public function gradeExam(StudentExam $studentExam)
+    {
+        $this->authorize('examiner_student_exam', $studentExam);
+
+        // Load exam với questions và answers của student
+        $studentExam->load([
+            'exam.questions', 
+            'answers.question',
+            'student'
+        ]);
+
+        return view('examiner.student_exams.grade', compact('studentExam'));
+
+    }// end of gradeExam
+
+    public function updateGrade(Request $request, StudentExam $studentExam)
+    {
+        $this->authorize('examiner_student_exam', $studentExam);
+
+        $request->validate([
+            'scores' => 'required|array',
+            'scores.*' => 'nullable|numeric|min:0',
+            'comments' => 'array',
+            'comments.*' => 'nullable|string|max:1000',
+            'total_score' => 'nullable|numeric|min:0',
+            'assessment' => 'nullable|string'
+        ]);
+
+        // Cập nhật điểm từng câu hỏi
+        foreach ($request->scores as $answerId => $score) {
+            if ($score !== null) {
+                \App\Models\StudentExamAnswer::where('id', $answerId)
+                    ->update([
+                        'score' => $score,
+                        'comment' => $request->comments[$answerId] ?? null
+                    ]);
+            }
+        }
+
+        // Cập nhật điểm tổng và đánh giá
+        $updateData = [];
+        if ($request->filled('total_score')) {
+            $updateData['notes'] = 'Tổng điểm: ' . $request->total_score;
+        }
+        if ($request->filled('assessment')) {
+            $updateData['assessment'] = $request->assessment;
+        }
+
+        if (!empty($updateData)) {
+            $studentExam->update($updateData);
+        }
+
+        // Cập nhật trạng thái đã chấm điểm
+        $studentExam->statuses()->create(['status' => StudentExamStatusEnum::ASSESSMENT_ADDED]);
+
+        return redirect()->route('examiner.student_exams.show', $studentExam)
+            ->with('success', 'Chấm điểm thành công!');
+
+    }// end of updateGrade
 
     public function destroy(StudentExam $studentExam)
     {

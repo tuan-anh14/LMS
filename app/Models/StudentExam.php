@@ -170,6 +170,12 @@ class StudentExam extends Model
 
     }// end of statuses
 
+    public function answers()
+    {
+        return $this->hasMany(StudentExamAnswer::class);
+
+    }// end of answers
+
     //fun
     public function canBeDeletedByTeacher()
     {

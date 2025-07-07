@@ -177,6 +177,20 @@
                                                 @lang('student_exams.add_assessment')
                                             </a>
 
+                                        @elseif($studentExam->status == 'submitted')
+
+                                            <div class="alert alert-success">
+                                                <i data-feather="check-circle"></i>
+                                                Học sinh đã nộp bài kiểm tra
+                                            </div>
+
+                                            <a href="{{ route('examiner.student_exams.grade', $studentExam->id) }}"
+                                               class="btn btn-warning btn-block"
+                                            >
+                                                <i data-feather="edit"></i>
+                                                Chấm điểm bài kiểm tra
+                                            </a>
+
                                         @endif
 
                                     @endif

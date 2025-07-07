@@ -56,6 +56,7 @@ Route::middleware(['auth', 'set_selected_center', 'role:teacher', 'localization'
 
         //exam routes
         Route::resource('exams', 'ExamController');
+        Route::resource('exams.questions', 'QuestionController');
 
         //exam routes
         Route::get('/student_exams/{student_exam}/date_time', 'StudentExamController@editDateTime')->name('student_exams.edit_date_time');
