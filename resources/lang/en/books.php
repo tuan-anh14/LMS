@@ -1,10 +1,14 @@
 <?php
 
 return [
-    'books' => 'books',
-    'book' => 'book',
-    'name' => 'name',
-    'number_of_pages' => 'number of pages',
-    'image' => 'image',
-    'books_count' => 'books count',
+    'books' => 'Books',
+    'book' => 'Book',
+    'name' => 'Book Name',
+    'title' => 'Title',
+    'author' => 'Author',
+    'publisher' => 'Publisher',
+    'isbn' => 'ISBN',
+    'pages_count' => 'Pages Count',
+    'books_count' => 'Books Count',
+    'projects_count' => 'Projects Count',
 ];

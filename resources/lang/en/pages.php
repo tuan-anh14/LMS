@@ -1,0 +1,22 @@
+<?php
+
+return [
+    'pages' => 'Pages',
+    'page' => 'Page',
+    'number' => 'Page Number',
+    'notes' => 'Notes',
+    'type' => 'Type',
+    'status' => 'Status',
+    'requested' => 'Requested',
+    'assigned_to_teacher' => 'Assigned to Teacher',
+    'approved' => 'Approved',
+    'request_page' => 'Request Page',
+    'assign_to_teacher' => 'Assign to Teacher',
+    'approve_page' => 'Approve Page',
+    'pages_count' => 'Pages Count',
+    'educational' => 'Educational',
+    'upbringing' => 'Upbringing',
+    'tajweed' => 'Tajweed',
+    'assessment' => 'Assessment',
+    'assessments' => 'Assessments',
+]; 

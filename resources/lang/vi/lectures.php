@@ -21,4 +21,10 @@ return [
     'attended' => 'Có mặt',
     'absent' => 'Vắng mặt',
     'excuse' => 'Có phép',
+    'date' => 'Ngày',
+    'attendance_status' => 'Tình trạng tham dự',
+    'attendance_statuses' => 'Tình trạng tham dự',
+    'types' => 'Loại',
+    'new_lecture' => 'Bài giảng mới',
+    'notes' => 'Ghi chú',
 ]; 

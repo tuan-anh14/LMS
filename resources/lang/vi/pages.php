@@ -17,4 +17,6 @@ return [
     'educational' => 'Giáo dục',
     'upbringing' => 'Đạo đức',
     'tajweed' => 'Tajweed',
+    'assessment' => 'Đánh giá',
+    'assessments' => 'Đánh giá',
 ]; 
