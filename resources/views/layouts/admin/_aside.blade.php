@@ -6,7 +6,7 @@
                     <span class="brand-logo">
                     <img src="{{ asset('storage/uploads/logo.png') }}" alt="">
                     </span>
-                    <h2 class="brand-text">@lang('site.webseity')</h2>
+                    <h2 class="brand-text">LMS</h2>
                 </a>
             </li>
             <li class="nav-item nav-toggle">

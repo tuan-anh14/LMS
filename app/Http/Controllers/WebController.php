@@ -66,7 +66,7 @@ class WebController extends Controller
         ]);
         $data = $request->except(['_token', '_method']);
         Inquiry::create($data);
-        session()->flash('contact_success', __('site.send_successfully'));
+        session()->flash('contact_success', __('site.contact_success'));
         return redirect(url()->previous() . '#contact-sent');
 
     }//end of inquiries

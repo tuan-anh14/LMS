@@ -73,7 +73,7 @@
                         </p>
                     </div>
                     <div class="col-md-6 text-right link">
-                        <p>@lang('site.developer_by') <a href="https://webseity.com">@lang('site.webseity')</a></p>
+                        <!-- Developer info removed -->
                     </div>
                 </div>
             </div>

@@ -235,11 +235,7 @@
 <footer class="footer footer-static footer-dark">
     <p class="clearfix mb-0">
         <span
-            class="float-md-left d-block d-md-inline-block mt-25">@lang('site.all_rights_reserved') &copy; {{ now()->year }}<a
-                class="ml-25"
-                href="https://webseity.com"
-                target="_blank">@lang('site.developer_by') @lang('site.webseity')</a>
-
+            class="float-md-left d-block d-md-inline-block mt-25">@lang('site.all_rights_reserved') &copy; {{ now()->year }}
         </span>
     </p>
 </footer>
