@@ -13,29 +13,20 @@
         <ul class="nav navbar-nav align-items-center ml-auto">
 
             {{--            --}}{{--languages--}}
-            {{--            <li class="nav-item dropdown dropdown-language">--}}
-
-            {{--                <a class="nav-link dropdown-toggle" id="dropdown-flag" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">--}}
-
-            {{--                    <i class="flag-icon flag-icon-{{ $selectedLanguage->country_flag_code }}"></i>--}}
-            {{--                    <span class="selected-language">@lang('languages.' . app()->getLocale())</span>--}}
-            {{--                </a>--}}
-
-            {{--                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-flag">--}}
-
-            {{--                    @foreach(config('localization.supportedLocales') as $localeCode => $properties)--}}
-
-            {{--                        <a class="dropdown-item" hreflang="{{ $localeCode }}" href="{{ route('teacher.switch_language', ['locale' => $localeCode]) }}" data-language="{{ $localeCode }}">--}}
-
-            {{--                            <i class="flag-icon flag-icon-{{ $properties['country_flag_code'] }}"></i>--}}
-
-            {{--                            @lang('languages.' . $localeCode)--}}
-            {{--                        </a>--}}
-
-            {{--                    @endforeach--}}
-
-            {{--                </div>--}}
-            {{--            </li>--}}
+            <li class="nav-item dropdown dropdown-language">
+                <a class="nav-link dropdown-toggle" id="dropdown-flag" href="javascript:void(0);" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <i class="flag-icon flag-icon-{{ $selectedLanguage->country_flag_code }}"></i>
+                    <span class="selected-language">@lang('languages.' . app()->getLocale())</span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdown-flag">
+                    @foreach(config('localization.supportedLocales') as $localeCode => $properties)
+                        <a class="dropdown-item" hreflang="{{ $localeCode }}" href="{{ route('student.switch_language', ['locale' => $localeCode]) }}" data-language="{{ $localeCode }}">
+                            <i class="flag-icon flag-icon-{{ $properties['country_flag_code'] }}"></i>
+                            @lang('languages.' . $localeCode)
+                        </a>
+                    @endforeach
+                </div>
+            </li>
 
             {{--            --}}{{--moon--}}
             {{--            <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-style"><i class="ficon" data-feather="moon"></i></a></li>--}}

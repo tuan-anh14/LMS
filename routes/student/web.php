@@ -40,6 +40,8 @@ Route::middleware(['auth', 'role:student', 'localization'])->group(function () {
 
         });
 
+        Route::get('/switch_language/{locale}', [\App\Http\Controllers\Student\ProfileController::class, 'switchLanguage'])->name('switch_language');
+
     });
 
 });

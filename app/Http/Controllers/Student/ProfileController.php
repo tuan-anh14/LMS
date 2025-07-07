@@ -32,4 +32,15 @@ class ProfileController extends Controller
 
     }// end of postChangeData
 
+    public function switchLanguage($locale)
+    {
+        $supported = array_keys(config('localization.supportedLocales'));
+        if (!in_array($locale, $supported)) {
+            abort(404);
+        }
+        auth()->user()->update(['locale' => $locale]);
+        session(['locale' => $locale]);
+        return redirect()->back();
+    }
+
 }//end of controller
