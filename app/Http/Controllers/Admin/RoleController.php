@@ -15,7 +15,7 @@ class RoleController extends Controller
         //disable actions in demo mode
         $this->middleware('demo_mode_middleware')->only(['store', 'update', 'destroy', 'bulkDelete', 'delete']);
 
-        $this->middleware('permission:read_roles')->only(['index']);
+        $this->middleware('permission:read_roles')->only(['index', 'data']);
         $this->middleware('permission:create_roles')->only(['create', 'store']);
         $this->middleware('permission:update_roles')->only(['edit', 'update']);
         $this->middleware('permission:delete_roles')->only(['delete', 'bulk_delete']);
@@ -30,15 +30,7 @@ class RoleController extends Controller
 
     public function data()
     {
-        $roles = Role::whereIn('name', [
-            UserTypeEnum::SUPER_ADMIN,
-            UserTypeEnum::ADMIN,
-            UserTypeEnum::TEACHER,
-            UserTypeEnum::STUDENT,
-            UserTypeEnum::CENTER_MANAGER,
-            UserTypeEnum::EXAMINER,
-        ])
-            ->withCount(['users']);
+        $roles = Role::withCount(['users']);
 
         return DataTables::of($roles)
             ->addColumn('record_select', 'admin.roles.data_table.record_select')

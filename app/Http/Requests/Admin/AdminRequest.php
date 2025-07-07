@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\Role;
 use Illuminate\Foundation\Http\FormRequest;
 
 class AdminRequest extends FormRequest
@@ -30,7 +31,7 @@ class AdminRequest extends FormRequest
             'email' => 'required|email|unique:users',
             'password' => 'required|confirmed',
             'type' => 'required',
-            'role_id' => 'required',
+            'role_id' => 'required|exists:roles,id',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {
@@ -53,5 +54,23 @@ class AdminRequest extends FormRequest
         ]);
 
     }//end of prepare for validation
+
+    /**
+     * Configure the validator instance.
+     *
+     * @param  \Illuminate\Validation\Validator  $validator
+     * @return void
+     */
+    public function withValidator($validator)
+    {
+        $validator->after(function ($validator) {
+            if ($this->role_id) {
+                $role = Role::find($this->role_id);
+                if ($role && !in_array($role->name, ['admin', 'super_admin'])) {
+                    $validator->errors()->add('role_id', 'Chỉ được phép chọn role admin hoặc super_admin.');
+                }
+            }
+        });
+    }
 
 }//end of request
