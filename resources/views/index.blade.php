@@ -12,7 +12,7 @@
                 @foreach($slides as $slide)
                     <div class="item {{($slide->id == 1 ? 'active' : '')}}">
                         <div class="slider-thumb bg-fixed"
-                             style="background-image: url({{ Storage::url('uploads/' . $slide->image) }});"></div>
+                             style="background-image: url({{ $slide->image ? Storage::url('uploads/' . $slide->image) : asset('images/default.jpg') }});"></div>
                         {{--<div class="box-table shadow dark">
                             <div class="box-cell">
                                 <div class="container">
@@ -73,7 +73,7 @@
                             <div class="item">
                                 <div class="thumb">
                                     <a href="javascript:;">
-                                        <img src="{{Storage::url('uploads/' . $course->image)}}"
+                                        <img src="{{$course->image ? Storage::url('uploads/' . $course->image) : asset('images/default.jpg')}}"
                                              alt="{{$course->title}}">
                                     </a>
                                 </div>

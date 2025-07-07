@@ -21,7 +21,11 @@
     <meta name="loading" content="@lang('site.loading')">
     <title>{{ config('app.name', 'Laravel') }} - @yield('title')</title>
     {{--<link rel="apple-touch-icon" href="{{ asset('admin_assets/app-assets/images/ico/apple-icon-120.png') }}">--}}
-    <link rel="icon" type="image/x-icon" href="{{ Storage::url('uploads/' . setting('fav_icon')) }}">
+    @if(setting('fav_icon'))
+        <link rel="icon" type="image/x-icon" href="{{ Storage::url('uploads/' . setting('fav_icon')) }}">
+    @else
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    @endif
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
           rel="stylesheet">
 

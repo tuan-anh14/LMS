@@ -12,7 +12,11 @@
     <title>{{ setting('title') }}</title>
 
     <!-- ========== Favicon Icon ========== -->
-    <link rel="shortcut icon" href="{{ Storage::url('uploads/' . setting('fav_icon')) }}" type="image/x-icon">
+    @if(setting('fav_icon'))
+        <link rel="shortcut icon" href="{{ Storage::url('uploads/' . setting('fav_icon')) }}" type="image/x-icon">
+    @else
+        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+    @endif
 
     <!-- ========== Start Stylesheet ========== -->
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet"/>

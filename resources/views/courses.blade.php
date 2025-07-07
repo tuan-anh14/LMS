@@ -30,7 +30,7 @@
                             <div class="item">
                                 <div class="thumb">
                                     <a href="javascript:;">
-                                        <img src="{{Storage::url('uploads/' . $course->image)}}"
+                                        <img src="{{$course->image ? Storage::url('uploads/' . $course->image) : asset('images/default.jpg')}}"
                                              alt="{{$course->title}}">
                                     </a>
                                 </div>

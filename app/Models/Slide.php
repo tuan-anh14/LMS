@@ -14,7 +14,10 @@ class Slide extends Model
     //attr
     public function getImagePathAttribute()
     {
-        return asset('storage/uploads/' . $this->image);
+        if ($this->image) {
+            return asset('storage/uploads/' . $this->image);
+        }
+        return asset('images/default.jpg');
 
     }// end of getImagePathAttribute
 

@@ -14,7 +14,10 @@ class Service extends Model
     //attr
     public function getIconPathAttribute()
     {
-        return asset('storage/uploads/' . $this->icon);
+        if ($this->icon) {
+            return asset('storage/uploads/' . $this->icon);
+        }
+        return asset('images/default.jpg');
 
     }// end of getIconPathAttribute
 

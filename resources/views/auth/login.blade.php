@@ -17,7 +17,11 @@
     <meta name="no-data-found" content="@lang('site.no_data_found')">
     <meta name="drop-images-text" content="@lang('site.drop_images')">
     <meta name="delete-text" content="@lang('site.delete')">
-    <link rel="icon" type="image/x-icon" href="{{ Storage::url('uploads/' . setting('fav_icon')) }}">
+    @if(setting('fav_icon'))
+        <link rel="icon" type="image/x-icon" href="{{ Storage::url('uploads/' . setting('fav_icon')) }}">
+    @else
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+    @endif
 
     <title>{{ setting('title') }}</title>
 

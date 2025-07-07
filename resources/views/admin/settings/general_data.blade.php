@@ -60,7 +60,7 @@
                                 <div class="form-group">
                                     <label>@lang('settings.fav_icon')</label>
                                     <input type="file" name="fav_icon" class="form-control load-image">
-                                    <img src="{{ Storage::url('uploads/' . setting('fav_icon')) }}" class="loaded-image"
+                                    <img src="{{ setting('fav_icon') ? Storage::url('uploads/' . setting('fav_icon')) : asset('images/default.jpg') }}" class="loaded-image"
                                          alt=""
                                          style="display: {{ setting('fav_icon') ? 'block' : 'none' }}; width: 50px; margin: 10px 0;">
                                 </div>
