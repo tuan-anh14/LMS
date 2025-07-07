@@ -72,7 +72,7 @@
                                 {{--date--}}
                                 <div class="form-group">
                                     <label>@lang('lectures.date') <span class="text-danger">*</span></label>
-                                    <input type="text" name="date" class="form-control date-picker" dir="{{ in_array(app()->getLocale(), ['ar']) ? 'rtl' : 'ltr' }}"
+                                    <input type="text" name="date" class="form-control date-picker" dir="ltr"
                                            value="{{ old('date') }}" required>
                                 </div>
 

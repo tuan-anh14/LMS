@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}" dir="{{ in_array(app()->getLocale(), ['ar']) ? 'rtl' : 'ltr' }}">
+<html lang="{{ app()->getLocale() }}" dir="ltr">
 
 <head>
     <!-- ========== Meta Tags ========== -->
@@ -43,7 +43,7 @@
 
     <!-- ========== Direction Config ========== -->
     <script>
-        window.isRTL = {{ in_array(app()->getLocale(), ['ar']) ? 'true' : 'false' }};
+        window.isRTL = false;
     </script>
 
 </head>
