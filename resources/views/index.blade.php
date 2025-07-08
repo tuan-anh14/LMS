@@ -9,10 +9,15 @@
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner text-light carousel-zoom">
-                @foreach($slides as $slide)
-                    <div class="carousel-item {{($slide->id == 1 ? 'active' : '')}}">
+                @foreach($slides as $key => $slide)
+                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
                         <div class="slider-thumb bg-fixed"
                              style="background-image: url({{ $slide->image ? Storage::url('uploads/' . $slide->image) : asset('images/default.jpg') }});"></div>
+                        <div>
+                            <p>{{ $slide->image }}</p>
+                            <p>{{ Storage::url('uploads/' . $slide->image) }}</p>
+                            <img src="{{ Storage::url('uploads/' . $slide->image) }}" style="max-width:200px;">
+                        </div>
                         {{--<div class="box-table shadow dark">
                             <div class="box-cell">
                                 <div class="container">
