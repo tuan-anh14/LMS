@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'examiners' => 'examiners',
-    'examiner' => 'examiner',
-    'return_to_original_admin' => 'return to original admin',
-    'is_examiner' => 'is examiner',
-    'details' => 'details',
-    'examiners_count' => 'examiners count',
+    'examiners' => 'Examiners',
+    'examiner' => 'Examiner',
+    'return_to_original_admin' => 'Return to original admin',
+    'is_examiner' => 'Is examiner',
+    'details' => 'Details',
+    'examiners_count' => 'Examiners count',
 ];

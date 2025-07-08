@@ -33,14 +33,45 @@
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                        <th>@lang('questions.content')</th>
-                                        <th>@lang('site.action')</th>
+                                        <th width="5%">#</th>
+                                        <th width="50%">@lang('questions.content')</th>
+                                        <th width="15%">Loại</th>
+                                        <th width="10%">Điểm</th>
+                                        <th width="20%">@lang('site.action')</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($questions as $question)
                                         <tr>
-                                            <td>{{ $question->content }}</td>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>
+                                                <div class="question-content">
+                                                    {{ Str::limit($question->content, 100) }}
+                                                </div>
+                                                @if($question->isMultipleChoice() && $question->options)
+                                                    <div class="mt-2">
+                                                        <small class="text-muted">Lựa chọn:</small>
+                                                        <ul class="list-unstyled ml-2">
+                                                            @foreach($question->options as $option)
+                                                                <li class="small {{ $question->correct_answer == $option ? 'text-success font-weight-bold' : 'text-muted' }}">
+                                                                    • {{ $option }}
+                                                                    @if($question->correct_answer == $option)
+                                                                        <i class="fa fa-check text-success"></i>
+                                                                    @endif
+                                                                </li>
+                                                            @endforeach
+                                                        </ul>
+                                                    </div>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-{{ $question->isMultipleChoice() ? 'info' : 'warning' }}">
+                                                    {{ $question->getTypeLabel() }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span class="badge badge-secondary">{{ $question->points ?? 1 }} điểm</span>
+                                            </td>
                                             <td>
                                                 <a href="{{ route('teacher.exams.questions.edit', [$exam->id, $question->id]) }}" class="btn btn-sm btn-warning">@lang('site.edit')</a>
                                                 <form action="{{ route('teacher.exams.questions.destroy', [$exam->id, $question->id]) }}" method="POST" style="display:inline-block">
@@ -51,8 +82,25 @@
                                             </td>
                                         </tr>
                                     @endforeach
+                                    @if($questions->count() == 0)
+                                        <tr>
+                                            <td colspan="5" class="text-center text-muted">Chưa có câu hỏi nào</td>
+                                        </tr>
+                                    @endif
                                 </tbody>
                             </table>
+                            
+                            @if($questions->count() > 0)
+                                <div class="mt-3">
+                                    <div class="alert alert-info">
+                                        <strong>Thống kê:</strong> 
+                                        Tổng cộng {{ $questions->count() }} câu hỏi 
+                                        | Tổng điểm: {{ $questions->sum('points') ?? $questions->count() }} điểm
+                                        | Trắc nghiệm: {{ $questions->where('type', 'multiple_choice')->count() }} câu
+                                        | Tự luận: {{ $questions->where('type', 'essay')->count() }} câu
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>

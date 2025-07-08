@@ -9,6 +9,6 @@ return [
     'inactive_students' => 'Inactive Students',
     'enrollment_date' => 'Enrollment Date',
     'status' => 'Status',
-    'details' => 'details',
-    'return_to_original_admin' => 'return to original admin',
+    'details' => 'Details',
+    'return_to_original_admin' => 'Return to original admin',
 ];

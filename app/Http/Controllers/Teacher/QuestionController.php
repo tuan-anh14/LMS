@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Teacher;
 
+use App\Enums\QuestionTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Exam;
 use App\Models\Question;
@@ -17,33 +18,71 @@ class QuestionController extends Controller
 
     public function create(Exam $exam)
     {
-        return view('teacher.questions.create', compact('exam'));
+        $questionTypes = QuestionTypeEnum::getLabels();
+        return view('teacher.questions.create', compact('exam', 'questionTypes'));
     }
 
     public function store(Request $request, Exam $exam)
     {
         $request->validate([
             'content' => 'required|string',
+            'type' => 'required|in:' . implode(',', QuestionTypeEnum::getConstants()),
+            'points' => 'required|numeric|min:0.1',
+            'options.*' => 'nullable|string',
+            'correct_answer' => 'nullable|string',
         ]);
-        $exam->questions()->create([
+
+        $questionData = [
             'content' => $request->content,
-        ]);
+            'type' => $request->type,
+            'points' => $request->points,
+            'correct_answer' => $request->correct_answer,
+        ];
+
+        // Handle options for multiple choice questions
+        if ($request->type === QuestionTypeEnum::MULTIPLE_CHOICE) {
+            $options = array_filter($request->input('options', []));
+            $questionData['options'] = $options;
+        }
+
+        $exam->questions()->create($questionData);
+
         return redirect()->route('teacher.exams.questions.index', $exam->id)->with('success', __('site.added_successfully'));
     }
 
     public function edit(Exam $exam, Question $question)
     {
-        return view('teacher.questions.edit', compact('exam', 'question'));
+        $questionTypes = QuestionTypeEnum::getLabels();
+        return view('teacher.questions.edit', compact('exam', 'question', 'questionTypes'));
     }
 
     public function update(Request $request, Exam $exam, Question $question)
     {
         $request->validate([
             'content' => 'required|string',
+            'type' => 'required|in:' . implode(',', QuestionTypeEnum::getConstants()),
+            'points' => 'required|numeric|min:0.1',
+            'options.*' => 'nullable|string',
+            'correct_answer' => 'nullable|string',
         ]);
-        $question->update([
+
+        $questionData = [
             'content' => $request->content,
-        ]);
+            'type' => $request->type,
+            'points' => $request->points,
+            'correct_answer' => $request->correct_answer,
+        ];
+
+        // Handle options for multiple choice questions
+        if ($request->type === QuestionTypeEnum::MULTIPLE_CHOICE) {
+            $options = array_filter($request->input('options', []));
+            $questionData['options'] = $options;
+        } else {
+            $questionData['options'] = null;
+        }
+
+        $question->update($questionData);
+
         return redirect()->route('teacher.exams.questions.index', $exam->id)->with('success', __('site.updated_successfully'));
     }
 
