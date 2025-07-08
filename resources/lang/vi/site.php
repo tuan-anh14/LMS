@@ -117,7 +117,7 @@ return [
     'links' => 'Liên kết',
     'students' => 'Học viên',
     'teachers' => 'Giảng viên',
-    'dashboard' => 'Bảng điều khiển',
+    'dashboard' => 'Dashboard',
     
     // Footer
     'copyright' => 'Bản quyền thuộc về',

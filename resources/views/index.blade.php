@@ -10,7 +10,7 @@
             <!-- Wrapper for slides -->
             <div class="carousel-inner text-light carousel-zoom">
                 @foreach($slides as $slide)
-                    <div class="item {{($slide->id == 1 ? 'active' : '')}}">
+                    <div class="carousel-item {{($slide->id == 1 ? 'active' : '')}}">
                         <div class="slider-thumb bg-fixed"
                              style="background-image: url({{ $slide->image ? Storage::url('uploads/' . $slide->image) : asset('images/default.jpg') }});"></div>
                         {{--<div class="box-table shadow dark">
@@ -39,12 +39,12 @@
             <!-- End Wrapper for slides -->
 
             <!-- Left and right controls -->
-            <a class="left carousel-control" href="#bootcarousel" data-slide="prev">
-                <i class="fa fa-angle-right"></i>
+            <a class="carousel-control-prev" href="#bootcarousel" role="button" data-slide="prev">
+                <i class="fa fa-angle-left" aria-hidden="true"></i>
                 <span class="sr-only">Previous</span>
             </a>
-            <a class="right carousel-control" href="#bootcarousel" data-slide="next">
-                <i class="fa fa-angle-left"></i>
+            <a class="carousel-control-next" href="#bootcarousel" role="button" data-slide="next">
+                <i class="fa fa-angle-right" aria-hidden="true"></i>
                 <span class="sr-only">Next</span>
             </a>
 

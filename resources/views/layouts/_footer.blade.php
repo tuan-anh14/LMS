@@ -16,16 +16,16 @@
                         <h4>@lang('site.links')</h4>
                         <ul>
                             <li>
-                                <a href="{{route('/')}}">Trang chủ</a>
+                                <a href="{{route('/')}}">@lang('site.home')</a>
                             </li>
                             <li>
-                                <a href="{{route('courses')}}">Khóa học</a>
+                                <a href="{{route('courses')}}">@lang('site.courses')</a>
                             </li>
                             <li>
-                                <a href="{{route('contact-us')}}">Liên hệ</a>
+                                <a href="{{route('contact-us')}}">@lang('site.contact_us')</a>
                             </li>
                             <li>
-                                <a href="{{route('about-us')}}">Về chúng tôi</a>
+                                <a href="{{route('about-us')}}">@lang('site.about_us')</a>
                             </li>
                         </ul>
                     </div>

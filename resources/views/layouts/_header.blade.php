@@ -2,7 +2,7 @@
 ============================================= -->
 <div class="top-bar-area address-two-lines bg-dark text-light">
     <div class="container">
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col-md-8 address-info">
                 <div class="info box">
 
@@ -24,7 +24,7 @@
                 </div>
             </div>
 
-            <div class="user-login text-end col-lg-4">
+            <div class="user-login text-end col-md-4 d-flex align-items-center justify-content-end">
 
                 @if (!auth()->user())
                     <a href="{{route('login')}}">
@@ -92,6 +92,31 @@
             <div class="attr-nav">
                 <ul>
                     {{--<li class="search"><a href="#"><i class="fa fa-search"></i></a></li>--}}
+                    
+                    <!-- Language Switcher -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            @php
+                                $currentLocale = app()->getLocale();
+                                $currentFlag = config('localization.supportedLocales')[$currentLocale]['country_flag_code'] ?? 'vn';
+                            @endphp
+                            <i class="flag-icon flag-icon-{{ $currentFlag }}"></i>
+                            <span class="selected-language">@lang('languages.' . app()->getLocale())</span>
+                            <i class="fa fa-angle-down"></i>
+                        </a>
+                        <ul class="dropdown-menu">
+                            @foreach(config('localization.supportedLocales') as $localeCode => $properties)
+                                <li>
+                                    <a href="{{ route('switch_language', ['locale' => $localeCode]) }}" 
+                                       hreflang="{{ $localeCode }}" 
+                                       data-language="{{ $localeCode }}">
+                                        <i class="flag-icon flag-icon-{{ $properties['country_flag_code'] }}"></i>
+                                        @lang('languages.' . $localeCode)
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </li>
 
                     <li>
                         @if (!auth()->user())
@@ -122,7 +147,15 @@
                 </button>
 
                 <a class="navbar-brand" href="{{route('/')}}">
-                    <img src="{{ asset('storage/uploads/logo.png') }}" class="logo" alt="Logo" width="">
+                    @if(app()->getLocale() == 'en')
+                        <span style="font-size: 24px; font-weight: bold; color: #01b5dd;">
+                            <i class="fas fa-graduation-cap"></i> LMS
+                        </span>
+                    @else
+                        <span style="font-size: 24px; font-weight: bold; color: #01b5dd;">
+                            <i class="fas fa-graduation-cap"></i> Hệ thống LMS
+                        </span>
+                    @endif
                 </a>
             </div>
             <!-- End Header Navigation -->
@@ -131,16 +164,16 @@
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav navbar-right" data-in="#" data-out="#">
                     <li>
-                        <a href="{{route('/')}}">Trang chủ</a>
+                        <a href="{{route('about-us')}}">@lang('site.about_us')</a>
                     </li>
                     <li>
-                        <a href="{{route('courses')}}">Khóa học</a>
+                        <a href="{{route('contact-us')}}">@lang('site.contact_us')</a>
                     </li>
                     <li>
-                        <a href="{{route('contact-us')}}">Liên hệ</a>
+                        <a href="{{route('courses')}}">@lang('site.courses')</a>
                     </li>
                     <li>
-                        <a href="{{route('about-us')}}">Về chúng tôi</a>
+                        <a href="{{route('/')}}">@lang('site.home')</a>
                     </li>
                     <li class="hidden-md hidden-xl hidden-lg">
                         @if (!auth()->user())

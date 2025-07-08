@@ -8,7 +8,7 @@
 
     /* Topbar */
     .top-bar-area.address-two-lines .user-login {
-        margin: 10px 0;
+        margin: 0 !important;
         text-align: center;
         display: none;
     }
@@ -58,7 +58,7 @@
     }
 
     /* What you learn */
-    .what-learn-area .row > .info {
+    .what-learn-area .row>.info {
         padding-left: 15px;
         margin-bottom: 30px;
     }
@@ -156,7 +156,7 @@
         padding-right: 15px;
     }
 
-    .featured-courses-area .info > h4 {
+    .featured-courses-area .info>h4 {
         margin-bottom: 25px;
     }
 
@@ -331,7 +331,8 @@
 
     /* Testimonials */
     .clients-review-carousel {
-        text-align: center;;
+        text-align: center;
+        ;
     }
 
     .clients-review-carousel .item .thumb img {
@@ -436,6 +437,11 @@
         text-align: center;
     }
 
+    .footer-bottom .col-md-6:last-child {
+        padding-left: 15px;
+        text-align: center;
+    }
+
     footer .f-items .f-item.link ul {
         margin-top: -10px;
     }
@@ -505,7 +511,8 @@
         line-height: 1.4;
     }
 
-    h5, h6 {
+    h5,
+    h6 {
         font-size: 14px;
         line-height: 1.4;
     }
@@ -594,13 +601,15 @@
     }
 
     .top-bar-area.address-two-lines .user-login {
-        margin: 10px 0;
+        margin: 0 !important;
+        /* Fixed alignment issue */
         text-align: center;
     }
 
     .top-bar-area .user-login {
         text-align: center;
-        margin: 10px 0;
+        margin: 0 !important;
+        /* Fixed alignment issue */
     }
 
     .top-bar-area .user-login a {
@@ -612,12 +621,12 @@
         text-align: center;
     }
 
-    .nav-pills > li {
+    .nav-pills>li {
         display: inline-block;
         float: none;
     }
 
-    .nav-pills > li a {
+    .nav-pills>li a {
         margin-left: 0 !important;
     }
 
@@ -696,7 +705,7 @@
 
 
     /* What you learn */
-    .what-learn-area .row > .info {
+    .what-learn-area .row>.info {
         padding-left: 15px;
         margin-bottom: 30px;
     }
@@ -807,7 +816,8 @@
         margin-top: 30px;
     }
 
-    .wcs-area .item .icon, .wcs-area .item .info {
+    .wcs-area .item .icon,
+    .wcs-area .item .info {
         display: block;
         text-align: center;
     }
@@ -820,7 +830,8 @@
         padding-right: 0;
     }
 
-    .wcs-area .thumb, .wcs-area .content {
+    .wcs-area .thumb,
+    .wcs-area .content {
         display: block;
     }
 
@@ -842,7 +853,7 @@
         padding-right: 15px;
     }
 
-    .featured-courses-area .info > h4 {
+    .featured-courses-area .info>h4 {
         margin-bottom: 25px;
     }
 
@@ -1173,7 +1184,8 @@
 
     /* Testimonials */
     .clients-review-carousel {
-        text-align: center;;
+        text-align: center;
+        ;
     }
 
     .clients-review-carousel .item .thumb img {

@@ -17,7 +17,11 @@
                 <a class="nav-link dropdown-toggle" id="dropdown-flag" href="javascript:void(0);" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
 
-                    <i class="flag-icon flag-icon-{{ $selectedLanguage->country_flag_code }}"></i>
+                    @php
+                        $currentLocale = app()->getLocale();
+                        $currentFlag = config('localization.supportedLocales')[$currentLocale]['country_flag_code'] ?? 'vn';
+                    @endphp
+                    <i class="flag-icon flag-icon-{{ $currentFlag }}"></i>
                     <span class="selected-language">@lang('languages.' . app()->getLocale())</span>
                 </a>
 

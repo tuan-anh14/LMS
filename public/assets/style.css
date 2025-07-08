@@ -57,6 +57,256 @@ Table of contents
 ** Template default css
 */
 
+/* Beautiful Typography Styles for LMS */
+
+/* Import Beautiful Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@300;400;500;600;700;800&display=swap');
+
+/* Modern Typography with Beautiful Fonts */
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    letter-spacing: 0.01em;
+    color: #2d3748;
+    font-feature-settings: 'kern' 1, 'liga' 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Beautiful Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.site-heading h2,
+.content h1,
+.content h2,
+.content h3 {
+    font-family: 'Poppins', 'Inter', sans-serif !important;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #1a202c;
+    margin-bottom: 0.8em;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+h2 {
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+h3 {
+    font-size: 1.75rem;
+    font-weight: 600;
+}
+
+h4 {
+    font-size: 1.5rem;
+    font-weight: 500;
+}
+
+h5 {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+h6 {
+    font-size: 1.125rem;
+    font-weight: 500;
+}
+
+/* Enhanced Paragraph */
+p {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1.2em;
+    color: #4a5568;
+}
+
+/* Beautiful Links */
+a {
+    color: #3182ce;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+a:hover {
+    color: #2c5aa0;
+    text-decoration: none;
+}
+
+/* Enhanced Buttons */
+.btn {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.025em;
+    border-radius: 8px;
+    padding: 12px 24px;
+    transition: all 0.3s ease;
+    border: none;
+    text-transform: none;
+}
+
+.btn-theme {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+.btn-theme:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    color: white;
+}
+
+/* Site Heading Enhancement */
+.site-heading {
+    margin-bottom: 3rem;
+}
+
+.site-heading h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+}
+
+.site-heading p {
+    font-size: 1.125rem;
+    color: #718096;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.8;
+}
+
+/* Course Cards Enhancement */
+.info h4 a {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: #2d3748;
+    line-height: 1.3;
+}
+
+.info p {
+    font-size: 0.95rem;
+    color: #718096;
+    line-height: 1.6;
+}
+
+/* Navigation Enhancement */
+.navbar-nav .nav-link {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+}
+
+/* Why Choose Us Section */
+.wcs-area .item h4 a {
+    font-family: 'Poppins', sans-serif !important;
+    font-weight: 600;
+    color: #fff;
+}
+
+/* Footer Text */
+footer {
+    font-family: 'Inter', sans-serif;
+}
+
+/* Form Inputs */
+.form-control {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    border-radius: 6px;
+    border: 1px solid #e2e8f0;
+    padding: 12px 16px;
+    transition: border-color 0.2s ease;
+}
+
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Bootstrap Carousel Fixes */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 5%;
+    color: #fff;
+    opacity: 0.8;
+}
+
+.carousel-control-prev:hover,
+.carousel-control-next:hover {
+    color: #fff;
+    opacity: 1;
+}
+
+.carousel-control-prev i,
+.carousel-control-next i {
+    font-size: 24px;
+}
+
+/* Ensure carousel items are properly displayed */
+.carousel-item {
+    display: none;
+}
+
+.carousel-item.active {
+    display: block;
+}
+
+/* Fix for fade effect */
+.carousel-fade .carousel-item {
+    opacity: 0;
+    transition-duration: 0.6s;
+    transition-property: opacity;
+}
+
+.carousel-fade .carousel-item.active {
+    opacity: 1;
+}
+
+/* Smooth font loading */
+.fonts-loaded {
+    transition: all 0.3s ease;
+}
+
+/* Mobile Responsive Typography */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+
+    h2 {
+        font-size: 1.75rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+    }
+
+    .site-heading h2 {
+        font-size: 2rem;
+    }
+
+    body {
+        font-size: 0.95rem;
+    }
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -789,6 +1039,23 @@ nav.navbar.bootsnav.navbar-transparent.pad-top {
     padding: 10px 0;
 }
 
+/* Improved alignment for top-bar */
+.top-bar-area .row.align-items-center {
+    display: flex;
+    align-items: center;
+    min-height: 60px;
+}
+
+.top-bar-area .user-login {
+    margin: 0 !important;
+    /* Override previous margins */
+}
+
+.top-bar-area .user-login.d-flex {
+    gap: 10px;
+    /* Space between buttons */
+}
+
 .top-bar-area .user-login a {
     background: #01b5dd none repeat scroll 100% 0;
     -webkit-border-radius: 5px;
@@ -798,11 +1065,146 @@ nav.navbar.bootsnav.navbar-transparent.pad-top {
     display: inline-block;
     font-weight: 600;
     margin-right: 5px;
-    padding: 8px 25px;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: all 0.3s ease;
 }
 
-.top-bar-area .user-login a i {
-    margin-left: 2px;
+.top-bar-area .user-login a:hover {
+    background: #018db8;
+    color: #fff;
+}
+
+/* Dashboard button styling */
+.btn-sm-lm {
+    border-radius: 5px !important;
+    padding: 8px 16px !important;
+    font-weight: 600 !important;
+}
+
+/* Logo styling */
+.navbar-brand .logo {
+    max-height: 45px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* Logo text with icon styling */
+.navbar-brand span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease;
+}
+
+.navbar-brand span:hover {
+    color: #018db8 !important;
+}
+
+.navbar-brand i.fas {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Responsive logo */
+@media (max-width: 768px) {
+    .navbar-brand span {
+        font-size: 18px !important;
+    }
+
+    .navbar-brand i.fas {
+        font-size: 18px !important;
+    }
+}
+
+/* Language Switcher Styles */
+.attr-nav .dropdown {
+    position: relative;
+}
+
+.attr-nav .dropdown-toggle {
+    color: #01b5dd !important;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.attr-nav .dropdown-toggle:hover {
+    background: rgba(1, 181, 221, 0.1);
+    color: #018db8 !important;
+}
+
+.attr-nav .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    z-index: 1000;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    min-width: 150px;
+    margin-top: 5px;
+    padding: 5px 0;
+}
+
+.attr-nav .dropdown-menu li {
+    list-style: none;
+}
+
+.attr-nav .dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 15px;
+    color: #333;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.attr-nav .dropdown-menu a:hover {
+    background: #f8f9fa;
+    color: #01b5dd;
+}
+
+.attr-nav .flag-icon {
+    width: 20px;
+    height: 15px;
+    background-size: cover;
+    display: inline-block;
+}
+
+.attr-nav .selected-language {
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .attr-nav .dropdown-toggle .selected-language {
+        display: none;
+    }
+
+    .attr-nav .dropdown-menu {
+        right: -20px;
+    }
 }
 
 .top-bar-area .address-info li {
@@ -832,7 +1234,8 @@ nav.navbar.bootsnav.navbar-transparent.pad-top {
 }
 
 .top-bar-area.address-two-lines .user-login {
-    margin: 3px 0;
+    margin: 0;
+    /* Remove the margin that was causing alignment issues */
 }
 
 .top-bar-area .address-info li span {

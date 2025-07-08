@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Inquiry;
 use App\Models\Slide;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\View;
 
@@ -71,5 +72,22 @@ class WebController extends Controller
 
     }//end of inquiries
 
+    public function switchLanguage($locale)
+    {
+        $supported = array_keys(config('localization.supportedLocales'));
+        if (!in_array($locale, $supported)) {
+            abort(404);
+        }
+        
+        // Update user locale if authenticated
+        if (auth()->check()) {
+            User::where('id', auth()->id())->update(['locale' => $locale]);
+        }
+        
+        // Store in session for all users (including guests)
+        session(['locale' => $locale]);
+        
+        return redirect()->back();
+    }//end of switchLanguage
 
 }//end of controller

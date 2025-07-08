@@ -158,9 +158,15 @@
                             <div class="app-brand justify-content-center mb-6 text-center">
                                 <a href="{{route('/')}}" class="app-brand-link">
                                     <span class="app-brand-logo demo">
-
-                                        <img src="{{ asset('storage/uploads/logo.png') }}" alt="" width="150">
-
+                                        @if(app()->getLocale() == 'en')
+                                            <span style="font-size: 48px; color: #01b5dd;">
+                                                <i class="fas fa-graduation-cap"></i>
+                                            </span>
+                                        @else
+                                            <span style="font-size: 48px; color: #01b5dd;">
+                                                <i class="fas fa-graduation-cap"></i>
+                                            </span>
+                                        @endif
                                     </span>
                                     {{--<span class="app-brand-text demo text-heading fw-bold">معراج للتعليم والتنمية</span>--}}
                                 </a>

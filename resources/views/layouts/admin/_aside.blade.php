@@ -4,7 +4,7 @@
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto"><a class="navbar-brand" wire:navigate href="{{ route('admin.home') }}">
                     <span class="brand-logo">
-                    <img src="{{ asset('storage/uploads/logo.png') }}" alt="">
+                        <i class="fas fa-graduation-cap" style="font-size: 32px; color: #01b5dd;"></i>
                     </span>
                     <h2 class="brand-text">LMS</h2>
                 </a>

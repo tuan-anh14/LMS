@@ -440,5 +440,77 @@
             });
         });
 
+        /* ==================================================
+            # Beautiful Typography Enhancement
+         ===============================================*/
+        // Initialize Bootstrap Carousel with proper settings
+        $('#bootcarousel').carousel({
+            interval: 5000,
+            ride: 'carousel'
+        });
+
+        // Ensure carousel items exist before trying to slide
+        $('#bootcarousel').on('slide.bs.carousel', function (e) {
+            var $nextItem = $(e.relatedTarget);
+            if (!$nextItem.length) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Enhance text readability after fonts load
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(function () {
+                // Add loaded class to body for smoother font transitions
+                $('body').addClass('fonts-loaded');
+
+                // Enhance Vietnamese text display
+                $('h1, h2, h3, h4, h5, h6, p, a, span').each(function () {
+                    var text = $(this).text();
+                    // Check if contains Vietnamese characters
+                    if (/[àáảãạăắằẳẵặâấầẩẫậèéẻẽẹêếềểễệìíỉĩịòóỏõọôốồổỗộơớờởỡợùúủũụưứừửữựỳýỷỹỵđ]/i.test(text)) {
+                        $(this).css({
+                            'font-feature-settings': '"liga" 1, "kern" 1, "calt" 1',
+                            'text-rendering': 'optimizeLegibility'
+                        });
+                    }
+                });
+            });
+        }
+
+        // Enhanced smooth scroll for better UX
+        $('a[href^="#"]').on('click', function (event) {
+            var target = $(this.getAttribute('href'));
+            if (target.length) {
+                event.preventDefault();
+                $('html, body').animate({
+                    scrollTop: target.offset().top - 80
+                }, 800, 'easeInOutCubic');
+            }
+        });
+
+        // Enhanced button hover effects
+        $('.btn').hover(
+            function () {
+                $(this).addClass('animate__animated animate__pulse');
+            },
+            function () {
+                $(this).removeClass('animate__animated animate__pulse');
+            }
+        );
+
     }); // end document ready function
+
+    // Page loading performance enhancement
+    $(window).on('load', function () {
+        // Hide preloader after everything is loaded
+        $('.se-pre-con').fadeOut('slow');
+
+        // Trigger font optimization
+        if ($('body').hasClass('fonts-loaded')) {
+            $('body').addClass('page-ready');
+        }
+    });
+
 })(jQuery); // End jQuery
+

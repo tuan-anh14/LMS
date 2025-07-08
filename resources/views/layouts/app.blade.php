@@ -30,7 +30,9 @@
     <link href="{{asset('assets/css/bootsnav.css')}}" rel="stylesheet"/>
     <link href="{{asset('assets/style.css')}}?id=1" rel="stylesheet">
     <link href="{{asset('assets/css/responsive.css')}}" rel="stylesheet"/>
-    <!-- ========== End Stylesheet ========== -->
+    <!-- Flag icons for language switcher -->
+    <link href="{{asset('admin_assets/app-assets/fonts/flag-icon-css/css/flag-icon.min.css')}}" rel="stylesheet"/>
+    
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -38,12 +40,6 @@
     <script src="{{asset('assets/js/html5/html5shiv.min.js')}}"></script>
     <script src="{{asset('assets/js/html5/respond.min.js')}}"></script>
     <![endif]-->
-
-    <!-- ========== Tajawal Google Fonts ========== -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@200;300;400;500;700;800;900&display=swap"
-          rel="stylesheet">
 
     <!-- ========== Direction Config ========== -->
     <script>
