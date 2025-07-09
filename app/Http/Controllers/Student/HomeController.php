@@ -38,16 +38,9 @@ class HomeController extends Controller
 
     public function leaveImpersonate()
     {
-        if (session()->has('impersonate')) {
-
-            session()->forget('impersonate');
-
-            return redirect()->route('admin.home');
-
-        }//end of if
-
-        return redirect()->route('student.home');
-
-    }// end of leaveImpersonate
+        auth()->user()->leaveImpersonation();
+        session(['locale' => auth()->user()->locale]);
+        return redirect()->route('admin.home');
+    }
 
 }//end of controller
