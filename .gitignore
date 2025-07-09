@@ -12,8 +12,3 @@ Homestead.yaml
 npm-debug.log
 yarn-error.log
 /.idea
-app/Http/Controllers/Teacher/StudentLectureController.php
-app/Http/Controllers/Admin/AdminController.php
-app/Http/Controllers/Admin/ExamController.php
-app/Http/Controllers/Student/StudentController.php
-app/Http/Controllers/Student/StudentExamController.php
