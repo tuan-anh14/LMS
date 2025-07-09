@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'sections' => 'Khối lớp',
-    'section' => 'Khối lớp',
-    'name' => 'Tên khối lớp',
-    'sections_count' => 'Số lượng khối lớp',
+    'sections' => 'Lớp',
+    'section' => 'Lớp',
+    'name' => 'Tên lớp',
+    'sections_count' => 'Số lượng lớp',
 ]; 

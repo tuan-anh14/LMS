@@ -181,7 +181,7 @@
 
                                             <div class="alert alert-success">
                                                 <i data-feather="check-circle"></i>
-                                                Học sinh đã nộp bài kiểm tra
+                                                Sinh viên đã nộp bài kiểm tra
                                             </div>
 
                                             <a href="{{ route('examiner.student_exams.grade', $studentExam->id) }}"

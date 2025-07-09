@@ -1,25 +1,23 @@
 @if (session('success'))
     <script>
-        Swal.fire({
-            icon: 'success',
-            title: "{{ session('success') }}",
-            showConfirmButton: false,
-            timer: 2000,
-            position: 'top-end',
-            customClass: { confirmButton: 'btn btn-success' },
+        var n = new Noty({
+            text: "{{ session('success') }}",
+            type: 'success',
+            killer: true,
+            timeout: 2000
         });
+        n.show();
     </script>
 @endif
 
 @if(session('error'))
     <script>
-        Swal.fire({
-            icon: 'error',
-            title: "{{ session('error') }}",
-            showConfirmButton: false,
-            timer: 2000,
-            position: 'top-end',
-            customClass: { confirmButton: 'btn btn-danger' },
+        var n = new Noty({
+            text: "{{ session('error') }}",
+            type: 'error',
+            killer: true,
+            timeout: 2000
         });
+        n.show();
     </script>
 @endif

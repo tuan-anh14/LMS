@@ -75,7 +75,7 @@
                                             @if ($model == 'inquiries')
 
                                                 @php
-                                                    $permissionMaps = ['read', 'delete'];
+                                                    $permissionMaps = ['create', 'read', 'update', 'delete'];
                                                 @endphp
 
                                             @else

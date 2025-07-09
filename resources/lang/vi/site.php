@@ -91,7 +91,7 @@ return [
     
     // Statistics
     'teachers_count' => 'Giáo viên',
-    'students_count' => 'Học sinh',
+    'students_count' => 'Sinh viên',
     'courses_count' => 'Khóa học',
     'certificates_count' => 'Chứng chỉ',
     

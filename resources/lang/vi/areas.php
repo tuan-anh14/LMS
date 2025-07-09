@@ -6,6 +6,6 @@ return [
     'name' => 'Tên khu vực',
     'centers_count' => 'Số lượng trung tâm',
     'teachers_count' => 'Số lượng giảng viên',
-    'students_count' => 'Số lượng học sinh',
+    'students_count' => 'Số lượng sinh viên',
     'areas_count' => 'Số lượng khu vực',
 ]; 

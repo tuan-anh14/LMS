@@ -10,6 +10,6 @@ return [
     'roles_count' => 'Số lượng vai trò',
     'teacher' => 'Giáo viên',
     'examiner' => 'Giám khảo',
-    'student' => 'Học sinh',
+    'student' => 'Sinh viên',
     'center_manager' => 'Quản lý trung tâm',
 ]; 

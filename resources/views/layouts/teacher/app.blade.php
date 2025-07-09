@@ -319,22 +319,13 @@ document.addEventListener('DOMContentLoaded', function () {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
             let form = btn.closest('form');
-            Swal.fire({
-                title: 'Bạn có chắc chắn muốn xoá?',
-                icon: 'warning',
-                showCancelButton: true,
-                confirmButtonText: 'Có',
-                cancelButtonText: 'Không',
-                customClass: {
-                    confirmButton: 'btn btn-danger',
-                    cancelButton: 'btn btn-secondary ml-1'
-                },
-                buttonsStyling: false
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
+            var n = new Noty({
+                text: 'Bạn có chắc chắn muốn xoá?',
+                type: 'warning',
+                killer: true,
+                timeout: 2000
             });
+            n.show();
         });
     });
     // Xác nhận nộp bài bằng SweetAlert2
@@ -342,22 +333,13 @@ document.addEventListener('DOMContentLoaded', function () {
         btn.addEventListener('click', function(e) {
             e.preventDefault();
             let form = btn.closest('form');
-            Swal.fire({
-                title: 'Bạn có chắc chắn muốn nộp bài? Sau khi nộp sẽ không thể chỉnh sửa.',
-                icon: 'question',
-                showCancelButton: true,
-                confirmButtonText: 'Nộp bài',
-                cancelButtonText: 'Huỷ',
-                customClass: {
-                    confirmButton: 'btn btn-success',
-                    cancelButton: 'btn btn-secondary ml-1'
-                },
-                buttonsStyling: false
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    form.submit();
-                }
+            var n = new Noty({
+                text: 'Bạn có chắc chắn muốn nộp bài? Sau khi nộp sẽ không thể chỉnh sửa.',
+                type: 'question',
+                killer: true,
+                timeout: 2000
             });
+            n.show();
         });
     });
 });

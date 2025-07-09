@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'courses' => 'courses',
-    'course' => 'course',
-    'title' => 'title',
-    'short_description' => 'short description',
-    'description' => 'description',
-    'image' => 'image',
-    'courses_count' => 'courses count',
+    'courses' => 'Courses',
+    'course' => 'Course',
+    'title' => 'Title',
+    'short_description' => 'Short description',
+    'description' => 'Description',
+    'image' => 'Image',
+    'courses_count' => 'Courses count',
 ];

@@ -25,7 +25,7 @@ return [
     'mobile' => 'Điện thoại',
     'about_text' => 'Giới thiệu',
     'teachers_count' => 'Số lượng giáo viên',
-    'students_count' => 'Số lượng học sinh',
+    'students_count' => 'Số lượng sinh viên',
     'courses_count' => 'Số lượng khóa học',
     'certificates_count' => 'Số lượng chứng chỉ',
     'success_rate' => 'Tỷ lệ thành công',

@@ -1,8 +1,8 @@
 <?php
 
 return [
-    'student_exams' => 'Bài kiểm tra học sinh',
-    'student_exam' => 'Bài kiểm tra học sinh',
+    'student_exams' => 'Bài kiểm tra sinh viên',
+    'student_exam' => 'Bài kiểm tra sinh viên',
     'statuses' => 'Trạng thái',
     'status' => 'Trạng thái',
     'requested' => 'Đã yêu cầu',

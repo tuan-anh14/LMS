@@ -2,7 +2,7 @@
     <i data-feather="eye"></i>
 </a>
 
-{{-- Nút chấm điểm nếu học sinh đã nộp bài --}}
+{{-- Nút chấm điểm nếu sinh viên đã nộp bài --}}
 @if ($studentExam->status === 'submitted')
     <a href="{{ route('examiner.student_exams.grade', $studentExam->id) }}" class="btn btn-warning btn-sm" title="Chấm điểm">
         <i data-feather="edit"></i>

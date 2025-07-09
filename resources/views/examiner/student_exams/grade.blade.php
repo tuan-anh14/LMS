@@ -18,7 +18,7 @@
                 <!-- Thông tin bài thi -->
                 <div class="row mb-4">
                     <div class="col-md-4">
-                        <strong>Học sinh:</strong> {{ $studentExam->student->name }}<br>
+                        <strong>Sinh viên:</strong> {{ $studentExam->student->name }}<br>
                         <strong>Bài kiểm tra:</strong> {{ $studentExam->exam->name }}<br>
                     </div>
                     <div class="col-md-4">
@@ -99,7 +99,7 @@
                                         <div class="col-md-6">
                                             @if($answer)
                                                 <div class="mb-3">
-                                                    <strong>Lựa chọn của học sinh:</strong>
+                                                    <strong>Lựa chọn của sinh viên:</strong>
                                                     <div class="alert {{ ($answer->answer_text == $question->correct_answer) ? 'alert-success' : 'alert-danger' }}">
                                                         <i class="fas {{ ($answer->answer_text == $question->correct_answer) ? 'fa-check' : 'fa-times' }}"></i>
                                                         {{ $answer->answer_text }}
@@ -129,7 +129,7 @@
                                 @if($answer)
                                     @if($question->isEssay())
                                         <div class="mb-3">
-                                            <strong>Câu trả lời của học sinh:</strong>
+                                            <strong>Câu trả lời của sinh viên:</strong>
                                             <div class="alert alert-light border">
                                                 {{ $answer->answer_text }}
                                             </div>
@@ -156,13 +156,13 @@
                                                       id="comment_{{ $answer->id }}"
                                                       class="form-control" 
                                                       rows="2" 
-                                                      placeholder="Nhận xét cho học sinh...">{{ $answer->comment }}</textarea>
+                                                      placeholder="Nhận xét cho sinh viên...">{{ $answer->comment }}</textarea>
                                         </div>
                                     </div>
                                 @else
                                     <div class="alert alert-warning">
                                         <i class="fas fa-exclamation-triangle"></i>
-                                        Học sinh chưa trả lời câu hỏi này.
+                                        Sinh viên chưa trả lời câu hỏi này.
                                     </div>
                                 @endif
                             </div>
@@ -226,7 +226,7 @@
                 @else
                     <div class="alert alert-warning">
                         <i class="fas fa-exclamation-triangle"></i>
-                        Học sinh chưa nộp bài kiểm tra này.
+                        Sinh viên chưa nộp bài kiểm tra này.
                     </div>
                 @endif
             </div>
@@ -299,7 +299,7 @@ $(document).ready(function() {
                 if (studentAnswer.includes(correctAnswer)) {
                     scoreInput.val(points);
                     gradedCount++;
-                } else if (studentAnswer && !studentAnswer.includes('Học sinh chưa trả lời')) {
+                } else if (studentAnswer && !studentAnswer.includes('Sinh viên chưa trả lời')) {
                     scoreInput.val(0);
                     gradedCount++;
                 }
@@ -332,23 +332,13 @@ $(document).ready(function() {
         
         if (hasUngraded) {
             if (ungradedQuestions.length > 0) {
-                Swal.fire({
-                    title: 'Bạn chưa chấm điểm cho câu hỏi số: ' + ungradedQuestions.join(', ') + '. Bạn có muốn tiếp tục không?',
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonText: 'Tiếp tục',
-                    cancelButtonText: 'Hủy',
-                    customClass: {
-                        confirmButton: 'btn btn-danger',
-                        cancelButton: 'btn btn-secondary ml-1'
-                    },
-                    buttonsStyling: false
-                }).then((result) => {
-                    if (!result.isConfirmed) {
-                        return;
-                    }
-                    // ... tiếp tục xử lý nếu đồng ý
+                var n = new Noty({
+                    text: 'Bạn chưa chấm điểm cho câu hỏi số: ' + ungradedQuestions.join(', ') + '. Bạn có muốn tiếp tục không?',
+                    type: 'alert',
+                    killer: true,
+                    timeout: 2000
                 });
+                n.show();
             } else {
                 // ... tiếp tục xử lý nếu không có câu hỏi chưa chấm
             }

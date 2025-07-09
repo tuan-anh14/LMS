@@ -81,10 +81,10 @@
                                             <td>@lang($model . '.' . $model)</td>
                                             <td>
 
-                                                @if ($model == 'queues')
+                                                @if ($model == 'inquiries')
 
                                                     @php
-                                                        $permissionMaps = ['read', 'delete'];
+                                                        $permissionMaps = ['create', 'read', 'update', 'delete'];
                                                     @endphp
 
                                                 @else

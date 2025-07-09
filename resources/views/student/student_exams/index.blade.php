@@ -62,9 +62,7 @@
                                         <table class="table datatable" id="student-exams-table" style="width: 100%;">
                                             <thead>
                                             <tr>
-                                                <th>@lang('students.student')</th>
                                                 <th>@lang('teachers.examiner')</th>
-                                                <th>@lang('students.student')</th>
                                                 <th>@lang('projects.project')</th>
                                                 <th>@lang('sections.section')</th>
                                                 <th>@lang('student_exams.status')</th>
@@ -129,16 +127,14 @@
                     }
                 },
                 columns: [
-                    {data: 'student', name: 'student', searchable: false, sortable: false},
                     {data: 'examiner', name: 'examiner', searchable: false, sortable: false},
-                    {data: 'student', name: 'student', searchable: false, sortable: false},
                     {data: 'project', name: 'project', searchable: false, sortable: false},
                     {data: 'section', name: 'section', searchable: false, sortable: false},
                     {data: 'status', name: 'status', searchable: false, sortable: false},
                     {data: 'created_at', name: 'created_at', searchable: false},
-                    {data: 'actions', name: 'actions', searchable: false, sortable: false},
+                    {data: 'actions', name: 'actions', searchable: false, sortable: false}
                 ],
-                order: [[6, 'desc']],
+                order: [[4, 'desc']],
                 drawCallback: function (settings) {
                     $('.record__select').prop('checked', false);
                     $('#record__select-all').prop('checked', false);
