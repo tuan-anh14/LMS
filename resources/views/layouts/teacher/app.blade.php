@@ -122,6 +122,8 @@
     @stack('styles')
 
     @livewireStyles
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/app-assets/vendors/css/extensions/sweetalert2.min.css') }}">
+    <script src="{{ asset('admin_assets/app-assets/vendors/js/extensions/sweetalert2.all.min.js') }}"></script>
 
     <script src="{{ asset('admin_assets/app-assets/vendors/js/tables/datatable/jquery.dataTables.min.js') }}"></script>
     <script
@@ -310,5 +312,55 @@
 
 @stack('scripts')
 
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Xác nhận xoá bằng SweetAlert2
+    document.querySelectorAll('.btn-delete').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            let form = btn.closest('form');
+            Swal.fire({
+                title: 'Bạn có chắc chắn muốn xoá?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Có',
+                cancelButtonText: 'Không',
+                customClass: {
+                    confirmButton: 'btn btn-danger',
+                    cancelButton: 'btn btn-secondary ml-1'
+                },
+                buttonsStyling: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    });
+    // Xác nhận nộp bài bằng SweetAlert2
+    document.querySelectorAll('.btn-submit-exam').forEach(function(btn) {
+        btn.addEventListener('click', function(e) {
+            e.preventDefault();
+            let form = btn.closest('form');
+            Swal.fire({
+                title: 'Bạn có chắc chắn muốn nộp bài? Sau khi nộp sẽ không thể chỉnh sửa.',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Nộp bài',
+                cancelButtonText: 'Huỷ',
+                customClass: {
+                    confirmButton: 'btn btn-success',
+                    cancelButton: 'btn btn-secondary ml-1'
+                },
+                buttonsStyling: false
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    });
+});
+</script>
 </body>
 </html>

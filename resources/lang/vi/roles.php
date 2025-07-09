@@ -8,4 +8,7 @@ return [
     'model' => 'Mô hình',
     'admins_count' => 'Số lượng quản trị viên',
     'roles_count' => 'Số lượng vai trò',
+    'teacher' => 'Giáo viên',
+    'examiner' => 'Giám khảo',
+    'student' => 'Học sinh',
 ]; 

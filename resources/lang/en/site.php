@@ -92,8 +92,8 @@ return [
     // Statistics
     'teachers_count' => 'Teachers',
     'students_count' => 'Students',
-    'quran_we_ascend' => 'Achievements',
-    'convoy' => 'Projects',
+    'courses_count' => 'Courses',
+    'certificates_count' => 'Certificates',
     
     // Reviews section
     'parent_reviews' => 'Parent Reviews',
@@ -244,5 +244,11 @@ return [
     'records' => 'records',
     'items' => 'items',
     'entries' => 'entries',
-
+    'no_permission' => 'You do not have permission to access this page.',
+    'go_to_dashboard' => 'Go to Dashboard',
+    'superiority' => 'Excellent (90-100%)',
+    'excellent' => 'Very Good (80-89%)',
+    'very_good' => 'Good (70-79%)',
+    'good' => 'Average (60-69%)',
+    'repeat' => 'Poor (<60%)',
 ];

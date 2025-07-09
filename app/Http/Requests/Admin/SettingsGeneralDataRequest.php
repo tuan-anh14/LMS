@@ -21,14 +21,14 @@ class SettingsGeneralDataRequest extends FormRequest
             'address' => 'required',
             'mobile' => 'required',
             'about_text' => 'required',
-            'teachers_count' => 'required',
-            'students_count' => 'required',
-            'quran_we_ascend' => 'required',
-            'convoy' => 'required',
-            'pulpits_of_light' => 'required',
-            'arabic_reading' => 'required',
-            'holy_quran_teachers_cadres' => 'required',
-            'licensed' => 'required',
+            'teachers_count' => 'nullable|numeric|min:0',
+            'students_count' => 'nullable|numeric|min:0',
+            'courses_count' => 'nullable|numeric|min:0',
+            'certificates_count' => 'nullable|numeric|min:0',
+            'success_rate' => 'nullable|numeric|min:0|max:100',
+            'years_experience' => 'nullable|numeric|min:0',
+            'total_graduates' => 'nullable|numeric|min:0',
+            'active_students' => 'nullable|numeric|min:0',
         ];
 
         if (in_array($this->method(), ['PUT', 'PATCH'])) {

@@ -331,9 +331,26 @@ $(document).ready(function() {
         });
         
         if (hasUngraded) {
-            if (!confirm('Bạn chưa chấm điểm cho câu hỏi số: ' + ungradedQuestions.join(', ') + '. Bạn có muốn tiếp tục không?')) {
-                e.preventDefault();
-                return false;
+            if (ungradedQuestions.length > 0) {
+                Swal.fire({
+                    title: 'Bạn chưa chấm điểm cho câu hỏi số: ' + ungradedQuestions.join(', ') + '. Bạn có muốn tiếp tục không?',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonText: 'Tiếp tục',
+                    cancelButtonText: 'Hủy',
+                    customClass: {
+                        confirmButton: 'btn btn-danger',
+                        cancelButton: 'btn btn-secondary ml-1'
+                    },
+                    buttonsStyling: false
+                }).then((result) => {
+                    if (!result.isConfirmed) {
+                        return;
+                    }
+                    // ... tiếp tục xử lý nếu đồng ý
+                });
+            } else {
+                // ... tiếp tục xử lý nếu không có câu hỏi chưa chấm
             }
         }
     });

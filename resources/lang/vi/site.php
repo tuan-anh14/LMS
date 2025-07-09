@@ -90,10 +90,10 @@ return [
     'our_values_des' => 'Chúng tôi luôn đặt chất lượng giáo dục và sự phát triển của học viên lên hàng đầu.',
     
     // Statistics
-    'teachers_count' => 'Giảng viên',
-    'students_count' => 'Học viên',
-    'quran_we_ascend' => 'Thành tựu',
-    'convoy' => 'Dự án',
+    'teachers_count' => 'Giáo viên',
+    'students_count' => 'Học sinh',
+    'courses_count' => 'Khóa học',
+    'certificates_count' => 'Chứng chỉ',
     
     // Reviews section
     'parent_reviews' => 'Đánh giá từ phụ huynh',
@@ -117,7 +117,7 @@ return [
     'links' => 'Liên kết',
     'students' => 'Học viên',
     'teachers' => 'Giảng viên',
-    'dashboard' => 'Dashboard',
+    'dashboard' => 'Bảng điều khiển',
     
     // Footer
     'copyright' => 'Bản quyền thuộc về',
@@ -244,5 +244,7 @@ return [
     'records' => 'bản ghi',
     'items' => 'mục',
     'entries' => 'mục nhập',
+    'no_permission' => 'Bạn không có quyền truy cập trang này.',
+    'go_to_dashboard' => 'Về trang chính',
 
 ]; 

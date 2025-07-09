@@ -39,6 +39,12 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="d-flex align-items-center" href="{{ route('/') }}">
+                    <i data-feather="home"></i><span class="menu-title text-truncate">@lang('site.web_home')</span>
+                </a>
+            </li>
+
             {{--students--}}
             {{--@if (auth()->user()->hasPermission('read_students'))
                 <li class="{{ request()->is('*students*') ? 'active' : '' }} nav-item">

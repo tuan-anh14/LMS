@@ -37,6 +37,12 @@
                 </a>
             </li>
 
+            <li class="nav-item">
+                <a class="d-flex align-items-center" href="{{ route('/') }}">
+                    <i data-feather="home"></i><span class="menu-title text-truncate">@lang('site.web_home')</span>
+                </a>
+            </li>
+
             {{--student_exams--}}
             <li class="{{ request()->is('*student_exams*') ? 'active' : '' }} nav-item">
                 <a class="d-flex align-items-center" href="{{ route('student.student_exams.index') }}" wire:navigate>

@@ -41,6 +41,7 @@
           href="{{ asset('admin_assets/app-assets/vendors/css/forms/select/select2.min.css') }}">
     <link rel="stylesheet" type="text/css"
           href="{{ asset('admin_assets/app-assets/vendors/css/pickers/flatpickr/flatpickr.min.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/app-assets/vendors/css/extensions/sweetalert2.min.css') }}">
     <!-- END: Vendor CSS-->
 
     {{--Vendor js--}}
@@ -164,6 +165,7 @@
         })
 
     </script>
+    <script src="{{ asset('admin_assets/app-assets/vendors/js/extensions/sweetalert2.all.min.js') }}"></script>
 </head>
 <!-- END: Head-->
 

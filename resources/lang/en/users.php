@@ -28,6 +28,7 @@ return [
     'edit_profile' => 'Edit Profile',
     'change_password' => 'Change Password',
     'image' => 'Profile Image',
+    'registration_date' => 'Registration Date',
     
     // Gender values
     'male' => 'Male',

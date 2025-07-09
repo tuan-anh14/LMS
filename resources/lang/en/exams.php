@@ -11,4 +11,5 @@ return [
     'new_exam' => 'New Exam',
     'assigned_student_exams_count' => 'Assigned Student Exams Count',
     'exams_count' => 'Exams Count',
+    'manage_questions' => 'Manage Questions',
 ];

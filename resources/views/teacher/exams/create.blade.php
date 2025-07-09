@@ -23,7 +23,7 @@
                 <div class="col-md-8 offset-md-2">
                     <div class="card">
                         <div class="card-body">
-                            <form method="POST" action="{{ route('teacher.exams.store') }}" class="ajax-form">
+                            <form method="POST" action="{{ route('teacher.exams.store') }}">
                                 @csrf
                                 <div class="form-group">
                                     <label>@lang('exams.name') <span class="text-danger">*</span></label>

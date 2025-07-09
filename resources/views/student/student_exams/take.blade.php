@@ -87,10 +87,7 @@
                             @endforeach
 
                             <div class="text-center mt-4">
-                                <button type="submit" class="btn btn-success btn-lg" onclick="return confirm('Bạn có chắc chắn muốn nộp bài? Sau khi nộp sẽ không thể chỉnh sửa.')">
-                                    <i class="fa fa-paper-plane mr-2"></i>
-                                    Nộp bài kiểm tra
-                                </button>
+                                <button type="submit" class="btn btn-success btn-lg btn-submit-exam">Nộp bài</button>
                                 <div class="mt-2">
                                     <small class="text-muted">
                                         Hãy kiểm tra kỹ trước khi nộp bài. Bạn sẽ không thể sửa đổi sau khi nộp.

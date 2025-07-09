@@ -19,4 +19,9 @@ return [
     'tajweed' => 'Tajweed',
     'assessment' => 'Assessment',
     'assessments' => 'Assessments',
+    'superiority' => 'Excellent (90-100%)',
+    'excellent' => 'Very Good (80-89%)',
+    'very_good' => 'Good (70-79%)',
+    'good' => 'Average (60-69%)',
+    'repeat' => 'Poor (<60%)',
 ]; 

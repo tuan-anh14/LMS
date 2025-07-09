@@ -11,4 +11,5 @@ return [
     'new_exam' => 'Bài kiểm tra mới',
     'assigned_student_exams_count' => 'Số bài kiểm tra được giao',
     'exams_count' => 'Số lượng bài kiểm tra',
+    'manage_questions' => 'Quản lý câu hỏi',
 ]; 

@@ -8,4 +8,7 @@ return [
     'model' => 'Model',
     'admins_count' => 'Admins count',
     'roles_count' => 'Roles count',
+    'teacher' => 'Teacher',
+    'examiner' => 'Examiner',
+    'student' => 'Student',
 ];

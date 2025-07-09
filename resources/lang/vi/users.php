@@ -36,6 +36,7 @@ return [
     'edit_profile' => 'Chỉnh sửa hồ sơ', 
     'change_password' => 'Đổi mật khẩu',
     'image' => 'Ảnh đại diện',
+    'registration_date' => 'Ngày đăng ký',
     
     // Gender values
     'male' => 'Nam',

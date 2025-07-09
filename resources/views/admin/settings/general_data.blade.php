@@ -126,46 +126,46 @@
                                            value="{{ setting('students_count') }}">
                                 </div>
 
-                                {{--quran_we_ascend--}}
+                                {{--courses_count--}}
                                 <div class="form-group">
-                                    <label>@lang('settings.quran_we_ascend')</label>
-                                    <input type="number" name="quran_we_ascend" class="form-control"
-                                           value="{{ setting('quran_we_ascend') }}">
+                                    <label>@lang('settings.courses_count')</label>
+                                    <input type="number" name="courses_count" class="form-control"
+                                           value="{{ setting('courses_count') }}">
                                 </div>
 
-                                {{--convoy--}}
+                                {{--certificates_count--}}
                                 <div class="form-group">
-                                    <label>@lang('settings.convoy')</label>
-                                    <input type="number" name="convoy" class="form-control"
-                                           value="{{ setting('convoy') }}">
+                                    <label>@lang('settings.certificates_count')</label>
+                                    <input type="number" name="certificates_count" class="form-control"
+                                           value="{{ setting('certificates_count') }}">
                                 </div>
 
-                                {{--pulpits_of_light--}}
+                                {{--success_rate--}}
                                 <div class="form-group">
-                                    <label>@lang('settings.pulpits_of_light')</label>
-                                    <input type="number" name="pulpits_of_light" class="form-control"
-                                           value="{{ setting('pulpits_of_light') }}">
+                                    <label>@lang('settings.success_rate') (%)</label>
+                                    <input type="number" name="success_rate" class="form-control" min="0" max="100"
+                                           value="{{ setting('success_rate') }}">
                                 </div>
 
-                                {{--arabic_reading--}}
+                                {{--years_experience--}}
                                 <div class="form-group">
-                                    <label>@lang('settings.arabic_reading')</label>
-                                    <input type="number" name="arabic_reading" class="form-control"
-                                           value="{{ setting('arabic_reading') }}">
+                                    <label>@lang('settings.years_experience')</label>
+                                    <input type="number" name="years_experience" class="form-control"
+                                           value="{{ setting('years_experience') }}">
                                 </div>
 
-                                {{--holy_quran_teachers_cadres--}}
+                                {{--total_graduates--}}
                                 <div class="form-group">
-                                    <label>@lang('settings.holy_quran_teachers_cadres')</label>
-                                    <input type="number" name="holy_quran_teachers_cadres" class="form-control"
-                                           value="{{ setting('holy_quran_teachers_cadres') }}">
+                                    <label>@lang('settings.total_graduates')</label>
+                                    <input type="number" name="total_graduates" class="form-control"
+                                           value="{{ setting('total_graduates') }}">
                                 </div>
 
-                                {{--licensed--}}
+                                {{--active_students--}}
                                 <div class="form-group">
-                                    <label>@lang('settings.licensed')</label>
-                                    <input type="number" name="licensed" class="form-control"
-                                           value="{{ setting('licensed') }}">
+                                    <label>@lang('settings.active_students')</label>
+                                    <input type="number" name="active_students" class="form-control"
+                                           value="{{ setting('active_students') }}">
                                 </div>
 
                                 {{--submit--}}

@@ -19,4 +19,9 @@ return [
     'tajweed' => 'Tajweed',
     'assessment' => 'Đánh giá',
     'assessments' => 'Đánh giá',
+    'superiority' => 'Xuất sắc (90-100%)',
+    'excellent' => 'Rất tốt (80-89%)',
+    'very_good' => 'Tốt (70-79%)',
+    'good' => 'Trung bình (60-69%)',
+    'repeat' => 'Kém (<60%)',
 ]; 

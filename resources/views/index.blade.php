@@ -276,9 +276,9 @@
                             <i class="flaticon-diploma"></i>
                         </div>
                         <div class="info">
-                            <span class="timer" data-to="{{setting('quran_we_ascend')}}"
-                                  data-speed="5000">{{setting('quran_we_ascend')}}</span>
-                            <span class="medium">@lang('site.quran_we_ascend')</span>
+                            <span class="timer" data-to="{{setting('courses_count')}}"
+                                  data-speed="5000">{{setting('courses_count')}}</span>
+                            <span class="medium">@lang('site.courses_count')</span>
                         </div>
                     </div>
                 </div>
@@ -288,9 +288,9 @@
                             <i class="flaticon-education"></i>
                         </div>
                         <div class="info">
-                            <span class="timer" data-to="{{setting('convoy')}}"
-                                  data-speed="5000">{{setting('convoy')}}</span>
-                            <span class="medium">@lang('site.convoy')</span>
+                            <span class="timer" data-to="{{setting('certificates_count')}}"
+                                  data-speed="5000">{{setting('certificates_count')}}</span>
+                            <span class="medium">@lang('site.certificates_count')</span>
                         </div>
                     </div>
                 </div>

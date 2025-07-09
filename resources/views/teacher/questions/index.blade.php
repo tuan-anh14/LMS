@@ -77,7 +77,7 @@
                                                 <form action="{{ route('teacher.exams.questions.destroy', [$exam->id, $question->id]) }}" method="POST" style="display:inline-block">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xoá?')">@lang('site.delete')</button>
+                                                    <button type="submit" class="btn btn-sm btn-danger btn-delete">@lang('site.delete')</button>
                                                 </form>
                                             </td>
                                         </tr>

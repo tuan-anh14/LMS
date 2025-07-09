@@ -27,4 +27,9 @@ return [
     'duration' => 'Duration',
     'questions_count' => 'Questions Count',
     'max_score' => 'Maximum Score',
+    'superiority' => 'Excellent (90-100%)',
+    'excellent' => 'Very Good (80-89%)',
+    'very_good' => 'Good (70-79%)',
+    'good' => 'Average (60-69%)',
+    'repeat' => 'Poor (<60%)',
 ];

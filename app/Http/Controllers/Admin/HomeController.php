@@ -25,16 +25,7 @@ class HomeController extends Controller
         $slides = Slide::query()->count();
         $sections = Section::query()->count();
         $books = Book::query()->count();
-        //$roles = Role::query()->count();
-        $roles = Role::whereNotIn('name', [
-            UserTypeEnum::SUPER_ADMIN,
-            UserTypeEnum::ADMIN,
-            UserTypeEnum::TEACHER,
-            UserTypeEnum::STUDENT,
-            UserTypeEnum::CENTER_MANAGER,
-            UserTypeEnum::EXAMINER,
-        ])
-            ->withCount(['users'])->count();
+        $roles = Role::query()->count();
 
         $examiners = User::query()->where('type', UserTypeEnum::EXAMINER)->count();
         $admins = User::query()->where('type', UserTypeEnum::ADMIN)->count();
