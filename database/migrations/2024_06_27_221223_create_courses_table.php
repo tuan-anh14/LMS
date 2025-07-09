@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('book_id')->nullable()->constrained()->nullOnDelete();
             $table->string('title');
             $table->string('short_description');
             $table->text('description');

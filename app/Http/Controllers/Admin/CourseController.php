@@ -7,6 +7,7 @@ use App\Http\Requests\Admin\CourseRequest;
 use App\Models\Course;
 use Illuminate\Support\Facades\Storage;
 use Yajra\DataTables\DataTables;
+use App\Models\Book;
 
 class CourseController extends Controller
 {
@@ -49,7 +50,8 @@ class CourseController extends Controller
 
     public function create()
     {
-        return view('admin.courses.create');
+        $books = Book::all();
+        return view('admin.courses.create', compact('books'));
 
     }// end of create
 
@@ -74,7 +76,8 @@ class CourseController extends Controller
 
     public function edit(Course $course)
     {
-        return view('admin.courses.edit', compact('course'));
+        $books = Book::all();
+        return view('admin.courses.edit', compact('course', 'books'));
 
     }// end of edit
 

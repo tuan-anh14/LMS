@@ -24,6 +24,7 @@ class CourseRequest extends FormRequest
     public function rules()
     {
         $rules = [
+            'book_id' => 'required|exists:books,id',
             'title' => 'required',
             'short_description' => 'required',
             'description' => 'required',
