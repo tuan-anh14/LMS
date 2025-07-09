@@ -10,42 +10,71 @@ class UsersTableSeeder extends Seeder
 {
     public function run()
     {
-        $user = User::create([
-            'first_name' => 'mohamad',
-            'second_name' => 'salahia',
-            'nickname' => 'developer',
-            'email' => 'admin@webseity.com',
-            'password' => bcrypt('demo1234'),
-            'type' => 'super_admin',
-            'image' => 'profile.jpg',
-        ]);
-
-        $user->attachRole('super_admin');
-
-        $admins = [
+        $users = [
             [
-                'first_name' => 'Quản trị 1',
-                'second_name' => null,
+                'id' => 1,
+                'country_id' => null,
+                'governorate_id' => null,
+                'degree_id' => null,
+                'student_center_id' => null,
+                'student_section_id' => null,
+                'student_project_id' => null,
+                'first_name' => 'Admin',
+                'second_name' => 'Super',
+                'nickname' => 'developer',
+                'name' => 'Admin Super',
+                'email' => 'admin@webseity.com',
+                'mobile' => null,
+                'email_verified_at' => null,
+                'password' => '$2y$10$RqoM77VqB7TAGuBAv5XP2.LUQLie32LVY1LR.0sJ0Cu9fOENSxppW',
+                'type' => 'super_admin',
+                'reading_type' => null,
+                'image' => 'btwEON37HUtDpwPm17JPThasmhSgTmdd7xMHqNXZ.png',
+                'locale' => 'vi',
+                'address' => null,
+                'dob' => null,
+                'gender' => 'male',
+                'is_examiner' => 0,
+                'remember_token' => null,
+                'registration_date' => null,
+                'created_at' => '2025-07-05 08:18:06',
+                'updated_at' => '2025-07-09 15:54:42',
+            ],
+            [
+                'id' => 2,
+                'country_id' => null,
+                'governorate_id' => null,
+                'degree_id' => null,
+                'student_center_id' => null,
+                'student_section_id' => null,
+                'student_project_id' => null,
+                'first_name' => 'Admin',
+                'second_name' => '1',
+                'nickname' => 'Admin 1',
+                'name' => 'Admin 1',
                 'email' => 'admin1@app.com',
-                'password' => bcrypt('password'),
-                'type' => UserTypeEnum::ADMIN,
+                'mobile' => null,
+                'email_verified_at' => null,
+                'password' => '$2y$10$0YPifwbe0A3qDu2X1iUFW.bKG.8DIZBT6.hOaPX7eoVUz7Fe13XWy',
+                'type' => 'admin',
+                'reading_type' => null,
+                'image' => null,
+                'locale' => 'ar',
+                'address' => null,
+                'dob' => null,
+                'gender' => 'male',
+                'is_examiner' => 0,
+                'remember_token' => null,
+                'registration_date' => null,
+                'created_at' => '2025-07-05 08:18:06',
+                'updated_at' => '2025-07-09 08:35:57',
             ],
-            [
-                'first_name' => 'Quản trị 2',
-                'second_name' => null,
-                'email' => 'admin2@app.com',
-                'password' => bcrypt('password'),
-                'type' => UserTypeEnum::ADMIN,
-            ],
+            // ... (Các user còn lại sẽ được dán đầy đủ từ users.json)
         ];
 
-        foreach ($admins as $admin) {
-
-            $newAdmin = User::create($admin);
-
-            $newAdmin->attachRole('admin');
-
-        }//end of for each
+        foreach ($users as $user) {
+            \App\Models\User::create($user);
+        }
 
     }//end of run
 

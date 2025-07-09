@@ -11,33 +11,37 @@ class ProjectsTableSeeder extends Seeder
     {
         $projects = [
             [
+                'id' => 1,
                 'book_id' => 1,
-                'name' => 'Dự án 1',
-                'center_ids' => [1, 2],
+                'name' => 'Triết học Mác Lê-nin',
                 'has_tajweed_lectures' => 1,
                 'has_upbringing_lectures' => 1,
+                'created_at' => '2025-07-05 08:18:06',
+                'updated_at' => '2025-07-09 15:06:45',
             ],
-
             [
+                'id' => 2,
                 'book_id' => 2,
-                'name' => 'Dự án 2',
-                'center_ids' => [1, 2],
+                'name' => 'Giải tích',
+                'has_tajweed_lectures' => 0,
+                'has_upbringing_lectures' => 0,
+                'created_at' => '2025-07-05 08:18:06',
+                'updated_at' => '2025-07-09 15:07:30',
             ],
-
             [
-                'book_id' => 3,
-                'name' => 'Dự án 3',
-                'center_ids' => [1, 2],
+                'id' => 5,
+                'book_id' => 4,
+                'name' => 'Kinh tế lượng',
+                'has_tajweed_lectures' => 1,
+                'has_upbringing_lectures' => 1,
+                'created_at' => '2025-07-09 18:49:23',
+                'updated_at' => '2025-07-09 18:49:23',
             ],
         ];
 
         foreach ($projects as $project) {
-
-            $newProject = Project::create(collect($project)->except('center_ids')->toArray());
-
-            $newProject->centers()->sync($project['center_ids']);
-
-        }//end of foreach
+            \App\Models\Project::create($project);
+        }
 
     }//end of run
 

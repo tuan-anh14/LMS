@@ -10,20 +10,47 @@ class SectionsTableSeeder extends Seeder
     public function run(): void
     {
         $sections = [
-            ['center_id' => 1, 'project_id' => 1, 'name' => 'Lớp học 1.1'],
-            ['center_id' => 1, 'project_id' => 2, 'name' => 'Lớp học 1.2'],
-            ['center_id' => 1, 'project_id' => 3, 'name' => 'Lớp học 1.3'],
-
-            ['center_id' => 2, 'project_id' => 1, 'name' => 'Lớp học 2.1'],
-            ['center_id' => 2, 'project_id' => 2, 'name' => 'Lớp học 2.2'],
-            
+            [
+                'id' => 1,
+                'center_id' => 1,
+                'project_id' => 1,
+                'course_id' => 0,
+                'name' => 'K1-TRIET-01',
+                'created_at' => '2025-07-05 08:18:06',
+                'updated_at' => '2025-07-09 15:10:29',
+            ],
+            [
+                'id' => 2,
+                'center_id' => 1,
+                'project_id' => 2,
+                'course_id' => 0,
+                'name' => 'K1-GT-01',
+                'created_at' => '2025-07-05 08:18:06',
+                'updated_at' => '2025-07-09 15:10:44',
+            ],
+            [
+                'id' => 4,
+                'center_id' => 2,
+                'project_id' => 1,
+                'course_id' => 0,
+                'name' => 'K2-TRIET-01',
+                'created_at' => '2025-07-05 08:18:06',
+                'updated_at' => '2025-07-09 15:11:07',
+            ],
+            [
+                'id' => 5,
+                'center_id' => 2,
+                'project_id' => 2,
+                'course_id' => 0,
+                'name' => 'K2-GT-01',
+                'created_at' => '2025-07-05 08:18:06',
+                'updated_at' => '2025-07-09 15:11:19',
+            ],
         ];
 
         foreach ($sections as $section) {
-
-            Section::create($section);
-
-        }//end of for each
+            \App\Models\Section::create($section);
+        }
 
     }//end of run
 
