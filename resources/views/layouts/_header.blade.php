@@ -147,15 +147,7 @@
                 </button>
 
                 <a class="navbar-brand" href="{{route('/')}}">
-                    @if(app()->getLocale() == 'en')
-                        <span style="font-size: 24px; font-weight: bold; color: #01b5dd;">
-                            <i class="fas fa-graduation-cap"></i> LMS
-                        </span>
-                    @else
-                        <span style="font-size: 24px; font-weight: bold; color: #01b5dd;">
-                            <i class="fas fa-graduation-cap"></i> Hệ thống LMS
-                        </span>
-                    @endif
+                    <img src="{{ asset('images/lms-logo.png') }}" alt="LMS Logo" style="height:48px; max-width:180px;">
                 </a>
             </div>
             <!-- End Header Navigation -->

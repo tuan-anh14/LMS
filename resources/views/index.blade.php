@@ -62,14 +62,14 @@
     <div class="popular-courses bg-gray circle carousel-shadow default-padding">
         <div class="container">
             <div class="row">
-                <div class="site-heading text-center">
-                    <div class="col-md-8 col-md-offset-2">
-                        <h2>@lang('site.courses')</h2>
-                        {{--<p>
-                            @lang('site.courses_des')
-                        </p>--}}
-                    </div>
-                </div>
+            <div class="site-heading text-center">                     
+                <div class="col-md-8 col-md-offset-2">                         
+                    <h2 style="text-transform: uppercase;">@lang('site.courses')</h2>                         
+                    {{--<p>                             
+                        @lang('site.courses_des')                         
+                    </p>--}}                     
+                </div>                 
+            </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
@@ -107,11 +107,11 @@
         <div class="container-full">
             <div class="row">
                 <div class="col-md-6 thumb bg-cover"
-                     style="background-image: url({{'images/section-why-us.jpg'}});background-position: left;"></div>
+                     style="background-image: url({{ asset('images/why_us1.png') }});background-position: left;"></div>
                 <div class="col-md-6 content">
                     <div class="site-heading text-left">
                         <h2>@lang('site.why_us_title')</h2>
-                        <p>
+                        <p style="color: white;">
                             @lang('site.why_us_des')
                         </p>
                     </div>
@@ -243,7 +243,7 @@
     <!-- End About -->
 
     <div class="fun-factor-area default-padding bottom-less text-center bg-fixed shadow dark-hard"
-         style="background-image: url({{'images/banner.jpg'}});">
+         style="background-image: url({{ asset('images/why_us1.png') }});">
         <div class="container">
             <div class="row">
                 <div class="col-md-3 col-sm-6 item">
@@ -318,7 +318,7 @@
 
                         <div class="item">
                             <div class="col-md-5 thumb">
-                                <img src="{{asset('web_assets/images/testimonial_1.png')}}" alt="Thumb">
+                                <img src="{{asset('web_assets/images/testimonial0.jpg')}}" alt="Thumb">
                             </div>
                             <div class="col-md-7 info">
                                 <p>
@@ -329,7 +329,7 @@
                         </div>
                         <div class="item">
                             <div class="col-md-5 thumb">
-                                <img src="{{asset('web_assets/images/testimonial_1.png')}}" alt="Thumb">
+                                <img src="{{asset('web_assets/images/testimonial0.jpg')}}" alt="Thumb">
                             </div>
                             <div class="col-md-7 info">
                                 <p>
@@ -340,7 +340,7 @@
                         </div>
                         <div class="item">
                             <div class="col-md-5 thumb">
-                                <img src="{{asset('web_assets/images/testimonial_1.png')}}" alt="Thumb">
+                                <img src="{{asset('web_assets/images/testimonial0.jpg')}}" alt="Thumb">
                             </div>
                             <div class="col-md-7 info">
                                 <p>
@@ -351,7 +351,7 @@
                         </div>
                         <div class="item">
                             <div class="col-md-5 thumb">
-                                <img src="{{asset('web_assets/images/testimonial_1.png')}}" alt="Thumb">
+                                <img src="{{asset('web_assets/images/testimonial0.jpg')}}" alt="Thumb">
                             </div>
                             <div class="col-md-7 info">
                                 <p>
@@ -362,7 +362,7 @@
                         </div>
                         <div class="item">
                             <div class="col-md-5 thumb">
-                                <img src="{{asset('web_assets/images/testimonial_1.png')}}" alt="Thumb">
+                                <img src="{{asset('web_assets/images/testimonial0.jpg')}}" alt="Thumb">
                             </div>
                             <div class="col-md-7 info">
                                 <p>

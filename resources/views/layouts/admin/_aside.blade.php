@@ -3,10 +3,9 @@
     <div class="navbar-header">
         <ul class="nav navbar-nav flex-row">
             <li class="nav-item mr-auto"><a class="navbar-brand" wire:navigate href="{{ route('admin.home') }}">
-                    <span class="brand-logo">
-                        <i class="fas fa-graduation-cap" style="font-size: 32px; color: #01b5dd;"></i>
-                    </span>
-                    <h2 class="brand-text">LMS</h2>
+            <span class="brand-logo" style="display: flex; justify-content: center; align-items: center; height: 36px; padding: 0;">
+                <img src="{{ asset('images/lms-logo.png') }}" alt="LMS Logo" style="height:42px; max-width:120px; display: block;">
+            </span>
                 </a>
             </li>
             <li class="nav-item nav-toggle">

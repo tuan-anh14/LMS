@@ -4,7 +4,7 @@
             <div class="f-items">
                 <div class="col-md-4 item">
                     <div class="f-item">
-                        <img class="footer-logo" src="{{asset('images/footer_logo.jpg')}}" alt="Logo">
+                        <img class="footer-logo" src="{{asset('images/lms-logo.png')}}" alt="Logo">
                         <!-- <img src="{{ asset('storage/uploads/logo.png') }}" alt="Logo" style="width: 100px !important;"> -->
                         <p></p>
                             {{setting('description')}}

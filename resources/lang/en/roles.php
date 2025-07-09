@@ -11,4 +11,5 @@ return [
     'teacher' => 'Teacher',
     'examiner' => 'Examiner',
     'student' => 'Student',
+    'center_manager' => 'Center Manager',
 ];

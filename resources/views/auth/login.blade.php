@@ -158,15 +158,7 @@
                             <div class="app-brand justify-content-center mb-6 text-center">
                                 <a href="{{route('/')}}" class="app-brand-link">
                                     <span class="app-brand-logo demo">
-                                        @if(app()->getLocale() == 'en')
-                                            <span style="font-size: 48px; color: #01b5dd;">
-                                                <i class="fas fa-graduation-cap"></i>
-                                            </span>
-                                        @else
-                                            <span style="font-size: 48px; color: #01b5dd;">
-                                                <i class="fas fa-graduation-cap"></i>
-                                            </span>
-                                        @endif
+                                        <img src="{{ asset('images/lms-logo.png') }}" alt="LMS Logo" style="height:48px; max-width:180px; display:block; margin:auto;">
                                     </span>
                                     {{--<span class="app-brand-text demo text-heading fw-bold">معراج للتعليم والتنمية</span>--}}
                                 </a>

@@ -4,11 +4,11 @@
     <!-- Start Breadcrumb
     ============================================= -->
     <div class="breadcrumb-area shadow dark text-center bg-fixed text-light"
-         style="background-image: url({{asset('images/banner.jpg')}});">
+         style="background-image: url({{asset('images/why_us1.png')}});">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>@lang('site.courses')</h1>
+                    <h1 style="text-transform: uppercase;">@lang('site.courses')</h1>
                     <ul class="breadcrumb">
                         <li><a href="{{route('/')}}"><i class="fas fa-home"></i> @lang('site.home')</a></li>
                         <li><a href="{{route('courses')}}">@lang('site.courses')</a></li>

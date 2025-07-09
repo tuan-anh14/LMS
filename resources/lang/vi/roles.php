@@ -11,4 +11,5 @@ return [
     'teacher' => 'Giáo viên',
     'examiner' => 'Giám khảo',
     'student' => 'Học sinh',
+    'center_manager' => 'Quản lý trung tâm',
 ]; 

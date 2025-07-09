@@ -153,7 +153,7 @@
                                 <a href="{{route('/')}}" class="app-brand-link">
                                     <span class="app-brand-logo demo">
 
-                                        <img src="{{asset('images/login_logo.jpg')}}" alt="" width="150">
+                                    <img src="{{ asset('images/lms-logo.png') }}" alt="LMS Logo" style="height:48px; max-width:180px; display:block; margin:auto;">
 
                                     </span>
                                     {{--<span class="app-brand-text demo text-heading fw-bold">معراج للتعليم والتنمية</span>--}}

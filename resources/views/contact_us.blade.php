@@ -4,11 +4,11 @@
     <!-- Start Breadcrumb
     ============================================= -->
     <div class="breadcrumb-area shadow dark text-center bg-fixed text-light"
-         style="background-image: url({{asset('images/banner.jpg')}});">
+         style="background-image: url({{asset('images/why_us1.png')}});">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>@lang('site.contact_us')</h1>
+                    <h1 style="text-transform: uppercase;">@lang('site.contact_us')</h1>
                     <ul class="breadcrumb">
                         <li><a href="{{route('/')}}"><i class="fas fa-home"></i> @lang('site.home')</a></li>
                         <li class="active">@lang('site.contact_us')</li>
@@ -68,7 +68,7 @@
                     <div class="col-md-6 maps">
                         <h3>@lang('site.free_contact')</h3>
                         <div class="google-maps">
-                            <img src="{{asset('images/about-us.jpg')}}" alt="Thumb">
+                            <img src="{{asset('images/about_us.jpg')}}" alt="Thumb">
                         </div>
                     </div>
                     <div class="col-md-6 form">

@@ -4,14 +4,14 @@
     <!-- Start Breadcrumb
     ============================================= -->
     <div class="breadcrumb-area shadow dark text-center bg-fixed text-light"
-         style="background-image: url({{asset('images/banner.jpg')}});">
+         style="background-image: url({{asset('images/why_us1.png')}});">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <h1>@lang('site.about_us')</h1>
+                    <h1 style="text-transform: uppercase;">@lang('site.about_us')</h1>
                     <ul class="breadcrumb">
                         <li><a href="{{route('/')}}"><i class="fas fa-home"></i> @lang('site.home')</a></li>
-                        <li class="active">@lang('site.about_us')</li>
+                        <li class="active" >@lang('site.about_us')</li>
                     </ul>
                 </div>
             </div>
@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="about-info">
                     <div class="col-md-6 thumb">
-                        <img src="{{asset('images/about-us.jpg')}}" alt="Thumb">
+                        <img src="{{asset('images/about_us.jpg')}}" alt="Thumb">
                     </div>
                     <div class="col-md-6 info">
                         <h5>@lang('site.about_us_subtitle')</h5>
@@ -33,7 +33,7 @@
                         <p>
                             @lang('site.about_us_description1')
                         </p>
-                        <a href="https://wa.me/905518927802"
+                        <a href="https://www.whatsapp.com/"
                            class="btn btn-dark border btn-md">@lang('site.register_now')</a>
                     </div>
                 </div>
@@ -43,7 +43,7 @@
     <!-- End About -->
 
     <div class="video-area padding-xl text-center bg-fixed text-light shadow dark-hard"
-         style="background-image: url({{asset('images/banner.jpg')}});">
+         style="background-image: url({{asset('images/why_us1.png')}});">
         <div class="container">
             <div class="row">
                 <div class="col-md-8 col-md-offset-2">
@@ -58,7 +58,7 @@
             <div class="row">
                 <div class="video-info">
                     <div class="overlay-video">
-                        <a class="popup-youtube video-play-button" href="https://www.youtube.com/watch?v=4kVt8Wq7_dQ">
+                        <a class="popup-youtube video-play-button" href="https://www.youtube.com/embed/r7R8ewU1Wqc">
                             <i class="fa fa-play"></i>
                         </a>
                     </div>
