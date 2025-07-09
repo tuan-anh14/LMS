@@ -61,7 +61,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/app-assets/css/colors.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/app-assets/css/components.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/app-assets/css/themes/dark-layout.css') }}">
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/app-assets/css/themes/bordered-layout.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/app-assets/css/themes/semi-dark-layout.css') }}">
     <link rel="stylesheet" type="text/css"
           href="{{ asset('admin_assets/app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
 
@@ -72,21 +73,6 @@
     {{--jstree--}}
     <link rel="stylesheet" type="text/css"
           href="{{ asset('admin_assets/app-assets/css/plugins/extensions/ext-component-tree.css') }}">
-
-    @if (in_array(app()->getLocale(), ['ar']))
-
-        {{--google font--}}
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cairo:400,600&display=swap">
-
-        <style>
-
-            html, body, .navigation, .header-navbar {
-                font-family: 'cairo', sans-serif !important;
-            }
-
-        </style>
-
-    @endif
 
     <script src="{{ asset('admin_assets/app-assets/vendors/js/charts/chart.min.js') }}"></script>
 

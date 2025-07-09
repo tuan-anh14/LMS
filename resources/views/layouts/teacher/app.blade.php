@@ -1,8 +1,5 @@
 <!DOCTYPE html>
-<html class="light-layout loaded {{ auth()->user()->layout == 'dark-layout' ? 'dark-layout' : '' }}"
-      dir="{{ app()->getLocale() == 'ar' ? 'rtl' : 'ltr' }}"
-      data-layout="bordered-layout"
->
+<html class="light-layout loaded {{ auth()->user()->layout == 'dark-layout' ? 'dark-layout' : '' }}">
 <!-- BEGIN: Head-->
 
 <head>
@@ -50,50 +47,21 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 
     <!-- BEGIN: Theme CSS-->
-    @if (app()->getLocale() == 'ar')
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('admin_assets/app-assets/vendors/css/vendors.min.css') }}">
 
-        <link rel="stylesheet" type="text/css"
-              href="{{ asset('admin_assets/app-assets/vendors/css/vendors-rtl.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/app-assets/css/bootstrap.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/app-assets/css/bootstrap-extended.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/app-assets/css/colors.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/app-assets/css/components.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/app-assets/css/themes/dark-layout.css') }}">
 
-        <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/app-assets/css-rtl/bootstrap.css') }}">
-        <link rel="stylesheet" type="text/css"
-              href="{{ asset('admin_assets/app-assets/css-rtl/bootstrap-extended.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/app-assets/css-rtl/colors.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/app-assets/css-rtl/components.css') }}">
-        <link rel="stylesheet" type="text/css"
-              href="{{ asset('admin_assets/app-assets/css-rtl/themes/dark-layout.css') }}">
-        <link rel="stylesheet" type="text/css"
-              href="{{ asset('admin_assets/app-assets/css-rtl/themes/bordered-layout.css') }}">
-        <link rel="stylesheet" type="text/css"
-              href="{{ asset('admin_assets/app-assets/css-rtl/themes/semi-dark-layout.css') }}">
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('admin_assets/app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
 
-        <link rel="stylesheet" type="text/css"
-              href="{{ asset('admin_assets/app-assets/css-rtl/core/menu/menu-types/vertical-menu.css') }}">
-
-        <link rel="stylesheet" type="text/css"
-              href="{{ asset('admin_assets/app-assets/css-rtl/plugins/forms/form-wizard.css') }}">
-
-        <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/app-assets/css-rtl/custom-rtl.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/assets/css/style-rtl.css') }}">
-
-    @else
-        <link rel="stylesheet" type="text/css"
-              href="{{ asset('admin_assets/app-assets/vendors/css/vendors.min.css') }}">
-
-        <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/app-assets/css/bootstrap.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/app-assets/css/bootstrap-extended.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/app-assets/css/colors.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/app-assets/css/components.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/app-assets/css/themes/dark-layout.css') }}">
-
-        <link rel="stylesheet" type="text/css"
-              href="{{ asset('admin_assets/app-assets/css/core/menu/menu-types/vertical-menu.css') }}">
-
-        <link rel="stylesheet" type="text/css"
-              href="{{ asset('admin_assets/app-assets/css/plugins/forms/form-wizard.css') }}">
-        <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/assets/css/style.css') }}">
-
-    @endif
+    <link rel="stylesheet" type="text/css"
+          href="{{ asset('admin_assets/app-assets/css/plugins/forms/form-wizard.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('admin_assets/assets/css/style.css') }}">
 
     <link rel="stylesheet" type="text/css"
           href="{{ asset('admin_assets/app-assets/vendors/css/forms/wizard/bs-stepper.min.css') }}">
