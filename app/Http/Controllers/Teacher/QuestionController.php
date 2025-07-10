@@ -24,13 +24,24 @@ class QuestionController extends Controller
 
     public function store(Request $request, Exam $exam)
     {
-        $request->validate([
+        // Dynamic validation rules based on question type
+        $rules = [
             'content' => 'required|string',
             'type' => 'required|in:' . implode(',', QuestionTypeEnum::getConstants()),
             'points' => 'required|numeric|min:0.1',
             'options.*' => 'nullable|string',
-            'correct_answer' => 'nullable|string',
-        ]);
+        ];
+
+        // Add conditional validation for correct_answer
+        if ($request->type === QuestionTypeEnum::MULTIPLE_CHOICE) {
+            $rules['correct_answer'] = 'required|string';
+            $rules['options'] = 'required|array|min:2';
+            $rules['options.*'] = 'required|string';
+        } else {
+            $rules['correct_answer'] = 'nullable|string';
+        }
+
+        $request->validate($rules);
 
         $questionData = [
             'content' => $request->content,
@@ -43,6 +54,13 @@ class QuestionController extends Controller
         if ($request->type === QuestionTypeEnum::MULTIPLE_CHOICE) {
             $options = array_filter($request->input('options', []));
             $questionData['options'] = $options;
+
+            // Ensure correct_answer is one of the options (for multiple choice)
+            if (!in_array($request->correct_answer, $options)) {
+                return back()->withErrors(['correct_answer' => 'Đáp án đúng phải là một trong các tùy chọn được cung cấp.'])->withInput();
+            }
+        } else {
+            $questionData['options'] = null;
         }
 
         $exam->questions()->create($questionData);
@@ -58,13 +76,24 @@ class QuestionController extends Controller
 
     public function update(Request $request, Exam $exam, Question $question)
     {
-        $request->validate([
+        // Dynamic validation rules based on question type
+        $rules = [
             'content' => 'required|string',
             'type' => 'required|in:' . implode(',', QuestionTypeEnum::getConstants()),
             'points' => 'required|numeric|min:0.1',
             'options.*' => 'nullable|string',
-            'correct_answer' => 'nullable|string',
-        ]);
+        ];
+
+        // Add conditional validation for correct_answer
+        if ($request->type === QuestionTypeEnum::MULTIPLE_CHOICE) {
+            $rules['correct_answer'] = 'required|string';
+            $rules['options'] = 'required|array|min:2';
+            $rules['options.*'] = 'required|string';
+        } else {
+            $rules['correct_answer'] = 'nullable|string';
+        }
+
+        $request->validate($rules);
 
         $questionData = [
             'content' => $request->content,
@@ -77,6 +106,11 @@ class QuestionController extends Controller
         if ($request->type === QuestionTypeEnum::MULTIPLE_CHOICE) {
             $options = array_filter($request->input('options', []));
             $questionData['options'] = $options;
+
+            // Ensure correct_answer is one of the options (for multiple choice)
+            if (!in_array($request->correct_answer, $options)) {
+                return back()->withErrors(['correct_answer' => 'Đáp án đúng phải là một trong các tùy chọn được cung cấp.'])->withInput();
+            }
         } else {
             $questionData['options'] = null;
         }
@@ -96,4 +130,4 @@ class QuestionController extends Controller
         }
         return redirect()->route('teacher.exams.questions.index', $exam->id)->with('success', __('site.deleted_successfully'));
     }
-} 
+}
