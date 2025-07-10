@@ -35,7 +35,7 @@ class CourseRequest extends FormRequest
 
             $course = $this->route()->parameter('course');
 
-            $rules['image'] = 'sometimes|nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
+            $rules['image'] = 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048';
 
         }//end of if
 

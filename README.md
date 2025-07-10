@@ -32,6 +32,7 @@ cp .env.example .env
 php artisan key:generate
 # Set your DB credentials in .env
 php artisan migrate --seed
+php artisan storage:link
 php artisan serve
 ```
 
