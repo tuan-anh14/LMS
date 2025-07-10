@@ -56,6 +56,14 @@ Route::middleware(['auth', 'set_selected_center', 'role:teacher', 'localization'
 
         //exam routes
         Route::resource('exams', 'ExamController');
+
+        // AI Question Generation routes
+        Route::get('/exams/{exam}/questions/create-with-ai', 'QuestionController@createWithAI')->name('exams.questions.create_ai');
+        Route::post('/exams/{exam}/questions/generate-with-ai', 'QuestionController@generateWithAI')->name('exams.questions.generate_ai');
+        Route::get('/exams/{exam}/questions/preview-ai', 'QuestionController@previewAI')->name('exams.questions.preview_ai');
+        Route::post('/exams/{exam}/questions/save-ai', 'QuestionController@saveAI')->name('exams.questions.save_ai');
+        Route::post('/exams/{exam}/questions/cancel-ai', 'QuestionController@cancelAI')->name('exams.questions.cancel_ai');
+
         Route::resource('exams.questions', 'QuestionController');
 
         //exam routes
@@ -87,9 +95,6 @@ Route::middleware(['auth', 'set_selected_center', 'role:teacher', 'localization'
             //password routes
             Route::get('/password/edit', 'PasswordController@edit')->name('password.edit');
             Route::put('/password/update', 'PasswordController@update')->name('password.update');
-
         });
-
     });
-
 });

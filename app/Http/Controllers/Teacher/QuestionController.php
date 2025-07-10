@@ -6,10 +6,19 @@ use App\Enums\QuestionTypeEnum;
 use App\Http\Controllers\Controller;
 use App\Models\Exam;
 use App\Models\Question;
+use App\Services\OpenAIService;
 use Illuminate\Http\Request;
+use Exception;
 
 class QuestionController extends Controller
 {
+    protected $openAIService;
+
+    public function __construct(OpenAIService $openAIService)
+    {
+        $this->openAIService = $openAIService;
+    }
+
     public function index(Exam $exam)
     {
         $questions = $exam->questions;
@@ -129,5 +138,106 @@ class QuestionController extends Controller
             ]);
         }
         return redirect()->route('teacher.exams.questions.index', $exam->id)->with('success', __('site.deleted_successfully'));
+    }
+
+    /**
+     * Show form to generate questions using AI
+     */
+    public function createWithAI(Exam $exam)
+    {
+        return view('teacher.questions.create_with_ai', compact('exam'));
+    }
+
+    /**
+     * Generate questions using AI
+     */
+    public function generateWithAI(Request $request, Exam $exam)
+    {
+        $request->validate([
+            'topic' => 'required|string|max:255',
+            'count' => 'required|integer|min:1|max:' . config('services.openai.max_questions', 10),
+            'difficulty' => 'required|in:easy,medium,hard',
+            'type' => 'required|in:multiple_choice,essay,mixed',
+        ]);
+
+        try {
+            $questions = $this->openAIService->generateQuestions(
+                $request->topic,
+                $request->count,
+                $request->difficulty,
+                $request->type
+            );
+
+            if (empty($questions)) {
+                return back()->withErrors(['ai_error' => 'Không thể tạo câu hỏi. Vui lòng thử lại với chủ đề khác.'])->withInput();
+            }
+
+            // Store questions in session for preview
+            session(['generated_questions' => $questions, 'exam_id' => $exam->id]);
+
+            return redirect()->route('teacher.exams.questions.preview_ai', $exam->id)
+                ->with('success', 'Đã tạo thành công ' . count($questions) . ' câu hỏi. Vui lòng xem lại và xác nhận.');
+        } catch (Exception $e) {
+            return back()->withErrors(['ai_error' => 'Lỗi khi tạo câu hỏi: ' . $e->getMessage()])->withInput();
+        }
+    }
+
+    /**
+     * Preview AI generated questions before saving
+     */
+    public function previewAI(Exam $exam)
+    {
+        $questions = session('generated_questions');
+        $sessionExamId = session('exam_id');
+
+        if (!$questions || $sessionExamId != $exam->id) {
+            return redirect()->route('teacher.exams.questions.create_ai', $exam->id)
+                ->withErrors(['preview_error' => 'Không tìm thấy câu hỏi đã tạo. Vui lòng tạo lại.']);
+        }
+
+        return view('teacher.questions.preview_ai', compact('exam', 'questions'));
+    }
+
+    /**
+     * Save AI generated questions to database
+     */
+    public function saveAI(Request $request, Exam $exam)
+    {
+        $questions = session('generated_questions');
+        $sessionExamId = session('exam_id');
+
+        if (!$questions || $sessionExamId != $exam->id) {
+            return redirect()->route('teacher.exams.questions.create_ai', $exam->id)
+                ->withErrors(['save_error' => 'Không tìm thấy câu hỏi đã tạo. Vui lòng tạo lại.']);
+        }
+
+        $request->validate([
+            'selected_questions' => 'required|array|min:1',
+            'selected_questions.*' => 'integer|min:0',
+        ]);
+
+        $savedCount = 0;
+        foreach ($request->selected_questions as $index) {
+            if (isset($questions[$index])) {
+                $questionData = $questions[$index];
+                $exam->questions()->create($questionData);
+                $savedCount++;
+            }
+        }
+
+        // Clear session data
+        session()->forget(['generated_questions', 'exam_id']);
+
+        return redirect()->route('teacher.exams.questions.index', $exam->id)
+            ->with('success', "Đã lưu thành công {$savedCount} câu hỏi vào bài kiểm tra.");
+    }
+
+    /**
+     * Cancel AI generation and clear session
+     */
+    public function cancelAI(Exam $exam)
+    {
+        session()->forget(['generated_questions', 'exam_id']);
+        return redirect()->route('teacher.exams.questions.index', $exam->id);
     }
 }
