@@ -69,17 +69,6 @@
                                     <img src="{{ $course->image_path }}" class="loaded-image" alt="" style="display: block; width: 200px; margin: 10px 0;">
                                 </div>
 
-                                {{--book_id--}}
-                                <div class="form-group">
-                                    <label>Giáo trình <span class="text-danger">*</span></label>
-                                    <select name="book_id" class="form-control select2" required>
-                                        <option value="">Chọn Giáo trình</option>
-                                        @foreach ($books as $book)
-                                            <option value="{{ $book->id }}" {{ $book->id == $course->book_id ? 'selected' : '' }}>{{ $book->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-primary"><i data-feather="edit"></i> @lang('site.update')</button>
                                 </div>

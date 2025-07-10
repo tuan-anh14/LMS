@@ -27,4 +27,5 @@ return [
     'types' => 'Loại',
     'new_lecture' => 'Bài giảng mới',
     'notes' => 'Ghi chú',
+    'educational_and_tajweed' => 'Giáo dục & Tajweed',
 ]; 

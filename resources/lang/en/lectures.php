@@ -27,4 +27,5 @@ return [
     'types' => 'Types',
     'new_lecture' => 'New Lecture',
     'notes' => 'Notes',
+    'educational_and_tajweed' => 'Educational & Tajweed',
 ]; 
