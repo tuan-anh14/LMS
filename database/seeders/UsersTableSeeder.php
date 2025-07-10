@@ -71,7 +71,14 @@ class UsersTableSeeder extends Seeder
         ];
 
         foreach ($users as $user) {
-            \App\Models\User::create($user);
+            $createdUser = \App\Models\User::create($user);
+            // Gán role tự động sau khi tạo user
+            if ($user['email'] === 'admin@webseity.com') {
+                $createdUser->attachRole('super_admin');
+            }
+            if ($user['email'] === 'admin1@app.com') {
+                $createdUser->attachRole('admin');
+            }
         }
 
     }//end of run
