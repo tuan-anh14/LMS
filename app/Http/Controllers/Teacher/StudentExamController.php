@@ -155,6 +155,79 @@ class StudentExamController extends Controller
 
     }// end of updateAssessment
 
+    public function gradeExam(StudentExam $studentExam)
+    {
+        $this->authorize('examiner_student_exam', $studentExam);
+
+        // Load exam với questions và answers của student
+        $studentExam->load([
+            'exam.questions', 
+            'answers.question',
+            'student'
+        ]);
+
+        return view('teacher.student_exams.grade', compact('studentExam'));
+
+    }// end of gradeExam
+
+    public function updateGrade(Request $request, StudentExam $studentExam)
+    {
+        $this->authorize('examiner_student_exam', $studentExam);
+
+        $request->validate([
+            'scores' => 'required|array',
+            'scores.*' => 'nullable|numeric|min:0',
+            'comments' => 'array',
+            'comments.*' => 'nullable|string|max:1000',
+            'total_score' => 'nullable|numeric|min:0',
+            'assessment' => 'nullable|string'
+        ]);
+
+        // Cập nhật điểm từng câu hỏi
+        foreach ($request->scores as $answerId => $score) {
+            if ($score !== null) {
+                \App\Models\StudentExamAnswer::where('id', $answerId)
+                    ->update([
+                        'score' => $score,
+                        'comment' => $request->comments[$answerId] ?? null
+                    ]);
+            }
+        }
+
+        // Tính lại tổng điểm và phần trăm
+        $studentExam->load(['answers', 'exam.questions']);
+        $totalScore = $studentExam->answers->whereNotNull('score')->sum('score');
+        $maxScore = $studentExam->exam->questions->sum('points') ?? $studentExam->exam->questions->count();
+        $percentage = $maxScore > 0 ? ($totalScore / $maxScore * 100) : 0;
+
+        // Đánh giá tự động nếu chưa có
+        $assessment = $request->assessment;
+        $hasAnswers = $studentExam->answers->whereNotNull('answer_text')->count() > 0;
+        if (!$assessment && $hasAnswers) {
+            if ($percentage >= 90) $assessment = 'superiority';
+            elseif ($percentage >= 80) $assessment = 'excellent';
+            elseif ($percentage >= 70) $assessment = 'very_good';
+            elseif ($percentage >= 60) $assessment = 'good';
+            else $assessment = 'repeat';
+        }
+
+        // Cập nhật điểm tổng và đánh giá
+        $updateData = [];
+        if ($request->filled('total_score')) {
+            $updateData['notes'] = 'Tổng điểm: ' . $request->total_score;
+        }
+        $updateData['assessment'] = $assessment;
+
+        $studentExam->update($updateData);
+
+        // Cập nhật trạng thái đã chấm điểm
+        $studentExam->statuses()->create(['status' => StudentExamStatusEnum::ASSESSMENT_ADDED]);
+
+        return redirect()->route('teacher.student_exams.show', $studentExam)
+            ->with('success', 'Chấm điểm thành công!');
+
+    }// end of updateGrade
+
     public function destroy(StudentExam $studentExam)
     {
         $this->authorize('teacher_student_exam', $studentExam);

@@ -98,10 +98,12 @@
             @endif
 
             {{--student_exams--}}
-            @if (auth()->user()->hasRole('examiner'))
+            @if (auth()->user()->hasRole('examiner') || auth()->user()->is_examiner)
                 <li class="{{ request()->is('*student_exams*') ? 'active' : '' }} nav-item">
-                    <a class="d-flex align-items-center" href="{{ route('teacher.student_exams.index') }}" wire:navigate>
-                        <i data-feather="paperclip"></i><span class="menu-title text-truncate">@lang('student_exams.student_exams')</span>
+                    <a class="d-flex align-items-center" href="{{ route('teacher.student_exams.index') }}"
+                       wire:navigate>
+                        <i data-feather="paperclip"></i><span
+                            class="menu-title text-truncate">@lang('student_exams.student_exams')</span>
                     </a>
                 </li>
             @endif

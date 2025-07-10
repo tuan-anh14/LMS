@@ -128,41 +128,44 @@
 
                                     </table>
 
-                                    @if (auth()->user()->hasRole('examiner') && $studentExam->examiner_id == auth()->user()->id)
-
-                                        @if ($studentExam->status == StudentExamStatusEnum::ASSIGNED_TO_EXAMINER)
-
-                                            <a href=""
-                                               class="btn btn-primary btn-block ajax-modal"
+                                    @if ((auth()->user()->hasRole('examiner') || auth()->user()->is_examiner) && $studentExam->examiner_id == auth()->user()->id)
+                                        @if ($studentExam->status == \App\Enums\StudentExamStatusEnum::ASSIGNED_TO_EXAMINER)
+                                            <a href="" class="btn btn-primary btn-block ajax-modal"
                                                data-url="{{ route('teacher.student_exams.edit_date_time', $studentExam->id) }}"
-                                               data-modal-title="@lang('student_exams.set_date_time')"
-                                            >
+                                               data-modal-title="@lang('student_exams.set_date_time')">
                                                 <i data-feather="clock"></i>
                                                 @lang('student_exams.set_date_time')
                                             </a>
-
-                                        @elseif($studentExam->status == StudentExamStatusEnum::DATE_TIME_SET)
-
-                                            <a href=""
-                                               class="btn btn-primary btn-block ajax-modal"
-                                               data-url="{{ route('teacher.student_exams.edit_date_time', $studentExam->id) }}"
-                                               data-modal-title="@lang('student_exams.set_date_time')"
-                                            >
+                                        @elseif($studentExam->status == \App\Enums\StudentExamStatusEnum::DATE_TIME_SET)
+                                            <div class="alert alert-success mb-2">
                                                 <i data-feather="clock"></i>
-                                                @lang('student_exams.set_date_time')
+                                                Đã đặt ngày giờ: <strong>{{ $studentExam->date_time?->translatedFormat('Y-m-d / h:i a') }}</strong>
+                                            </div>
+                                            <a href="" class="btn btn-primary btn-block ajax-modal"
+                                               data-url="{{ route('teacher.student_exams.edit_date_time', $studentExam->id) }}"
+                                               data-modal-title="@lang('student_exams.set_date_time')">
+                                                <i data-feather="clock"></i>
+                                                Đặt lại ngày giờ
                                             </a>
-
-                                            <!-- <a href=""
-                                               class="btn btn-primary btn-block ajax-modal"
-                                               data-url="{{ route('teacher.student_exams.edit_assessment', $studentExam->id) }}"
-                                               data-modal-title="@lang('student_exams.add_assessment')"
-                                            >
-                                                <i data-feather="check-circle"></i>
-                                                @lang('student_exams.add_assessment')
-                                            </a> -->
-
+                                        @elseif($studentExam->status == 'submitted')
+                                            @if($studentExam->assessment)
+                                                <div class="alert alert-success mb-2">
+                                                    <i data-feather="check-circle"></i>
+                                                    Đã chấm điểm
+                                                </div>
+                                                <a href="{{ route('teacher.student_exams.grade', $studentExam) }}" class="btn btn-warning btn-sm">
+                                                    <i class="fas fa-edit"></i> Chỉnh sửa điểm
+                                                </a>
+                                            @else
+                                                <div class="alert alert-success">
+                                                    <i data-feather="check-circle"></i>
+                                                    Sinh viên đã nộp bài kiểm tra
+                                                </div>
+                                                <a href="{{ route('teacher.student_exams.grade', $studentExam) }}" class="btn btn-warning btn-sm">
+                                                    <i class="fas fa-edit"></i> Chấm điểm
+                                                </a>
+                                            @endif
                                         @endif
-
                                     @endif
                                 </div>
                             </div>

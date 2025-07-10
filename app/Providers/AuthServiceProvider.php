@@ -42,7 +42,7 @@ class AuthServiceProvider extends ServiceProvider
         });
 
         Gate::define('examiner_student_exam', function (User $teacher, StudentExam $studentExam) {
-            return $teacher->hasRole('examiner') && $teacher->id == $studentExam->examiner_id;
+            return ($teacher->hasRole('examiner') || $teacher->is_examiner) && $teacher->id == $studentExam->examiner_id;
         });
     }
 

@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['auth', 'set_selected_center', 'role:examiner', 'localization', 'no_cache'])->group(function () {
+Route::middleware(['auth', 'set_selected_center', 'is_examiner', 'localization', 'no_cache'])->group(function () {
 
     Route::name('examiner.')->prefix('examiner')->group(function () {
 

@@ -73,5 +73,6 @@ class Kernel extends HttpKernel
         'no_cache' => \App\Http\Middleware\NoCache::class,
         'demo_mode' => \App\Http\Middleware\DemoMode::class,
         'demo_mode_middleware' => \App\Http\Middleware\DemoModeMiddleware::class,
+        'is_examiner' => \App\Http\Middleware\IsExaminer::class,
     ];
 }

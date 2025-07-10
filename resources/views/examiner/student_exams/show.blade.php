@@ -144,7 +144,7 @@
 
                                     </table>
 
-                                    @if (auth()->user()->hasRole('examiner') && $studentExam->examiner_id == auth()->user()->id)
+                                    @if (auth()->user()->isExaminer() && $studentExam->examiner_id == auth()->user()->id)
 
                                         @if ($studentExam->status == StudentExamStatusEnum::ASSIGNED_TO_EXAMINER)
 
@@ -186,23 +186,21 @@
                                                     <i data-feather="check-circle"></i>
                                                     Đã chấm điểm
                                                 </div>
-                                                <a href="{{ route('examiner.student_exams.grade', $studentExam->id) }}"
-                                                   class="btn btn-warning btn-block"
-                                                >
-                                                    <i data-feather="edit"></i>
-                                                    Chỉnh sửa chấm điểm
-                                                </a>
+                                                @if ((auth()->user()->hasRole('examiner') || auth()->user()->is_examiner) && $studentExam->examiner_id == auth()->user()->id)
+                                                    <a href="{{ route('examiner.student_exams.grade', $studentExam) }}" class="btn btn-warning btn-sm">
+                                                        <i class="fas fa-edit"></i> Chấm điểm
+                                                    </a>
+                                                @endif
                                             @else
                                                 <div class="alert alert-success">
                                                     <i data-feather="check-circle"></i>
                                                     Sinh viên đã nộp bài kiểm tra
                                                 </div>
-                                                <a href="{{ route('examiner.student_exams.grade', $studentExam->id) }}"
-                                                   class="btn btn-warning btn-block"
-                                                >
-                                                    <i data-feather="edit"></i>
-                                                    Chấm điểm bài kiểm tra
-                                                </a>
+                                                @if ((auth()->user()->hasRole('examiner') || auth()->user()->is_examiner) && $studentExam->examiner_id == auth()->user()->id)
+                                                    <a href="{{ route('examiner.student_exams.grade', $studentExam) }}" class="btn btn-warning btn-sm">
+                                                        <i class="fas fa-edit"></i> Chấm điểm
+                                                    </a>
+                                                @endif
                                             @endif
                                         @endif
 

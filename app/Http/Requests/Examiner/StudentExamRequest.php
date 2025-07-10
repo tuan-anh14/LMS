@@ -28,7 +28,9 @@ class StudentExamRequest extends FormRequest
             ],
             'examiner_id' => [
                 'required', 'integer',
-                'in:' . implode(',', User::whereRoleIs('examiner')->pluck('id')->toArray()),
+                'in:' . implode(',', User::where('is_examiner', true)->orWhereHas('roles', function($query) {
+                    $query->where('name', 'examiner');
+                })->pluck('id')->toArray()),
             ],
             'teacher_id' => 'required|exists:users,id',
             'center_id' => 'required|exists:centers,id',

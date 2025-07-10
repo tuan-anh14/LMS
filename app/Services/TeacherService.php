@@ -36,7 +36,15 @@ class TeacherService
         if (request()->is_examiner) {
 
             $teacher->syncRolesWithoutDetaching([UserTypeEnum::EXAMINER]);
+            
+            // Cập nhật trường is_examiner trong database
+            $teacher->update(['is_examiner' => true]);
 
+        } else {
+            
+            // Đảm bảo trường is_examiner được set về false nếu không phải examiner
+            $teacher->update(['is_examiner' => false]);
+            
         }//end of if
 
     }// end of attachTeacherRole
@@ -54,7 +62,15 @@ class TeacherService
         if (request()->is_examiner) {
 
             $teacher->syncRolesWithoutDetaching([UserTypeEnum::EXAMINER]);
+            
+            // Cập nhật trường is_examiner trong database
+            $teacher->update(['is_examiner' => true]);
 
+        } else {
+            
+            // Đảm bảo trường is_examiner được set về false nếu không phải examiner
+            $teacher->update(['is_examiner' => false]);
+            
         }//end of if
 
     }// end of updateTeacher

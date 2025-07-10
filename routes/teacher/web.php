@@ -71,6 +71,8 @@ Route::middleware(['auth', 'set_selected_center', 'role:teacher', 'localization'
         Route::put('/student_exams/{student_exam}/date_time', 'StudentExamController@updateDateTime')->name('student_exams.update_date_time');
         Route::get('/student_exams/{student_exam}/assessment', 'StudentExamController@editAssessment')->name('student_exams.edit_assessment');
         Route::put('/student_exams/{student_exam}/assessment', 'StudentExamController@updateAssessment')->name('student_exams.update_assessment');
+        Route::get('/student_exams/{student_exam}/grade', 'StudentExamController@gradeExam')->name('student_exams.grade');
+        Route::put('/student_exams/{student_exam}/grade', 'StudentExamController@updateGrade')->name('student_exams.update_grade');
         Route::get('/student_exams/data', 'StudentExamController@data')->name('student_exams.data');
         Route::resource('student_exams', 'StudentExamController');
 

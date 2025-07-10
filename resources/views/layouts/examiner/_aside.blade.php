@@ -55,7 +55,7 @@
             @endif--}}
 
             {{--student_exams--}}
-            @if (auth()->user()->hasRole('examiner'))
+            @if (auth()->user()->hasRole('examiner') || auth()->user()->is_examiner)
                 <li class="{{ request()->is('*student_exams*') ? 'active' : '' }} nav-item">
                     <a class="d-flex align-items-center" href="{{ route('examiner.student_exams.index') }}"
                        wire:navigate>

@@ -261,7 +261,7 @@
                                 {{--is_examiner--}}
                                 <div class="custom-control custom-checkbox form-group">
                                     <input type="checkbox" name="is_examiner" class="custom-control-input"
-                                           id="is-examiner" value="1" {{ $teacher->hasRole(UserTypeEnum::EXAMINER) ? 'checked' : '' }}>
+                                           id="is-examiner" value="1" {{ ($teacher->hasRole(UserTypeEnum::EXAMINER) || $teacher->is_examiner) ? 'checked' : '' }}>
                                     <label class="custom-control-label"
                                            for="is-examiner">@lang('teachers.is_examiner')</label>
                                 </div>

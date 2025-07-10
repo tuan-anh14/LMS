@@ -61,15 +61,17 @@ class LoginController extends Controller
 
             return redirect()->route('teacher.home');
 
-        } else if (auth()->user()->hasRole('examiner')) {
+        } else if (auth()->user()->hasRole('examiner') || auth()->user()->is_examiner) {
 
             return redirect()->route('examiner.home');
 
-        } elseif (auth()->user()->hasRole('student')) {
+        } else if (auth()->user()->hasRole('student')) {
 
             return redirect()->route('student.home');
 
         }
+
+        abort(403);
 
     }// end of authenticated
 

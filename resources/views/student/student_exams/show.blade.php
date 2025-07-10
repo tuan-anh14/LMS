@@ -184,33 +184,13 @@
                                         @endif
                                     @endif
 
-                                    @if (auth()->user()->hasRole('examiner') && $studentExam->examiner_id == auth()->user()->id)
-
-                                        @if ($studentExam->status == StudentExamStatusEnum::ASSIGNED_TO_EXAMINER)
-
-                                            <a href=""
-                                               class="btn btn-primary btn-block ajax-modal"
-                                               data-url="{{ route('teacher.student_exams.edit_date_time', $studentExam->id) }}"
-                                               data-modal-title="@lang('student_exams.set_date_time')"
-                                            >
-                                                <i data-feather="clock"></i>
-                                                @lang('student_exams.set_date_time')
-                                            </a>
-
-                                        @elseif($studentExam->status == StudentExamStatusEnum::DATE_TIME_SET)
-
-                                            <a href=""
-                                               class="btn btn-primary btn-block ajax-modal"
-                                               data-url="{{ route('teacher.student_exams.edit_assessment', $studentExam->id) }}"
-                                               data-modal-title="@lang('student_exams.add_assessment')"
-                                            >
-                                                <i data-feather="check-circle"></i>
-                                                @lang('student_exams.add_assessment')
-                                            </a>
-
-                                        @endif
-
+                                    @if ((auth()->user()->hasRole('examiner') || auth()->user()->is_examiner) && $studentExam->examiner_id == auth()->user()->id)
+                                        <a href="{{ route('examiner.student_exams.grade', $studentExam) }}" class="btn btn-warning btn-sm">
+                                            <i class="fas fa-edit"></i> Chấm điểm
+                                        </a>
                                     @endif
+
+
                                 </div>
                             </div>
 

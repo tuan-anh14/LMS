@@ -19,6 +19,10 @@ class RedirectToDashboard
 
                 return redirect()->route('teacher.home');
 
+            } elseif (auth()->user()->hasRole('examiner') || auth()->user()->is_examiner) {
+
+                return redirect()->route('examiner.home');
+
             } elseif (auth()->user()->hasRole('student')) {
 
                 return redirect()->route('student.home');

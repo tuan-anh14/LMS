@@ -373,7 +373,7 @@ class User extends Authenticatable
 
     public function isExaminer()
     {
-        return $this->is_examiner;
+        return $this->is_examiner || $this->hasRole('examiner');
 
     }// end of isExaminer
 

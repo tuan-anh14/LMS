@@ -178,8 +178,7 @@
                                     <a href="{{ route('teacher.home') }}" class="btn btn-primary">@lang('site.go_to_dashboard')</a>
                                 </div>
 
-                            @elseif(auth()->user()->hasRole('examiner'))
-
+                            @elseif(auth()->user()->hasRole('examiner') || auth()->user()->is_examiner)
                                 <div class="text-center">
                                     <a href="{{ route('examiner.home') }}" class="btn btn-primary">@lang('site.go_to_dashboard')</a>
                                 </div>

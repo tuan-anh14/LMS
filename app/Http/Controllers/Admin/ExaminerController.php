@@ -47,7 +47,10 @@ class ExaminerController extends Controller
             ->whenCountryId(request()->country_id)
             ->whenGovernorateId(request()->governorate_id)
             ->whenDegreeId(request()->degree_id)
-            ->whereRoleIs(UserTypeEnum::EXAMINER);
+            ->where(function($query) {
+                $query->whereRoleIs(UserTypeEnum::EXAMINER)
+                      ->orWhere('is_examiner', true);
+            });
 
         return DataTables::of($examiners)
             ->filter(function ($query) {
