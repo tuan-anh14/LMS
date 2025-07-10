@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Teacher;
+namespace App\Http\Controllers\Examiner;
 
 use App\Http\Controllers\Controller;
 use App\Models\Country;

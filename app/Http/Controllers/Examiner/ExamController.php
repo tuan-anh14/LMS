@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Teacher;
+namespace App\Http\Controllers\Examiner;
 
 use App\Enums\UserTypeEnum;
 use App\Http\Controllers\Controller;
@@ -151,7 +151,7 @@ class ExamController extends Controller
     {
         foreach (json_decode(request()->record_ids) as $recordId) {
 
-            $exam = Teacher::FindOrFail($recordId);
+            $exam = User::FindOrFail($recordId);
             $this->delete($exam);
 
         }//end of for each
