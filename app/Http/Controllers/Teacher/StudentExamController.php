@@ -76,7 +76,6 @@ class StudentExamController extends Controller
         $exams = $student->studentProject->exams;
 
         $examiners = User::query()
-            ->where('gender', $student->gender)
             ->whereRoleIs('examiner')
             ->get();
 

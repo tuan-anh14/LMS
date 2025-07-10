@@ -67,10 +67,10 @@
                 <td>{{ $student->sectionAsStudent->name }}</td>
             </tr>
 
-            <tr>
+            <!-- <tr>
                 <th>@lang('users.logs_count')</th>
                 <td>{{ $student->logs_as_student_count }}</td>
-            </tr>
+            </tr> -->
         </table>
 
     </div>

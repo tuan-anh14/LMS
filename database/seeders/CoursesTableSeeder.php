@@ -12,7 +12,6 @@ class CoursesTableSeeder extends Seeder
         $courses = [
             [
                 'id' => 1,
-                'book_id' => 1,
                 'title' => 'Triết học Mác Lê nin',
                 'short_description' => 'Khóa học tìm hiểu Triết học Mác -Lê nin online',
                 'description' => 'Khóa học tìm hiểu Triết học Mác -Lê nin online',
@@ -22,7 +21,6 @@ class CoursesTableSeeder extends Seeder
             ],
             [
                 'id' => 2,
-                'book_id' => 2,
                 'title' => 'Giải tích',
                 'short_description' => 'Khoá học Làm chủ Hình học giải tích trong mặt phẳng Oxy | Học toán online chất lượng cao 2025 | Vted',
                 'description' => 'Khoá học Làm chủ Hình học giải tích trong mặt phẳng Oxy | Học toán online chất lượng cao 2025 | Vted',
@@ -32,7 +30,6 @@ class CoursesTableSeeder extends Seeder
             ],
             [
                 'id' => 3,
-                'book_id' => 4,
                 'title' => 'Kinh tế lượng',
                 'short_description' => 'Kinh tế lượng ứng dụng | ATD',
                 'description' => 'Kinh tế lượng ứng dụng | ATD',

@@ -201,18 +201,31 @@ class StudentExamController extends Controller
             }
         }
 
+        // Tính lại tổng điểm và phần trăm
+        $studentExam->load(['answers', 'exam.questions']);
+        $totalScore = $studentExam->answers->whereNotNull('score')->sum('score');
+        $maxScore = $studentExam->exam->questions->sum('points') ?? $studentExam->exam->questions->count();
+        $percentage = $maxScore > 0 ? ($totalScore / $maxScore * 100) : 0;
+
+        // Đánh giá tự động nếu chưa có
+        $assessment = $request->assessment;
+        $hasAnswers = $studentExam->answers->whereNotNull('answer_text')->count() > 0;
+        if (!$assessment && $hasAnswers) {
+            if ($percentage >= 90) $assessment = 'superiority';
+            elseif ($percentage >= 80) $assessment = 'excellent';
+            elseif ($percentage >= 70) $assessment = 'very_good';
+            elseif ($percentage >= 60) $assessment = 'good';
+            else $assessment = 'repeat';
+        }
+
         // Cập nhật điểm tổng và đánh giá
         $updateData = [];
         if ($request->filled('total_score')) {
             $updateData['notes'] = 'Tổng điểm: ' . $request->total_score;
         }
-        if ($request->filled('assessment')) {
-            $updateData['assessment'] = $request->assessment;
-        }
+        $updateData['assessment'] = $assessment;
 
-        if (!empty($updateData)) {
-            $studentExam->update($updateData);
-        }
+        $studentExam->update($updateData);
 
         // Cập nhật trạng thái đã chấm điểm
         $studentExam->statuses()->create(['status' => StudentExamStatusEnum::ASSESSMENT_ADDED]);

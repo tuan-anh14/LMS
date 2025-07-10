@@ -74,10 +74,10 @@
                                             </td>
                                             <td>
                                                 <a href="{{ route('teacher.exams.questions.edit', [$exam->id, $question->id]) }}" class="btn btn-sm btn-warning">@lang('site.edit')</a>
-                                                <form action="{{ route('teacher.exams.questions.destroy', [$exam->id, $question->id]) }}" method="POST" style="display:inline-block">
+                                                <form action="{{ route('teacher.exams.questions.destroy', [$exam->id, $question->id]) }}" method="POST" style="display:inline-block" class="ajax-form">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger btn-delete">@lang('site.delete')</button>
+                                                    <button type="submit" class="btn btn-sm btn-danger delete">@lang('site.delete')</button>
                                                 </form>
                                             </td>
                                         </tr>

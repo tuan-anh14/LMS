@@ -29,11 +29,11 @@ class TeachersTableSeeder extends Seeder
                 'centers' => [
                     [
                         'center_id' => 1,
-                        'section_ids' => [1, 2, 3],
+                        'section_ids' => [1, 2, 3], 
                     ],
                     [
                         'center_id' => 2,
-                        'section_ids' => [4, 5],
+                        'section_ids' => [4],
                     ],
                 ],
                 'centers_as_manager' => [1],

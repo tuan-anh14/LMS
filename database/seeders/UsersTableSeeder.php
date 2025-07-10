@@ -12,7 +12,6 @@ class UsersTableSeeder extends Seeder
     {
         $users = [
             [
-                'id' => 1,
                 'country_id' => null,
                 'governorate_id' => null,
                 'degree_id' => null,
@@ -41,7 +40,6 @@ class UsersTableSeeder extends Seeder
                 'updated_at' => '2025-07-09 15:54:42',
             ],
             [
-                'id' => 2,
                 'country_id' => null,
                 'governorate_id' => null,
                 'degree_id' => null,

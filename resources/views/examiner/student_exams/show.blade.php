@@ -158,39 +158,52 @@
                                             </a>
 
                                         @elseif($studentExam->status == StudentExamStatusEnum::DATE_TIME_SET)
-
+                                            <div class="alert alert-success mb-2">
+                                                <i data-feather="clock"></i>
+                                                Đã đặt ngày giờ: <strong>{{ $studentExam->date_time?->translatedFormat('Y-m-d / h:i a') }}</strong>
+                                            </div>
                                             <a href=""
                                                class="btn btn-primary btn-block ajax-modal"
                                                data-url="{{ route('examiner.student_exams.edit_date_time', $studentExam->id) }}"
                                                data-modal-title="@lang('student_exams.set_date_time')"
                                             >
                                                 <i data-feather="clock"></i>
-                                                @lang('student_exams.set_date_time')
+                                                Đặt lại ngày giờ
                                             </a>
 
-                                            <a href=""
+                                            <!-- <a href=""
                                                class="btn btn-primary btn-block ajax-modal"
                                                data-url="{{ route('examiner.student_exams.edit_assessment', $studentExam->id) }}"
                                                data-modal-title="@lang('student_exams.add_assessment')"
                                             >
                                                 <i data-feather="check-circle"></i>
                                                 @lang('student_exams.add_assessment')
-                                            </a>
+                                            </a> -->
 
                                         @elseif($studentExam->status == 'submitted')
-
-                                            <div class="alert alert-success">
-                                                <i data-feather="check-circle"></i>
-                                                Sinh viên đã nộp bài kiểm tra
-                                            </div>
-
-                                            <a href="{{ route('examiner.student_exams.grade', $studentExam->id) }}"
-                                               class="btn btn-warning btn-block"
-                                            >
-                                                <i data-feather="edit"></i>
-                                                Chấm điểm bài kiểm tra
-                                            </a>
-
+                                            @if($studentExam->assessment)
+                                                <div class="alert alert-success mb-2">
+                                                    <i data-feather="check-circle"></i>
+                                                    Đã chấm điểm
+                                                </div>
+                                                <a href="{{ route('examiner.student_exams.grade', $studentExam->id) }}"
+                                                   class="btn btn-warning btn-block"
+                                                >
+                                                    <i data-feather="edit"></i>
+                                                    Chỉnh sửa chấm điểm
+                                                </a>
+                                            @else
+                                                <div class="alert alert-success">
+                                                    <i data-feather="check-circle"></i>
+                                                    Sinh viên đã nộp bài kiểm tra
+                                                </div>
+                                                <a href="{{ route('examiner.student_exams.grade', $studentExam->id) }}"
+                                                   class="btn btn-warning btn-block"
+                                                >
+                                                    <i data-feather="edit"></i>
+                                                    Chấm điểm bài kiểm tra
+                                                </a>
+                                            @endif
                                         @endif
 
                                     @endif

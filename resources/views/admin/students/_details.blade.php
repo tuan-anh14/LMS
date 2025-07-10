@@ -72,10 +72,10 @@
                 <td>@lang('users.' . $student->reading_type)</td>
             </tr>
 
-            <tr>
+            <!-- <tr>
                 <th>@lang('users.logs_count')</th>
                 <td>{{ $student->student_logs_count }}</td>
-            </tr>
+            </tr> -->
         </table>
 
     </div>

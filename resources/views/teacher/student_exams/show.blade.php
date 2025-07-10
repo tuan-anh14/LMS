@@ -152,14 +152,14 @@
                                                 @lang('student_exams.set_date_time')
                                             </a>
 
-                                            <a href=""
+                                            <!-- <a href=""
                                                class="btn btn-primary btn-block ajax-modal"
                                                data-url="{{ route('teacher.student_exams.edit_assessment', $studentExam->id) }}"
                                                data-modal-title="@lang('student_exams.add_assessment')"
                                             >
                                                 <i data-feather="check-circle"></i>
                                                 @lang('student_exams.add_assessment')
-                                            </a>
+                                            </a> -->
 
                                         @endif
 

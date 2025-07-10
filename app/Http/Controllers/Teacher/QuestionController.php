@@ -89,6 +89,11 @@ class QuestionController extends Controller
     public function destroy(Exam $exam, Question $question)
     {
         $question->delete();
+        if (request()->ajax()) {
+            return response()->json([
+                'success_message' => __('site.deleted_successfully')
+            ]);
+        }
         return redirect()->route('teacher.exams.questions.index', $exam->id)->with('success', __('site.deleted_successfully'));
     }
 } 

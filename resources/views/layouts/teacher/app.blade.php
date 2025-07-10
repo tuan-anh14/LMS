@@ -154,7 +154,12 @@
 
                                     $("#record__select-all").prop("checked", false);
 
-                                    $('.datatable').DataTable().ajax.reload();
+                                    // Nếu là DataTable thì reload, còn không thì xoá dòng <tr> khỏi DOM
+                                    if ($('.datatable').length) {
+                                        $('.datatable').DataTable().ajax.reload();
+                                    } else {
+                                        that.closest('tr').remove();
+                                    }
 
                                     new Noty({
                                         layout: 'topRight',

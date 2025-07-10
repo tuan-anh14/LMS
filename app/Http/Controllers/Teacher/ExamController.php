@@ -108,6 +108,11 @@ class ExamController extends Controller
     public function destroy(Exam $exam)
     {
         $exam->delete();
+        if (request()->ajax()) {
+            return response()->json([
+                'success_message' => __('site.deleted_successfully')
+            ]);
+        }
         return redirect()->route('teacher.exams.index')->with('success', __('site.deleted_successfully'));
     }
 

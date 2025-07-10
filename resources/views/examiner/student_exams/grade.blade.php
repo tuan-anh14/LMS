@@ -143,7 +143,7 @@
                                                    name="scores[{{ $answer->id }}]" 
                                                    id="score_{{ $answer->id }}"
                                                    class="form-control score-input" 
-                                                   value="{{ $answer->score }}"
+                                                   value="{{ $answer->score ?? 0 }}"
                                                    min="0" 
                                                    max="{{ $question->points ?? 1 }}"
                                                    step="0.1" 
@@ -170,48 +170,63 @@
                     @endforeach
 
                     <!-- Tổng kết -->
+                    @php
+                        $totalScore = $studentExam->answers->whereNotNull('score')->sum('score');
+                        $maxScore = $studentExam->exam->questions->sum('points') ?? $studentExam->exam->questions->count();
+                        $percentage = $maxScore > 0 ? ($totalScore / $maxScore * 100) : 0;
+                        $assessment = $studentExam->assessment;
+                        // Chỉ đánh giá khi đã làm bài (có câu trả lời)
+                        $hasAnswers = $studentExam->answers->whereNotNull('answer_text')->count() > 0;
+                        if (!$assessment && $hasAnswers) {
+                            if ($percentage >= 90) $assessment = 'superiority';
+                            elseif ($percentage >= 80) $assessment = 'excellent';
+                            elseif ($percentage >= 70) $assessment = 'very_good';
+                            elseif ($percentage >= 60) $assessment = 'good';
+                            else $assessment = 'repeat';
+                        }
+                    @endphp
                     <div class="card bg-light">
                         <div class="card-body">
                             <h5><i class="fas fa-chart-line"></i> Đánh giá tổng thể</h5>
                             <div class="row">
                                 <div class="col-md-3">
-                                    <label for="total_score">Tổng điểm đạt được:</label>
-                                    <input type="number" 
-                                           name="total_score" 
-                                           id="total_score"
-                                           class="form-control" 
-                                           min="0" 
-                                           step="0.1" 
-                                           readonly
-                                           placeholder="Điểm tổng">
+                                    <p class="mb-1"><strong>Điểm đạt được:</strong>
+                                        <span class="badge badge-primary">{{ $totalScore }}</span>
+                                    </p>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="max_score">Tổng điểm tối đa:</label>
-                                    <input type="number" 
-                                           id="max_score"
-                                           class="form-control" 
-                                           value="{{ $studentExam->exam->questions->sum('points') ?? $studentExam->exam->questions->count() }}"
-                                           readonly>
+                                    <p class="mb-1"><strong>Tổng điểm:</strong>
+                                        <span class="badge badge-secondary">{{ $maxScore }}</span>
+                                    </p>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="percentage">Phần trăm đạt được:</label>
-                                    <input type="text" 
-                                           id="percentage"
-                                           class="form-control" 
-                                           readonly
-                                           placeholder="0%">
+                                    <p class="mb-1"><strong>Phần trăm:</strong>
+                                        <span class="badge badge-{{ $percentage >= 80 ? 'success' : ($percentage >= 60 ? 'warning' : 'danger') }}">{{ round($percentage, 1) }}%</span>
+                                    </p>
                                 </div>
                                 <div class="col-md-3">
-                                    <label for="assessment">Đánh giá:</label>
-                                    <select name="assessment" id="assessment" class="form-control">
-                                        <option value="">Chọn đánh giá</option>
-                                        <option value="excellent" {{ $studentExam->assessment === 'excellent' ? 'selected' : '' }}>Xuất sắc (90-100%)</option>
-                                        <option value="very_good" {{ $studentExam->assessment === 'very_good' ? 'selected' : '' }}>Rất tốt (80-89%)</option>
-                                        <option value="good" {{ $studentExam->assessment === 'good' ? 'selected' : '' }}>Tốt (70-79%)</option>
-                                        <option value="average" {{ $studentExam->assessment === 'average' ? 'selected' : '' }}>Trung bình (60-69%)</option>
-                                        <option value="below_average" {{ $studentExam->assessment === 'below_average' ? 'selected' : '' }}>Dưới trung bình (50-59%)</option>
-                                        <option value="poor" {{ $studentExam->assessment === 'poor' ? 'selected' : '' }}>Kém (<50%)</option>
-                                    </select>
+                                    <p class="mb-1"><strong>Đánh giá:</strong>
+                                        @if($assessment)
+                                            <span class="badge badge-lg badge-
+                                                @if($assessment === 'excellent') success
+                                                @elseif(in_array($assessment, ['very_good', 'good'])) primary
+                                                @elseif($assessment === 'average') warning
+                                                @else danger @endif
+                                            " style="color: #6e6b7b; font-weight: 600;">
+                                                @switch($assessment)
+                                                    @case('excellent') <i class="fas fa-star"></i> Xuất sắc @break
+                                                    @case('very_good') <i class="fas fa-thumbs-up"></i> Rất tốt @break
+                                                    @case('good') <i class="fas fa-check"></i> Tốt @break
+                                                    @case('average') <i class="fas fa-equals"></i> Trung bình @break
+                                                    @case('below_average') <i class="fas fa-arrow-down"></i> Dưới trung bình @break
+                                                    @case('poor') <i class="fas fa-times"></i> Kém @break
+                                                    @default {{ $assessment }}
+                                                @endswitch
+                                            </span>
+                                        @else
+                                            <span class="badge badge-secondary">Chưa có đánh giá</span>
+                                        @endif
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -316,6 +331,19 @@ $(document).ready(function() {
     
     // Initial calculation
     calculateTotalScore();
+    // Đảm bảo cập nhật tổng kết khi trang vừa load (fix trường hợp input bị để trống)
+    $(window).on('load', function() {
+        calculateTotalScore();
+    });
+    // --- DEBUG: Log giá trị tổng kết khi load trang ---
+    setTimeout(function() {
+        console.log('DEBUG: total_score =', $('#total_score').val());
+        console.log('DEBUG: percentage =', $('#percentage').val());
+        console.log('DEBUG: assessment =', $('#assessment').val());
+        // Nếu input bị readonly mà value không hiện, ép cập nhật lại UI
+        $('#total_score')[0].value = $('#total_score').val();
+        $('#percentage')[0].value = $('#percentage').val();
+    }, 500);
     
     // Form validation
     $('#gradingForm').on('submit', function(e) {

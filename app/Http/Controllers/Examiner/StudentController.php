@@ -55,7 +55,7 @@ class StudentController extends Controller
             ->whenGender(
                 auth()->user()->hasRole('center_manager', session('selected_center')['id'])
                     ? request()->gender
-                    : auth()->user()->gender
+                    : null
             )
             ->where('type', UserTypeEnum::STUDENT);
 

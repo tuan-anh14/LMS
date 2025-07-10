@@ -14,7 +14,6 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('center_id')->constrained()->cascadeOnDelete();
             $table->foreignId('project_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('course_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->timestamps();
         });

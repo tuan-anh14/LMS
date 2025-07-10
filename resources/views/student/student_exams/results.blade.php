@@ -55,6 +55,16 @@
                                             $totalPossibleScore = $studentExam->exam->questions->sum('points') ?? $studentExam->exam->questions->count();
                                             $totalScore = $studentExam->answers->whereNotNull('score')->sum('score');
                                             $percentage = $totalPossibleScore > 0 ? ($totalScore / $totalPossibleScore * 100) : 0;
+                                            $assessment = $studentExam->assessment;
+                                            // Chỉ đánh giá khi đã làm bài (có câu trả lời)
+                                            $hasAnswers = $studentExam->answers->whereNotNull('answer_text')->count() > 0;
+                                            if (!$assessment && $hasAnswers) {
+                                                if ($percentage >= 90) $assessment = 'superiority';
+                                                elseif ($percentage >= 80) $assessment = 'excellent';
+                                                elseif ($percentage >= 70) $assessment = 'very_good';
+                                                elseif ($percentage >= 60) $assessment = 'good';
+                                                else $assessment = 'repeat';
+                                            }
                                         @endphp
                                         <p class="mb-1"><strong>Điểm đạt được:</strong> 
                                             <span class="badge badge-primary">{{ $totalScore }}</span>
@@ -75,22 +85,22 @@
                                 <div class="card bg-light">
                                     <div class="card-body">
                                         <h6><i class="fas fa-award"></i> Đánh giá</h6>
-                                        @if($studentExam->assessment)
+                                        @if($assessment)
                                             <div class="text-center">
                                                 <span class="badge badge-lg badge-
-                                                    @if($studentExam->assessment === 'excellent') success 
-                                                    @elseif(in_array($studentExam->assessment, ['very_good', 'good'])) primary
-                                                    @elseif($studentExam->assessment === 'average') warning
+                                                    @if($assessment === 'excellent') success 
+                                                    @elseif(in_array($assessment, ['very_good', 'good'])) primary
+                                                    @elseif($assessment === 'average') warning
                                                     @else danger @endif
-                                                ">
-                                                    @switch($studentExam->assessment)
+                                                " style="color: #6e6b7b; font-weight: 600;">
+                                                    @switch($assessment)
                                                         @case('excellent') <i class="fas fa-star"></i> Xuất sắc @break
                                                         @case('very_good') <i class="fas fa-thumbs-up"></i> Rất tốt @break
                                                         @case('good') <i class="fas fa-check"></i> Tốt @break
                                                         @case('average') <i class="fas fa-equals"></i> Trung bình @break
                                                         @case('below_average') <i class="fas fa-arrow-down"></i> Dưới trung bình @break
                                                         @case('poor') <i class="fas fa-times"></i> Kém @break
-                                                        @default {{ $studentExam->assessment }}
+                                                        @default {{ $assessment }}
                                                     @endswitch
                                                 </span>
                                             </div>
@@ -99,10 +109,9 @@
                                                 <span class="badge badge-secondary">Chưa có đánh giá</span>
                                             </div>
                                         @endif
-                                        
-                                        @if($studentExam->notes)
+                                        @if($studentExam->notes && $studentExam->assessment)
                                             <div class="mt-2">
-                                                <small class="text-muted">{{ $studentExam->notes }}</small>
+                                                
                                             </div>
                                         @endif
                                     </div>
