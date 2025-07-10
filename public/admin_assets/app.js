@@ -2167,7 +2167,7 @@ window.initDatePicker = function () {
   $('.date-picker').flatpickr({
     dateFormat: 'Y-m-d',
     disableMobile: "true",
-    locale: "ar",
+    locale: "vi",
     position: 'top right'
   });
   $('.date-range-picker').each(function () {
@@ -2175,7 +2175,7 @@ window.initDatePicker = function () {
     var defaultToDate = $(this).data('default-to-date');
     $(this).flatpickr({
       mode: "range",
-      locale: "ar",
+      locale: "vi",
       position: 'top right',
       dateFormat: "Y-m-d",
       defaultDate: [defaultFromDate !== null && defaultFromDate !== void 0 ? defaultFromDate : '', defaultToDate !== null && defaultToDate !== void 0 ? defaultToDate : ''],
@@ -2194,7 +2194,7 @@ window.initDatePicker = function () {
       enableTime: true,
       noCalendar: true,
       time_24hr: false,
-      locale: "ar",
+      locale: "vi",
       position: 'top right'
     });
   });
@@ -2202,7 +2202,7 @@ window.initDatePicker = function () {
     $(this).flatpickr({
       enableTime: true,
       dateFormat: "Y-m-d H:i K",
-      locale: "ar",
+      locale: "vi",
       position: 'top right'
     });
   });

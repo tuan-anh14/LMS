@@ -188,7 +188,7 @@
                                                 </div>
                                                 @if ((auth()->user()->hasRole('examiner') || auth()->user()->is_examiner) && $studentExam->examiner_id == auth()->user()->id)
                                                     <a href="{{ route('examiner.student_exams.grade', $studentExam) }}" class="btn btn-warning btn-sm">
-                                                        <i class="fas fa-edit"></i> Chấm điểm
+                                                        <i class="fas fa-edit"></i> Chỉnh sửa điểm
                                                     </a>
                                                 @endif
                                             @else

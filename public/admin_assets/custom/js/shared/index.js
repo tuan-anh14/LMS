@@ -592,7 +592,7 @@ let handleAjaxRedirects = (response, submitButtonHtml) => {
 
 let handleAjaxRemoveElements = (response) => {
 
-    if (response['remove']) {$(response['remove']).remove();}//end of if
+    if (response['remove']) { $(response['remove']).remove(); }//end of if
 
 }
 
@@ -622,7 +622,7 @@ window.initDatePicker = () => {
     $('.date-picker').flatpickr({
         dateFormat: 'Y-m-d',
         disableMobile: "true",
-        locale: "ar",
+        locale: "vi",
         position: 'top right',
     });
 
@@ -633,7 +633,7 @@ window.initDatePicker = () => {
 
         $(this).flatpickr({
             mode: "range",
-            locale: "ar",
+            locale: "vi",
             position: 'top right',
             dateFormat: "Y-m-d",
             defaultDate: [defaultFromDate ?? '', defaultToDate ?? ''],
@@ -658,7 +658,7 @@ window.initDatePicker = () => {
             enableTime: true,
             noCalendar: true,
             time_24hr: false,
-            locale: "ar",
+            locale: "vi",
             position: 'top right',
         });
 
@@ -669,7 +669,7 @@ window.initDatePicker = () => {
         $(this).flatpickr({
             enableTime: true,
             dateFormat: "Y-m-d H:i K",
-            locale: "ar",
+            locale: "vi",
             position: 'top right',
         });
 
