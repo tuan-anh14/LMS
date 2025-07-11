@@ -74,12 +74,12 @@
 
                                         @if ($lecture->section->project->hasTajweedLectures())
                                             <option
-                                                value="{{ LectureTypeEnum::TAJWEED }}" {{ $lecture->type == LectureTypeEnum::TAJWEED ? 'selected' : '' }}>@lang('lectures.tajweed')</option>
+                                                value="{{ LectureTypeEnum::EDUCATIONAL_AND_TAJWEED }}" {{ $lecture->type == LectureTypeEnum::EDUCATIONAL_AND_TAJWEED ? 'selected' : '' }}>@lang('lectures.educational_and_tajweed')</option>
                                         @endif
 
                                         @if ($lecture->section->project->hasUpbringingLectures())
                                             <option
-                                                value="{{ LectureTypeEnum::UPBRINGING }}" {{ $lecture->type == LectureTypeEnum::UPBRINGING ? 'selected' : '' }}>@lang('lectures.upbringing')</option>
+                                                value="{{ LectureTypeEnum::EDUCATIONAL_AND_UPBRINGING }}" {{ $lecture->type == LectureTypeEnum::EDUCATIONAL_AND_UPBRINGING ? 'selected' : '' }}>@lang('lectures.educational_and_upbringing')</option>
                                         @endif
                                     </select>
                                 </div>

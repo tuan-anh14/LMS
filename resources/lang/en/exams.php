@@ -9,7 +9,7 @@ return [
     'assessment' => 'Assessment',
     'requested' => 'Requested',
     'new_exam' => 'New Exam',
-    'assigned_student_exams_count' => 'Assigned Student Exams Count',
-    'exams_count' => 'Exams Count',
+    'assigned_student_exams_count' => 'Number of Assigned Student Exams',
+    'exams_count' => 'Number of Exams',
     'manage_questions' => 'Manage Questions',
 ];

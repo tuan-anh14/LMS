@@ -4,7 +4,11 @@ return [
     'projects' => 'Môn học',
     'project' => 'Môn học',
     'name' => 'Tên môn học',
-    'has_tajweed_lectures' => 'Có bài giảng Tajweed',
-    'has_upbringing_lectures' => 'Có bài giảng giáo dục',
     'projects_count' => 'Số lượng môn học',
+    'students_count' => 'Số lượng sinh viên',
+    'centers_count' => 'Số lượng trung tâm',
+    'sections_count' => 'Số lượng lớp học',
+    'books_count' => 'Số lượng sách',
+    'has_tajweed_lectures' => 'Có bài giảng Lý thuyết & Thực hành nâng cao',
+    'has_upbringing_lectures' => 'Có bài giảng Lý thuyết & Thực hành ứng dụng',
 ]; 

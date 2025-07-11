@@ -24,7 +24,9 @@
         <div class="form-group">
             <select id="lecture-type" class="form-control select2" required>
                 <option value="0">@lang('site.all') @lang('lectures.types')</option>
-                <option value="{{ \App\Enums\LectureTypeEnum::EDUCATIONAL }}">@lang('lectures.educational')</option>
+                @foreach(\App\Enums\LectureTypeEnum::getConstants() as $key => $value)
+                    <option value="{{ $value }}">@lang('lectures.' . $value)</option>
+                @endforeach
             </select>
         </div>
     </div>

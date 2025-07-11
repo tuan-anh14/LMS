@@ -7,5 +7,5 @@ return [
     'short_description' => 'Short description',
     'description' => 'Description',
     'image' => 'Image',
-    'courses_count' => 'Courses count',
+    'courses_count' => 'Number of Courses',
 ];

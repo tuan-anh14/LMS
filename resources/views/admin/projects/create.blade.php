@@ -72,12 +72,12 @@
                             </div>
 
                             {{--has_tajweed_lectures--}}
-                            <!-- <div class="form-group">
+                            <div class="form-group">
                                 <div class="custom-control custom-checkbox">
                                     <input type="checkbox" name="has_tajweed_lectures" class="custom-control-input" id="has-tajweed-lectures" value="1">
                                     <label class="custom-control-label" for="has-tajweed-lectures">@lang('projects.has_tajweed_lectures')</label>
                                 </div>
-                            </div> -->
+                            </div>
 
                             {{--has_upbringing_lectures--}}
                             <div class="form-group">

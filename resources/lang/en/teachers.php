@@ -8,5 +8,5 @@ return [
     'is_examiner' => 'Is Examiner',
     'examiner' => 'Examiner',
     'details' => 'Details',
-    'teachers_count' => 'Teachers Count',
+    'teachers_count' => 'Number of Teachers',
 ];

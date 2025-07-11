@@ -63,7 +63,9 @@
                                     <label>@lang('lectures.type') <span class="text-danger">*</span></label>
                                     <select name="type" id="lecture-type" class="form-control select2" required>
                                         <option value="">@lang('site.choose') @lang('lectures.type')</option>
-                                        <option value="{{ \App\Enums\LectureTypeEnum::EDUCATIONAL }}">@lang('lectures.educational')</option>
+                                        @foreach(\App\Enums\LectureTypeEnum::getConstants() as $key => $value)
+                                            <option value="{{ $value }}">@lang('lectures.' . $value)</option>
+                                        @endforeach
                                     </select>
                                 </div>
 

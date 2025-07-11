@@ -1,10 +1,10 @@
 <?php
 
 return [
-    'educational' => 'educational',
-    'educational_and_upbringing' => 'educational_and_upbringing',
-    'educational_and_tajweed' => 'educational_and_tajweed',
-    'attended_students_count' => 'attended_students_count',
-    'absent_students_count' => 'absent_students_count',
-    'excuse_students_count' => 'excuse_students_count',
+    'educational' => 'Theoretical',
+    'educational_and_upbringing' => 'Theoretical & Practical Application',
+    'educational_and_tajweed' => 'Theoretical & Advanced Practice',
+    'attended_students_count' => 'Number of students present',
+    'absent_students_count' => 'Number of students absent',
+    'excuse_students_count' => 'Number of students excused',
 ];
