@@ -173,14 +173,14 @@
             @endif
 
             {{--inquiries--}}
-            @if (auth()->user()->hasPermission('read_inquiries'))
-                <li class="{{ request()->is('*inquiries*') ? 'active' : '' }} nav-item">
-                    <a class="d-flex align-items-center" href="{{ route('admin.inquiries.index') }}" wire:navigate>
-                        <i data-feather="video"></i><span
-                            class="menu-title text-truncate">@lang('inquiries.inquiries')</span>
-                    </a>
-                </li>
-            @endif
+            {{--@if (auth()->user()->hasPermission('read_inquiries'))--}}
+                {{--<li class="{{ request()->is('*inquiries*') ? 'active' : '' }} nav-item">--}}
+                    {{--<a class="d-flex align-items-center" href="{{ route('admin.inquiries.index') }}" wire:navigate>--}}
+                        {{--<i data-feather="video"></i><span--}}
+                            {{--class="menu-title text-truncate">@lang('inquiries.inquiries')</span>--}}
+                    {{--</a>--}}
+                {{--</li>--}}
+            {{--@endif--}}
 
             {{--sample--}}
             {{--            @if (auth()->user()->hasPermission('read_students'))--}}

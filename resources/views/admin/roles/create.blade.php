@@ -55,7 +55,7 @@
                                 @php
                                     $models = [
                                         'roles', 'admins','slides', 'courses', 'centers', 'books', 'projects', 'sections', 'teachers', 'examiners', 'students',
-                                        'exams', 'inquiries', 'settings'
+                                        'exams', /* 'inquiries', */ 'settings'
                                     ];
                                 @endphp
 
