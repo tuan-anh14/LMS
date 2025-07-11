@@ -5,20 +5,15 @@
     <!-- Start Banner
 ============================================= -->
     <div class="banner-area content-top-heading less-paragraph text-normal slide-mobile">
-        <div id="bootcarousel" class="carousel slide animate_text carousel-fade" data-ride="carousel">
+        <div id="bootcarousel" class="carousel slide animate_text carousel-fade" data-ride="carousel" data-interval="3000">
 
             <!-- Wrapper for slides -->
             <div class="carousel-inner text-light carousel-zoom">
                 @foreach($slides as $key => $slide)
-                    <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
+                    <div class="item {{ $key == 0 ? 'active' : '' }}">
                         <div class="slider-thumb bg-fixed"
                              style="background-image: url({{ $slide->image ? Storage::url('uploads/' . $slide->image) : asset('images/default.jpg') }});"></div>
-                        <div>
-                            <p>{{ $slide->image }}</p>
-                            <p>{{ Storage::url('uploads/' . $slide->image) }}</p>
-                            <img src="{{ Storage::url('uploads/' . $slide->image) }}" style="max-width:200px;">
-                        </div>
-                        {{--<div class="box-table shadow dark">
+                        <div class="box-table shadow dark">
                             <div class="box-cell">
                                 <div class="container">
                                     <div class="row">
@@ -37,11 +32,18 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>--}}
+                        </div>
                     </div>
                 @endforeach
             </div>
             <!-- End Wrapper for slides -->
+
+            <!-- Carousel indicators -->
+            <ol class="carousel-indicators">
+                @foreach($slides as $key => $slide)
+                    <li data-target="#bootcarousel" data-slide-to="{{ $key }}" class="{{ $key == 0 ? 'active' : '' }}"></li>
+                @endforeach
+            </ol>
 
             <!-- Left and right controls -->
             <a class="carousel-control-prev" href="#bootcarousel" role="button" data-slide="prev">

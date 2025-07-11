@@ -32,6 +32,8 @@
     <link href="{{asset('assets/css/responsive.css')}}" rel="stylesheet"/>
     <!-- Flag icons for language switcher -->
     <link href="{{asset('admin_assets/app-assets/fonts/flag-icon-css/css/flag-icon.min.css')}}" rel="stylesheet"/>
+    <!-- Carousel Fix CSS -->
+    <link href="{{asset('css/carousel-fix.css')}}" rel="stylesheet"/>
     
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -202,6 +204,36 @@
 <script src="{{asset('assets/js/jquery.nice-select.min.js')}}"></script>
 <script src="{{asset('assets/js/bootsnav.js')}}"></script>
 <script src="{{asset('assets/js/main.js')}}"></script>
+
+<!-- Carousel Fix JavaScript -->
+<script>
+$(document).ready(function() {
+    // Initialize carousel with proper settings
+    $('#bootcarousel').carousel({
+        interval: 3000,
+        pause: 'hover',
+        wrap: true
+    });
+    
+    // Ensure controls are clickable
+    $('.carousel-control-prev').on('click', function() {
+        $('#bootcarousel').carousel('prev');
+    });
+    
+    $('.carousel-control-next').on('click', function() {
+        $('#bootcarousel').carousel('next');
+    });
+    
+    // Fix for carousel fade transition
+    $('#bootcarousel').on('slide.bs.carousel', function () {
+        $(this).find('.carousel-item').removeClass('active');
+    });
+    
+    $('#bootcarousel').on('slid.bs.carousel', function () {
+        $(this).find('.carousel-item.active').addClass('active');
+    });
+});
+</script>
 
 </body>
 </html>

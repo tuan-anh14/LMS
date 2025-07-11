@@ -57,51 +57,41 @@
                                     <div class="form-group">
                                         <label class="font-weight-bold">Các đáp án trắc nghiệm <span class="text-danger">*</span></label>
                                         <div id="options_container">
-                                            <!-- Default A and B options -->
-                                            <div class="card mb-2 option-card">
-                                                <div class="card-body py-2">
-                                                    <div class="d-flex align-items-center">
-                                                        <span class="option-letter bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mr-3" 
-                                                              style="width: 35px; height: 35px; font-weight: bold;">A</span>
-                                                        <input type="text" name="options[]" class="form-control option-input" placeholder="Nhập nội dung đáp án A">
-                                                        <div class="ml-2">
-                                                            <button type="button" class="btn btn-sm btn-success add-option">
-                                                                <i class="fa fa-plus"></i>
-                                                            </button>
+                                            @for($i = 0; $i < 4; $i++)
+                                                <div class="card mb-2 option-card" data-option="{{ chr(65 + $i) }}">
+                                                    <div class="card-body py-2">
+                                                        <div class="d-flex align-items-center">
+                                                            <span class="option-letter bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mr-3" 
+                                                                  style="width: 35px; height: 35px; font-weight: bold;">{{ chr(65 + $i) }}</span>
+                                                            <input type="text" name="options[]" class="form-control option-input" 
+                                                                   placeholder="Nhập nội dung đáp án {{ chr(65 + $i) }}">
+                                                            <div class="ml-2">
+                                                                <button type="button" class="btn btn-sm btn-outline-success correct-answer-btn" 
+                                                                        data-answer="{{ chr(65 + $i) }}" 
+                                                                        onclick="selectCorrectAnswer('{{ chr(65 + $i) }}')">
+                                                                    <i class="fa fa-check"></i>
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="card mb-2 option-card">
-                                                <div class="card-body py-2">
-                                                    <div class="d-flex align-items-center">
-                                                        <span class="option-letter bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mr-3" 
-                                                              style="width: 35px; height: 35px; font-weight: bold;">B</span>
-                                                        <input type="text" name="options[]" class="form-control option-input" placeholder="Nhập nội dung đáp án B">
-                                                        <div class="ml-2">
-                                                            <button type="button" class="btn btn-sm btn-danger remove-option">
-                                                                <i class="fa fa-minus"></i>
-                                                            </button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            @endfor
                                         </div>
                                         <small class="text-muted">
                                             <i class="fa fa-info-circle"></i> 
-                                            Cần ít nhất 2 đáp án. Sử dụng nút + để thêm đáp án, nút - để xóa đáp án.
+                                            Nhập nội dung cho các đáp án và click nút tick để chọn đáp án đúng.
                                         </small>
                                     </div>
                                     
-                                    <!-- Correct Answer Selection -->
+                                    <!-- Hidden input for correct answer -->
+                                    <input type="hidden" name="correct_answer" id="correct_answer_input" value="">
+                                    
                                     <div class="form-group">
-                                        <label class="font-weight-bold">Chọn đáp án đúng <span class="text-danger">*</span></label>
-                                        <div id="correct_answer_options" class="row">
-                                            <!-- Dynamic correct answer options will be generated here -->
-                                        </div>
+                                        <label class="font-weight-bold">Đáp án đúng hiện tại: <span id="current_correct_answer" class="badge badge-success" style="display: none;">Chưa chọn</span></label>
+                                        <br>
                                         <small class="text-muted">
                                             <i class="fa fa-check-circle"></i> 
-                                            Chọn đáp án đúng từ các tùy chọn bên trên
+                                            Click vào nút tick bên cạnh đáp án để chọn đáp án đúng
                                         </small>
                                     </div>
                                 </div>
@@ -133,211 +123,186 @@
             </div>
         </div>
     </div>
-@endsection
 
-@section('scripts')
-<style>
-.option-card {
-    border-left: 4px solid #007bff;
-    transition: all 0.3s ease;
-}
-
-.option-card:hover {
-    box-shadow: 0 2px 8px rgba(0,123,255,0.2);
-}
-
-.correct-answer-option {
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 2px solid #e9ecef;
-}
-
-.correct-answer-option:hover {
-    border-color: #007bff;
-    transform: translateY(-2px);
-}
-
-.correct-answer-option.selected {
-    border-color: #28a745;
-    background-color: #f8fff9;
-}
-
-.correct-answer-option input[type="radio"] {
-    transform: scale(1.2);
-}
-
-.cursor-pointer {
-    cursor: pointer;
-}
-</style>
-
-<script>
-$(document).ready(function() {
-    console.log('Create form ready');
-    
-    // Handle question type change
-    $('#question_type').change(function() {
-        var type = $(this).val();
-        console.log('Question type changed to:', type);
-        
-        if (type === 'multiple_choice') {
-            $('#multiple_choice_section').show();
-            $('#essay_section').hide();
-            
-            // Add required attribute to option inputs
-            $('.option-input').attr('required', true);
-            $('.essay-answer').removeAttr('required');
-            
-            updateCorrectAnswerOptions();
-            updateOptionLabels();
-        } else if (type === 'essay') {
-            $('#multiple_choice_section').hide();
-            $('#essay_section').show();
-            
-            // Remove required from option inputs and add to essay
-            $('.option-input').removeAttr('required');
-            $('.essay-answer').attr('required', true);
-        } else {
-            $('#multiple_choice_section').hide();
-            $('#essay_section').hide();
-            
-            // Remove all required attributes
-            $('.option-input').removeAttr('required');
-            $('.essay-answer').removeAttr('required');
-        }
-    });
-
-    // Add option
-    $(document).on('click', '.add-option', function() {
-        var currentCount = $('#options_container .option-card').length;
-        if (currentCount >= 6) {
-            alert('Tối đa chỉ được 6 đáp án!');
-            return;
+    <style>
+        .option-card.correct {
+            border: 2px solid #28a745 !important;
+            background-color: #f8fff9 !important;
         }
         
-        var nextLetter = String.fromCharCode(65 + currentCount);
-        var isRequired = $('#question_type').val() === 'multiple_choice' ? 'required' : '';
-        
-        var newOption = `
-            <div class="card mb-2 option-card">
-                <div class="card-body py-2">
-                    <div class="d-flex align-items-center">
-                        <span class="option-letter bg-primary text-white rounded-circle d-flex align-items-center justify-content-center mr-3" 
-                              style="width: 35px; height: 35px; font-weight: bold;">${nextLetter}</span>
-                        <input type="text" name="options[]" class="form-control option-input" placeholder="Nhập nội dung đáp án ${nextLetter}" ${isRequired}>
-                        <div class="ml-2">
-                            <button type="button" class="btn btn-sm btn-danger remove-option">
-                                <i class="fa fa-minus"></i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-        $('#options_container').append(newOption);
-        updateOptionLabels();
-        updateCorrectAnswerOptions();
-    });
-
-    // Remove option
-    $(document).on('click', '.remove-option', function() {
-        if ($('#options_container .option-card').length > 2) {
-            $(this).closest('.option-card').remove();
-            updateOptionLabels();
-            updateCorrectAnswerOptions();
-        } else {
-            alert('Cần ít nhất 2 đáp án cho câu hỏi trắc nghiệm!');
-        }
-    });
-
-    // Update options when text changes
-    $(document).on('input', 'input[name="options[]"]', function() {
-        updateCorrectAnswerOptions();
-    });
-
-    // Handle correct answer selection
-    $(document).on('click', '.correct-answer-option', function() {
-        $('.correct-answer-option').removeClass('selected');
-        $(this).addClass('selected');
-        $(this).find('input[type="radio"]').prop('checked', true);
-    });
-
-    // Form validation before submit
-    $('form').on('submit', function(e) {
-        var questionType = $('#question_type').val();
-        
-        if (!questionType) {
-            e.preventDefault();
-            alert('Vui lòng chọn loại câu hỏi!');
-            return false;
+        .correct-answer-btn.active {
+            background-color: #28a745 !important;
+            border-color: #28a745 !important;
+            color: white !important;
         }
         
-        if (questionType === 'multiple_choice') {
-            // Check if at least 2 options are filled
-            var filledOptions = 0;
-            $('.option-input').each(function() {
-                if ($(this).val().trim() !== '') {
-                    filledOptions++;
+        .correct-answer-btn:hover {
+            background-color: #28a745;
+            border-color: #28a745;
+            color: white;
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle question type change
+            document.getElementById('question_type').addEventListener('change', function() {
+                toggleQuestionSections();
+                syncCorrectAnswerInput();
+            });
+            
+            // Khi submit form, đồng bộ correct_answer cho đúng loại
+            document.querySelector('form').addEventListener('submit', function(e) {
+                syncCorrectAnswerInput();
+            });
+            
+            toggleQuestionSections();
+            syncCorrectAnswerInput();
+        });
+
+        function selectCorrectAnswer(answer) {
+            // Remove previous selection
+            document.querySelectorAll('.option-card').forEach(card => {
+                card.classList.remove('correct');
+            });
+            document.querySelectorAll('.correct-answer-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Add selection to current answer
+            const selectedCard = document.querySelector(`[data-option="${answer}"]`);
+            const selectedBtn = document.querySelector(`[data-answer="${answer}"]`);
+            
+            if (selectedCard && selectedBtn) {
+                selectedCard.classList.add('correct');
+                selectedBtn.classList.add('active');
+                
+                // Update hidden input and display
+                document.getElementById('correct_answer_input').value = answer;
+                const currentAnswerSpan = document.getElementById('current_correct_answer');
+                currentAnswerSpan.textContent = answer;
+                currentAnswerSpan.style.display = 'inline';
+            }
+        }
+
+        function toggleQuestionSections() {
+            const questionType = document.getElementById('question_type').value;
+            const multipleChoiceSection = document.getElementById('multiple_choice_section');
+            const essaySection = document.getElementById('essay_section');
+            
+            if (questionType === 'multiple_choice') {
+                multipleChoiceSection.style.display = 'block';
+                essaySection.style.display = 'none';
+                
+                // Make options required
+                document.querySelectorAll('.option-input').forEach(input => {
+                    input.setAttribute('required', 'required');
+                });
+                
+                // Remove required from essay
+                document.querySelector('.essay-answer').removeAttribute('required');
+            } else if (questionType === 'essay') {
+                multipleChoiceSection.style.display = 'none';
+                essaySection.style.display = 'block';
+                
+                // Remove required from options
+                document.querySelectorAll('.option-input').forEach(input => {
+                    input.removeAttribute('required');
+                });
+                
+                // Make essay required
+                document.querySelector('.essay-answer').setAttribute('required', 'required');
+            } else {
+                multipleChoiceSection.style.display = 'none';
+                essaySection.style.display = 'none';
+                
+                // Remove all required
+                document.querySelectorAll('.option-input').forEach(input => {
+                    input.removeAttribute('required');
+                });
+                document.querySelector('.essay-answer').removeAttribute('required');
+            }
+        }
+
+        // Đảm bảo chỉ gửi đúng 1 correct_answer phù hợp loại câu hỏi
+        function syncCorrectAnswerInput() {
+            const questionType = document.getElementById('question_type').value;
+            const hiddenInput = document.getElementById('correct_answer_input');
+            const essayTextarea = document.querySelector('.essay-answer');
+            if (questionType === 'multiple_choice') {
+                if (hiddenInput) hiddenInput.disabled = false;
+                if (essayTextarea) essayTextarea.disabled = true;
+            } else if (questionType === 'essay') {
+                if (hiddenInput) hiddenInput.disabled = true;
+                if (essayTextarea) essayTextarea.disabled = false;
+            } else {
+                if (hiddenInput) hiddenInput.disabled = true;
+                if (essayTextarea) essayTextarea.disabled = true;
+            }
+        }
+
+        // Check for duplicate options
+        function checkDuplicateOptions() {
+            const optionInputs = document.querySelectorAll('.option-input');
+            const options = [];
+            let hasDuplicates = false;
+            
+            optionInputs.forEach(input => {
+                const value = input.value.trim();
+                if (value !== '') {
+                    if (options.includes(value)) {
+                        hasDuplicates = true;
+                    } else {
+                        options.push(value);
+                    }
                 }
             });
             
-            if (filledOptions < 2) {
-                e.preventDefault();
-                alert('Cần ít nhất 2 đáp án cho câu hỏi trắc nghiệm!');
+            // Show/hide error message
+            const errorDiv = document.getElementById('duplicate-error');
+            if (hasDuplicates) {
+                if (!errorDiv) {
+                    const errorElement = document.createElement('div');
+                    errorElement.id = 'duplicate-error';
+                    errorElement.className = 'alert alert-danger mt-2';
+                    errorElement.innerHTML = '<i class="fa fa-exclamation-triangle"></i> Các đáp án không được trùng nhau!';
+                    document.getElementById('options_container').parentNode.appendChild(errorElement);
+                }
                 return false;
-            }
-            
-            // Check if correct answer is selected
-            if (!$('input[name="correct_answer"]:checked').length) {
-                e.preventDefault();
-                alert('Vui lòng chọn đáp án đúng!');
-                return false;
+            } else {
+                if (errorDiv) {
+                    errorDiv.remove();
+                }
+                return true;
             }
         }
-        
-        return true;
-    });
 
-    function updateOptionLabels() {
-        $('#options_container .option-card').each(function(index) {
-            var letter = String.fromCharCode(65 + index);
-            $(this).find('.option-letter').text(letter);
-            $(this).find('input[name="options[]"]').attr('placeholder', 'Nhập nội dung đáp án ' + letter);
+        // Add event listeners for option inputs
+        document.addEventListener('input', function(e) {
+            if (e.target.classList.contains('option-input')) {
+                checkDuplicateOptions();
+            }
         });
-    }
 
-    function updateCorrectAnswerOptions() {
-        var container = $('#correct_answer_options');
-        container.empty();
-        
-        $('#options_container input[name="options[]"]').each(function(index) {
-            var letter = String.fromCharCode(65 + index);
-            var value = $(this).val();
-            var displayText = value.trim() !== '' ? value : `Đáp án ${letter}`;
+        // Form validation before submit
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const questionType = document.getElementById('question_type').value;
             
-            var optionHtml = `
-                <div class="col-md-6 mb-2">
-                    <div class="correct-answer-option p-3 rounded">
-                        <label class="mb-0 w-100 cursor-pointer">
-                            <input type="radio" name="correct_answer" value="${letter}" class="mr-2">
-                            <span class="option-letter-small bg-primary text-white rounded-circle d-inline-flex align-items-center justify-content-center mr-2" 
-                                  style="width: 25px; height: 25px; font-size: 12px; font-weight: bold;">${letter}</span>
-                            <span class="option-text">${displayText}</span>
-                        </label>
-                    </div>
-                </div>
-            `;
-            container.append(optionHtml);
+            if (questionType === 'multiple_choice') {
+                // Check for duplicate options
+                if (!checkDuplicateOptions()) {
+                    e.preventDefault();
+                    return false;
+                }
+                
+                // Check if correct answer is selected
+                const correctAnswer = document.getElementById('correct_answer_input').value;
+                if (!correctAnswer) {
+                    e.preventDefault();
+                    alert('Vui lòng chọn đáp án đúng!');
+                    return false;
+                }
+            }
         });
-    }
-
-    // Initialize on page load
-    var initialType = $('#question_type').val();
-    if (initialType === 'multiple_choice') {
-        $('#multiple_choice_section').show();
-        updateOptionLabels();
-        updateCorrectAnswerOptions();
-    }
-});
-</script>
+    </script>
 @endsection 

@@ -66,11 +66,8 @@
                                             <small class="text-muted">Lựa chọn:</small>
                                             <ul class="list-unstyled ml-2">
                                                 @foreach($question->options as $option)
-                                                <li class="small {{ $question->correct_answer == $option ? 'text-success font-weight-bold' : 'text-muted' }}">
+                                                <li class="small text-muted">
                                                     • {{ $option }}
-                                                    @if($question->correct_answer == $option)
-                                                    <i class="fa fa-check text-success"></i>
-                                                    @endif
                                                 </li>
                                                 @endforeach
                                             </ul>

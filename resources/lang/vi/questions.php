@@ -5,6 +5,7 @@ return [
     'question' => 'Câu hỏi',
     'new_question' => 'Thêm câu hỏi mới',
     'edit_question' => 'Chỉnh sửa câu hỏi',
+    'create_question' => 'Tạo câu hỏi mới',
     'content' => 'Nội dung câu hỏi',
     'type' => 'Loại câu hỏi',
     'points' => 'Điểm số',

@@ -60,7 +60,9 @@
                                         <div id="options_container">
                                             @php
                                                 $options = $question->isMultipleChoice() && $question->options ? $question->options : ['', '', '', ''];
-                                                $correctAnswer = $question->correct_answer ?? 'A';
+                                                // Find the index of correct answer in options array
+                                                $correctAnswerIndex = $question->isMultipleChoice() && $question->correct_answer ? array_search($question->correct_answer, $options) : 0;
+                                                $correctAnswer = $correctAnswerIndex !== false ? chr(65 + $correctAnswerIndex) : 'A';
                                             @endphp
                                             
                                             @for($i = 0; $i < 4; $i++)
@@ -252,5 +254,69 @@
                 if (essayTextarea) essayTextarea.disabled = true;
             }
         }
+
+        // Check for duplicate options
+        function checkDuplicateOptions() {
+            const optionInputs = document.querySelectorAll('.option-input');
+            const options = [];
+            let hasDuplicates = false;
+            
+            optionInputs.forEach(input => {
+                const value = input.value.trim();
+                if (value !== '') {
+                    if (options.includes(value)) {
+                        hasDuplicates = true;
+                    } else {
+                        options.push(value);
+                    }
+                }
+            });
+            
+            // Show/hide error message
+            const errorDiv = document.getElementById('duplicate-error');
+            if (hasDuplicates) {
+                if (!errorDiv) {
+                    const errorElement = document.createElement('div');
+                    errorElement.id = 'duplicate-error';
+                    errorElement.className = 'alert alert-danger mt-2';
+                    errorElement.innerHTML = '<i class="fa fa-exclamation-triangle"></i> Các đáp án không được trùng nhau!';
+                    document.getElementById('options_container').parentNode.appendChild(errorElement);
+                }
+                return false;
+            } else {
+                if (errorDiv) {
+                    errorDiv.remove();
+                }
+                return true;
+            }
+        }
+
+        // Add event listeners for option inputs
+        document.addEventListener('input', function(e) {
+            if (e.target.classList.contains('option-input')) {
+                checkDuplicateOptions();
+            }
+        });
+
+        // Form validation before submit
+        document.querySelector('form').addEventListener('submit', function(e) {
+            const questionType = document.getElementById('question_type').value;
+            
+            if (questionType === 'multiple_choice') {
+                // Check for duplicate options
+                if (!checkDuplicateOptions()) {
+                    e.preventDefault();
+                    return false;
+                }
+                
+                // Check if correct answer is selected
+                const correctAnswer = document.getElementById('correct_answer_input').value;
+                if (!correctAnswer) {
+                    e.preventDefault();
+                    alert('Vui lòng chọn đáp án đúng!');
+                    return false;
+                }
+            }
+        });
     </script>
 @endsection

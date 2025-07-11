@@ -25,8 +25,8 @@
 
     <title>{{ setting('title') }}</title>
 
-    <link rel="apple-touch-icon" href="{{ asset('admin_assets/app-assets/images/ico/favicon.png') }}">
-    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('admin_assets/app-assets/images/ico/favicon.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('favicon.ico') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600"
           rel="stylesheet">
@@ -165,7 +165,7 @@
                             </div>
 
                             <div class="text-center">
-                                <img src="{{ asset('admin_assets/app-assets/images/logo_md.png') }}" alt="">
+                                <!-- <img src="{{ asset('images/lms-logo.png') }}" alt=""> -->
                                 <h4 class="card-title my-1">@lang('site.login')</h4>
                             </div>
 

@@ -46,17 +46,25 @@ class QuestionController extends Controller
             $rules['correct_answer'] = 'required|string';
             $rules['options'] = 'required|array|min:2';
             $rules['options.*'] = 'required|string';
+            
+            // Add custom validation for unique options
+            $request->validate($rules);
+            
+            // Check for duplicate options
+            $options = array_filter($request->input('options', []));
+            $uniqueOptions = array_unique($options);
+            
+            if (count($options) !== count($uniqueOptions)) {
+                return back()->withErrors(['options' => 'Các đáp án không được trùng nhau.'])->withInput();
+            }
         } else {
-            $rules['correct_answer'] = 'nullable|string';
+            $request->validate($rules);
         }
-
-        $request->validate($rules);
 
         $questionData = [
             'content' => $request->content,
             'type' => $request->type,
             'points' => $request->points,
-            'correct_answer' => $request->correct_answer,
         ];
 
         // Handle options for multiple choice questions
@@ -64,12 +72,18 @@ class QuestionController extends Controller
             $options = array_filter($request->input('options', []));
             $questionData['options'] = $options;
 
-            // Ensure correct_answer is one of the options (for multiple choice)
-            if (!in_array($request->correct_answer, $options)) {
-                return back()->withErrors(['correct_answer' => 'Đáp án đúng phải là một trong các tùy chọn được cung cấp.'])->withInput();
+            // Convert letter answer (A, B, C, D) to actual option content
+            $correctAnswerLetter = $request->correct_answer;
+            $correctAnswerIndex = ord($correctAnswerLetter) - ord('A'); // Convert A=0, B=1, C=2, D=3
+            
+            if (isset($options[$correctAnswerIndex])) {
+                $questionData['correct_answer'] = $options[$correctAnswerIndex];
+            } else {
+                return back()->withErrors(['correct_answer' => 'Đáp án đúng không hợp lệ.'])->withInput();
             }
         } else {
             $questionData['options'] = null;
+            $questionData['correct_answer'] = $request->correct_answer;
         }
 
         $exam->questions()->create($questionData);
@@ -98,17 +112,25 @@ class QuestionController extends Controller
             $rules['correct_answer'] = 'required|string';
             $rules['options'] = 'required|array|min:2';
             $rules['options.*'] = 'required|string';
+            
+            // Add custom validation for unique options
+            $request->validate($rules);
+            
+            // Check for duplicate options
+            $options = array_filter($request->input('options', []));
+            $uniqueOptions = array_unique($options);
+            
+            if (count($options) !== count($uniqueOptions)) {
+                return back()->withErrors(['options' => 'Các đáp án không được trùng nhau.'])->withInput();
+            }
         } else {
-            $rules['correct_answer'] = 'nullable|string';
+            $request->validate($rules);
         }
-
-        $request->validate($rules);
 
         $questionData = [
             'content' => $request->content,
             'type' => $request->type,
             'points' => $request->points,
-            'correct_answer' => $request->correct_answer,
         ];
 
         // Handle options for multiple choice questions
@@ -116,12 +138,18 @@ class QuestionController extends Controller
             $options = array_filter($request->input('options', []));
             $questionData['options'] = $options;
 
-            // Ensure correct_answer is one of the options (for multiple choice)
-            if (!in_array($request->correct_answer, $options)) {
-                return back()->withErrors(['correct_answer' => 'Đáp án đúng phải là một trong các tùy chọn được cung cấp.'])->withInput();
+            // Convert letter answer (A, B, C, D) to actual option content
+            $correctAnswerLetter = $request->correct_answer;
+            $correctAnswerIndex = ord($correctAnswerLetter) - ord('A'); // Convert A=0, B=1, C=2, D=3
+            
+            if (isset($options[$correctAnswerIndex])) {
+                $questionData['correct_answer'] = $options[$correctAnswerIndex];
+            } else {
+                return back()->withErrors(['correct_answer' => 'Đáp án đúng không hợp lệ.'])->withInput();
             }
         } else {
             $questionData['options'] = null;
+            $questionData['correct_answer'] = $request->correct_answer;
         }
 
         $question->update($questionData);
