@@ -46,13 +46,13 @@
             </li>
 
             {{--roles--}}
-            {{--@if (auth()->user()->hasPermission('read_roles'))
+            @if (auth()->user()->hasPermission('read_roles'))
                 <li class="{{ request()->is('*roles*') ? 'active' : '' }} nav-item">
                     <a class="d-flex align-items-center" href="{{ route('admin.roles.index') }}" wire:navigate>
                         <i data-feather="lock"></i><span class="menu-title text-truncate">@lang('roles.roles')</span>
                     </a>
                 </li>
-            @endif--}}
+            @endif
 
             {{--admins--}}
             @if (auth()->user()->hasPermission('read_admins'))

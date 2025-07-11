@@ -35,18 +35,18 @@
 
                                 <div class="col-md-12">
 
-                                    @if (auth()->user()->hasPermission('create_roles'))
-                                        <a href="{{ route('admin.roles.create') }}" class="btn btn-primary" wire:navigate><i data-feather="plus"></i> @lang('site.create')</a>
-                                    @endif
+                                                                    {{--@if (auth()->user()->hasPermission('create_roles'))
+                                    <a href="{{ route('admin.roles.create') }}" class="btn btn-primary" wire:navigate><i data-feather="plus"></i> @lang('site.create')</a>
+                                @endif
 
-                                    @if (auth()->user()->hasPermission('delete_roles'))
-                                        <form method="post" action="{{ route('admin.roles.bulk_delete') }}" class="ajax-form" style="display: inline-block;">
-                                            @csrf
-                                            @method('delete')
-                                            <input type="hidden" name="record_ids" id="record-ids">
-                                            <button type="submit" class="btn btn-danger" id="bulk-delete" disabled="true"><i data-feather="trash-2"></i> @lang('site.bulk_delete')</button>
-                                        </form><!-- end of form -->
-                                    @endif
+                                @if (auth()->user()->hasPermission('delete_roles'))
+                                    <form method="post" action="{{ route('admin.roles.bulk_delete') }}" class="ajax-form" style="display: inline-block;">
+                                        @csrf
+                                        @method('delete')
+                                        <input type="hidden" name="record_ids" id="record-ids">
+                                        <button type="submit" class="btn btn-danger" id="bulk-delete" disabled="true"><i data-feather="trash-2"></i> @lang('site.bulk_delete')</button>
+                                    </form><!-- end of form -->
+                                @endif--}}
 
                                 </div>
 
@@ -71,16 +71,16 @@
                                         <table class="table datatable" id="roles-table" style="width: 100%;">
                                             <thead>
                                             <tr>
-                                                <th>
+                                                {{--<th>
                                                     <div class="custom-control custom-checkbox">
                                                         <input type="checkbox" class="custom-control-input" id="record__select-all">
                                                         <label class="custom-control-label" for="record__select-all"></label>
                                                     </div>
-                                                </th>
+                                                </th>--}}
                                                 <th>@lang('roles.name')</th>
                                                 <th>@lang('roles.admins_count')</th>
                                                 <th>@lang('site.created_at')</th>
-                                                <th style="width: 20%;">@lang('site.action')</th>
+                                                {{--<th style="width: 20%;">@lang('site.action')</th>--}}
                                             </tr>
                                             </thead>
                                         </table>
@@ -117,13 +117,13 @@
                     {
                         extend: 'excelHtml5',
                         exportOptions: {
-                            columns: [1, 2, 3]
+                            columns: [0, 1, 2]
                         }
                     },
                     {
                         extend: 'pdfHtml5',
                         exportOptions: {
-                            columns: [1, 2, 3]
+                            columns: [0, 1, 2]
                         }
                     },
                 ],
@@ -136,19 +136,19 @@
                     url: '{{ route('admin.roles.data') }}',
                 },
                 columns: [
-                    {data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
+                    //{data: 'record_select', name: 'record_select', searchable: false, sortable: false, width: '1%'},
                     {data: 'name', name: 'name'},
                     {data: 'users_count', name: 'users_count', searchable: false},
                     {data: 'created_at', name: 'created_at', searchable: false},
-                    {data: 'actions', name: 'actions', searchable: false, sortable: false},
+                    //{data: 'actions', name: 'actions', searchable: false, sortable: false},
                 ],
-                order: [[3, 'desc']],
-                drawCallback: function (settings) {
+                order: [[2, 'desc']],
+                /*drawCallback: function (settings) {
                     $('.record__select').prop('checked', false);
                     $('#record__select-all').prop('checked', false);
                     $('#record-ids').val();
                     $('#bulk-delete').attr('disabled', true);
-                }
+                }*/
             });
 
             $('#data-table-search').keyup(function () {

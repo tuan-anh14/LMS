@@ -1,3 +1,4 @@
+{{--
 @if (auth()->user()->hasPermission('update_roles'))
     <a href="{{ route('admin.roles.edit', $id) }}" wire:navigate class="btn btn-warning btn-sm"><i data-feather="edit"></i> </a>
 @endif
@@ -18,3 +19,4 @@
         });
     }
 </script>
+--}}
