@@ -46,9 +46,12 @@
                                 <button type="button" class="btn btn-primary ajax-data"
                                         data-url="{{ route('student.logs') }}"
                                         style="border-bottom-left-radius: 0">@lang('logs.logs')</button>
-                                <button type="button" class="btn btn-primary ajax-data"
+                                <!-- <button type="button" class="btn btn-primary ajax-data"
                                         data-url="{{ route('student.pages') }}"
-                                        style="border-bottom-left-radius: 0">@lang('pages.pages')</button>
+                                        style="border-bottom-left-radius: 0">@lang('pages.pages')</button> -->
+                                <button type="button" class="btn btn-primary ajax-data"
+                                        data-url="{{ route('student.lectures') }}"
+                                        style="border-bottom-left-radius: 0">@lang('lectures.lectures')</button>
                             </div>
 
                             <div id="ajax-data-wrapper" style="padding-top: 20px">

@@ -1,5 +1,5 @@
 @php use App\Enums\AssessmentEnum;use App\Enums\AttendanceStatusEnum; @endphp
-
+{{--
 <div class="row">
 
     {{--<div class="col-md-6">
@@ -23,7 +23,7 @@
             </select>
         </div>
     </div>--}}
-
+{{--
 </div><!-- end of row -->
 
 <div class="row">
@@ -122,3 +122,4 @@
     });//end of document ready
 
 </script>
+--}}

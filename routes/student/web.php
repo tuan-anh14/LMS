@@ -3,6 +3,7 @@
 use App\Http\Controllers\Student\HomeController;
 use App\Http\Controllers\Student\LogController;
 use App\Http\Controllers\Student\PageController;
+use App\Http\Controllers\Student\LectureController;
 use App\Http\Controllers\Student\ProfileController;
 use App\Http\Controllers\Student\Profile\PasswordController;
 use App\Http\Controllers\Student\StudentExamController;
@@ -20,9 +21,11 @@ Route::middleware(['auth', 'role:student', 'localization'])->group(function () {
         Route::get('/details', [HomeController::class, 'details'])->name('details');
         Route::get('/logs', [HomeController::class, 'logs'])->name('logs');
         Route::get('/pages', [HomeController::class, 'pages'])->name('pages');
+        Route::get('/lectures', [HomeController::class, 'lectures'])->name('lectures');
 
         Route::get('/logs/data', [LogController::class, 'data'])->name('logs.data');
         Route::get('/pages/data', [PageController::class, 'data'])->name('pages.data');
+        Route::get('/lectures/data', [LectureController::class, 'data'])->name('lectures.data');
 
         //student_exam routes
         Route::get('/student_exams/data', [StudentExamController::class, 'data'])->name('student_exams.data');

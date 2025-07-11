@@ -61,8 +61,9 @@
                                 {{--type--}}
                                 <div class="form-group">
                                     <label>@lang('lectures.type') <span class="text-danger">*</span></label>
-                                    <select name="type" id="lecture-type" class="form-control select2" required disabled>
+                                    <select name="type" id="lecture-type" class="form-control select2" required>
                                         <option value="">@lang('site.choose') @lang('lectures.type')</option>
+                                        <option value="{{ \App\Enums\LectureTypeEnum::EDUCATIONAL }}">@lang('lectures.educational')</option>
                                     </select>
                                 </div>
 

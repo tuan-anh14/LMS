@@ -25,7 +25,9 @@ return [
     'attendance_status' => 'Attendance Status',
     'attendance_statuses' => 'Attendance Statuses',
     'types' => 'Types',
+    'teacher' => 'Teacher',
     'new_lecture' => 'New Lecture',
     'notes' => 'Notes',
     'educational_and_tajweed' => 'Educational & Tajweed',
+    'educational_and_upbringing' => 'Educational & Upbringing',
 ]; 

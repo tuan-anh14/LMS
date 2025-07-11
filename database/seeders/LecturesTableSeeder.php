@@ -12,8 +12,6 @@ class LecturesTableSeeder extends Seeder
     {
         $lectures = [
             ['center_id' => 1, 'section_id' => 1, 'teacher_id' => 4, 'date' => '2024-05-20', 'type' => LectureTypeEnum::EDUCATIONAL,],
-            ['center_id' => 1, 'section_id' => 1, 'teacher_id' => 4, 'date' => '2024-05-21', 'type' => LectureTypeEnum::EDUCATIONAL_AND_TAJWEED,],
-            ['center_id' => 1, 'section_id' => 1, 'teacher_id' => 4, 'date' => '2024-05-23', 'type' => LectureTypeEnum::EDUCATIONAL_AND_TAJWEED,],
             ['center_id' => 1, 'section_id' => 1, 'teacher_id' => 4, 'date' => '2024-05-24', 'type' => LectureTypeEnum::EDUCATIONAL,],
         ];
 

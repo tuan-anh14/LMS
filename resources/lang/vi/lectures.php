@@ -25,7 +25,9 @@ return [
     'attendance_status' => 'Tình trạng tham dự',
     'attendance_statuses' => 'Tình trạng tham dự',
     'types' => 'Loại',
+    'teacher' => 'Giáo viên',
     'new_lecture' => 'Bài giảng mới',
     'notes' => 'Ghi chú',
     'educational_and_tajweed' => 'Giáo dục & Tajweed',
+    'educational_and_upbringing' => 'Giáo dục & Đạo đức',
 ]; 

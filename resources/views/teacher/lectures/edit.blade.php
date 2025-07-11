@@ -69,18 +69,7 @@
                                     <label>@lang('lectures.type') <span class="text-danger">*</span></label>
                                     <select name="type" id="lecture-type" class="form-control select2" required>
                                         <option value="">@lang('site.choose') @lang('lectures.type')</option>
-                                        <option
-                                            value="{{ LectureTypeEnum::EDUCATIONAL }}" {{ $lecture->type == LectureTypeEnum::EDUCATIONAL ? 'selected' : '' }}>@lang('lectures.educational')</option>
-
-                                        @if ($lecture->section->project->hasTajweedLectures())
-                                            <option
-                                                value="{{ LectureTypeEnum::EDUCATIONAL_AND_TAJWEED }}" {{ $lecture->type == LectureTypeEnum::EDUCATIONAL_AND_TAJWEED ? 'selected' : '' }}>@lang('lectures.educational_and_tajweed')</option>
-                                        @endif
-
-                                        @if ($lecture->section->project->hasUpbringingLectures())
-                                            <option
-                                                value="{{ LectureTypeEnum::EDUCATIONAL_AND_UPBRINGING }}" {{ $lecture->type == LectureTypeEnum::EDUCATIONAL_AND_UPBRINGING ? 'selected' : '' }}>@lang('lectures.educational_and_upbringing')</option>
-                                        @endif
+                                        <option value="{{ \App\Enums\LectureTypeEnum::EDUCATIONAL }}" {{ $lecture->type == \App\Enums\LectureTypeEnum::EDUCATIONAL ? 'selected' : '' }}>@lang('lectures.educational')</option>
                                     </select>
                                 </div>
 
