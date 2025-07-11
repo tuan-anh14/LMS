@@ -12,6 +12,21 @@
 
 
         /* ==================================================
+            # Navigation Fix - Desktop Only
+         ===============================================*/
+        // Only handle desktop visibility, let existing plugins handle mobile
+        function handleNavVisibility() {
+            if ($(window).width() >= 1024) {
+                $('.navbar-collapse').addClass('in').show();
+                $('.navbar-nav > li').show();
+            }
+        }
+
+        // Run on load and resize
+        handleNavVisibility();
+        $(window).on('resize', handleNavVisibility);
+
+        /* ==================================================
             # Wow Init
          ===============================================*/
         var wow = new WOW({

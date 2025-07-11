@@ -8,5 +8,6 @@ return [
     'email' => 'Email',
     'subject' => 'Chủ đề',
     'message' => 'Nội dung',
+    'body' => 'Nội dung chi tiết',
     'inquiries_count' => 'Số lượng yêu cầu',
 ]; 

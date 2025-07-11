@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 
 /*Route::get('/', 'WelcomeController@index')->name('welcome');*/
@@ -25,7 +26,7 @@ Route::get('/contact-us', 'WebController@contact_us')->name('contact-us');
 Route::get('/visuals', 'WebController@visuals')->name('visuals');
 
 //inquiries
-// Route::post('/contact', 'WebController@inquiries')->name('contact.post');
+Route::post('/contact', 'WebController@inquiries')->name('contact.post');
 
 //switch language
 Route::get('/switch_language/{locale}', 'WebController@switchLanguage')->name('switch_language');

@@ -31,7 +31,7 @@ return [
             'exams' => 'c,r,u,d',
             'slides' => 'c,r,u,d',
             'courses' => 'c,r,u,d',
-            // 'inquiries' => 'r,d',
+            'inquiries' => 'r,d',
             'services' => 'c,r,u,d',
         ],
         'admin' => [],

@@ -7632,3 +7632,60 @@ footer .footer-bottom.bg-light p {
 .footer-logo {
     width: 150px !important;
 }
+
+/* ====================================================
+   Navigation Fix for LMS 
+   ==================================================== */
+
+/* Toggle button styling for mobile */
+.navbar-toggle .icon-bar {
+    display: block;
+    width: 22px;
+    height: 2px;
+    border-radius: 1px;
+    background-color: #888;
+}
+
+.navbar-toggle .icon-bar+.icon-bar {
+    margin-top: 4px;
+}
+
+/* Force navigation visibility - more specific selectors to avoid conflicts */
+nav.navbar.bootsnav .navbar-nav>li {
+    display: inline-block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+nav.navbar.bootsnav .navbar-nav>li>a {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    color: #333333 !important;
+}
+
+/* Desktop specific fixes - more targeted */
+@media (min-width: 1024px) {
+    nav.navbar.bootsnav .navbar-nav>li {
+        float: left !important;
+    }
+
+    nav.navbar.bootsnav .navbar-collapse {
+        display: block !important;
+        height: auto !important;
+        overflow: visible !important;
+    }
+}
+
+/* Mobile specific fixes - only for bootsnav */
+@media (max-width: 1023px) {
+    nav.navbar.bootsnav .navbar-nav>li {
+        float: none !important;
+        width: 100% !important;
+    }
+
+    nav.navbar.bootsnav .navbar-nav>li>a {
+        border-bottom: 1px solid #e7e7e7;
+        padding: 10px 0 !important;
+    }
+}

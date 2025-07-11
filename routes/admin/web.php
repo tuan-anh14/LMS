@@ -66,9 +66,9 @@ Route::middleware(['auth', 'role:admin|super_admin', 'localization', 'no_cache',
         Route::resource('courses', CourseController::class);
 
         //inquiry routes
-        // Route::get('/inquiries/data', [InquiryController::class, 'data'])->name('inquiries.data');
-        // Route::delete('/inquiries/bulk_delete', [InquiryController::class, 'bulkDelete'])->name('inquiries.bulk_delete');
-        // Route::resource('inquiries', InquiryController::class)->only(['index', 'show', 'destroy']);
+        Route::get('/inquiries/data', [InquiryController::class, 'data'])->name('inquiries.data');
+        Route::delete('/inquiries/bulk_delete', [InquiryController::class, 'bulkDelete'])->name('inquiries.bulk_delete');
+        Route::resource('inquiries', InquiryController::class)->only(['index', 'show', 'destroy']);
 
         //service routes
         Route::get('/services/data', [ServiceController::class, 'data'])->name('services.data');

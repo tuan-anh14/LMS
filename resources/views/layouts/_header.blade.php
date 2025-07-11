@@ -167,7 +167,7 @@
                     <li>
                         <a href="{{route('/')}}">@lang('site.home')</a>
                     </li>
-                    <li class="hidden-md hidden-xl hidden-lg">
+                    <!-- <li class="hidden-md hidden-xl hidden-lg">
                         @if (!auth()->user())
                             <a href="{{route('login')}}">
                                 <i class="fas fa-users"></i> @lang('site.students')
@@ -188,7 +188,7 @@
                                 <i class="fas fa-users"></i> @lang('site.dashboard')
                             </a>
                         @endif
-                    </li>
+                    </li> -->
 
 
                 </ul>
