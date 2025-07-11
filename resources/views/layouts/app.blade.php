@@ -2,238 +2,248 @@
 <html lang="{{ app()->getLocale() }}" dir="ltr">
 
 <head>
-    <!-- ========== Meta Tags ========== -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="{{ setting('description') }}">
+  <!-- ========== Meta Tags ========== -->
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{ setting('description') }}">
 
-    <!-- ========== Page Title ========== -->
-    <title>{{ setting('title') }}</title>
+  <!-- ========== Page Title ========== -->
+  <title>{{ setting('title') }}</title>
 
-    <!-- ========== Favicon Icon ========== -->
-    @if(setting('fav_icon'))
-        <link rel="shortcut icon" href="{{ Storage::url('uploads/' . setting('fav_icon')) }}" type="image/x-icon">
-    @else
-        <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
-    @endif
+  <!-- ========== Favicon Icon ========== -->
+  @if(setting('fav_icon'))
+  <link rel="shortcut icon" href="{{ Storage::url('uploads/' . setting('fav_icon')) }}" type="image/x-icon">
+  @else
+  <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" type="image/x-icon">
+  @endif
 
-    <!-- ========== Start Stylesheet ========== -->
-    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet"/>
-    <link href="{{asset('assets/css/font-awesome.min.css')}}" rel="stylesheet"/>
-    <link href="{{asset('assets/css/flaticon-set.css')}}" rel="stylesheet"/>
-    <link href="{{asset('assets/css/elegant-icons.css')}}" rel="stylesheet"/>
-    <link href="{{asset('assets/css/magnific-popup.css')}}" rel="stylesheet"/>
-    <link href="{{asset('assets/css/owl.carousel.min.css')}}" rel="stylesheet"/>
-    <link href="{{asset('assets/css/owl.theme.default.min.css')}}" rel="stylesheet"/>
-    <link href="{{asset('assets/css/animate.css')}}" rel="stylesheet"/>
-    <link href="{{asset('assets/css/bootsnav.css')}}" rel="stylesheet"/>
-    <link href="{{asset('assets/style.css')}}?id=1" rel="stylesheet">
-    <link href="{{asset('assets/css/responsive.css')}}" rel="stylesheet"/>
-    <!-- Flag icons for language switcher -->
-    <link href="{{asset('admin_assets/app-assets/fonts/flag-icon-css/css/flag-icon.min.css')}}" rel="stylesheet"/>
-    <!-- Carousel Fix CSS -->
-    <link href="{{asset('css/carousel-fix.css')}}" rel="stylesheet"/>
-    
+  <!-- ========== Start Stylesheet ========== -->
+  <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
+  <link href="{{asset('assets/css/font-awesome.min.css')}}" rel="stylesheet" />
+  <link href="{{asset('assets/css/flaticon-set.css')}}" rel="stylesheet" />
+  <link href="{{asset('assets/css/elegant-icons.css')}}" rel="stylesheet" />
+  <link href="{{asset('assets/css/magnific-popup.css')}}" rel="stylesheet" />
+  <link href="{{asset('assets/css/owl.carousel.min.css')}}" rel="stylesheet" />
+  <link href="{{asset('assets/css/owl.theme.default.min.css')}}" rel="stylesheet" />
+  <link href="{{asset('assets/css/animate.css')}}" rel="stylesheet" />
+  <link href="{{asset('assets/css/bootsnav.css')}}" rel="stylesheet" />
+  <link href="{{asset('assets/style.css')}}?id=1" rel="stylesheet">
+  <link href="{{asset('assets/css/responsive.css')}}" rel="stylesheet" />
+  <!-- Flag icons for language switcher -->
+  <link href="{{asset('admin_assets/app-assets/fonts/flag-icon-css/css/flag-icon.min.css')}}" rel="stylesheet" />
+  <!-- Carousel Fix CSS -->
+  <link href="{{asset('css/carousel-fix.css')}}" rel="stylesheet" />
+  <!-- Tailwind CSS for Chatbot -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Alpine.js for Chatbot -->
+  <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
+  <!-- CSRF Token for AJAX -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+
+  <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
     <script src="{{asset('assets/js/html5/html5shiv.min.js')}}"></script>
     <script src="{{asset('assets/js/html5/respond.min.js')}}"></script>
     <![endif]-->
 
-    <!-- ========== Direction Config ========== -->
-    <script>
-        window.isRTL = false;
-    </script>
+  <!-- ========== Direction Config ========== -->
+  <script>
+    window.isRTL = false;
+  </script>
 
 </head>
 
 <body>
 
-<!-- Preloader Start -->
-<div class="se-pre-con"></div>
-<!-- Preloader Ends -->
+  <!-- Preloader Start -->
+  <div class="se-pre-con"></div>
+  <!-- Preloader Ends -->
 
-@include('layouts._header')
+  @include('layouts._header')
 
-<!-- Start Login Form
+  <!-- Start Login Form
 ============================================= -->
-<form action="#" id="login-form" class="mfp-hide white-popup-block">
+  <form action="#" id="login-form" class="mfp-hide white-popup-block">
     <div class="col-md-4 login-social">
-        <h4>Login with social</h4>
-        <ul>
-            <li class="facebook">
-                <a href="#">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-            </li>
-            <li class="twitter">
-                <a href="#">
-                    <i class="fab fa-twitter"></i>
-                </a>
-            </li>
-            <li class="linkedin">
-                <a href="#">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-            </li>
-        </ul>
+      <h4>Login with social</h4>
+      <ul>
+        <li class="facebook">
+          <a href="#">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+        </li>
+        <li class="twitter">
+          <a href="#">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </li>
+        <li class="linkedin">
+          <a href="#">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </li>
+      </ul>
     </div>
     <div class="col-md-8 login-custom">
-        <h4>login to your registered account!</h4>
-        <div class="col-md-12">
-            <div class="row">
-                <div class="form-group">
-                    <input class="form-control" placeholder="Email*" type="email">
-                </div>
-            </div>
+      <h4>login to your registered account!</h4>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="form-group">
+            <input class="form-control" placeholder="Email*" type="email">
+          </div>
         </div>
-        <div class="col-md-12">
-            <div class="row">
-                <div class="form-group">
-                    <input class="form-control" placeholder="Password*" type="text">
-                </div>
-            </div>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="form-group">
+            <input class="form-control" placeholder="Password*" type="text">
+          </div>
         </div>
-        <div class="col-md-12">
-            <div class="row">
-                <label for="login-remember"><input type="checkbox" id="login-remember">Remember Me</label>
-                <a title="Lost Password" href="#" class="lost-pass-link">Lost your password?</a>
-            </div>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+          <label for="login-remember"><input type="checkbox" id="login-remember">Remember Me</label>
+          <a title="Lost Password" href="#" class="lost-pass-link">Lost your password?</a>
         </div>
-        <div class="col-md-12">
-            <div class="row">
-                <button type="submit">
-                    Login
-                </button>
-            </div>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+          <button type="submit">
+            Login
+          </button>
         </div>
-        <p class="link-bottom">Not a member yet? <a href="#">Register now</a></p>
+      </div>
+      <p class="link-bottom">Not a member yet? <a href="#">Register now</a></p>
     </div>
-</form>
-<!-- End Login Form -->
+  </form>
+  <!-- End Login Form -->
 
-<!-- Start Register Form
+  <!-- Start Register Form
 ============================================= -->
-<form action="#" id="register-form" class="mfp-hide white-popup-block">
+  <form action="#" id="register-form" class="mfp-hide white-popup-block">
     <div class="col-md-4 login-social">
-        <h4>Register with social</h4>
-        <ul>
-            <li class="facebook">
-                <a href="#">
-                    <i class="fab fa-facebook-f"></i>
-                </a>
-            </li>
-            <li class="twitter">
-                <a href="#">
-                    <i class="fab fa-twitter"></i>
-                </a>
-            </li>
-            <li class="linkedin">
-                <a href="#">
-                    <i class="fab fa-linkedin-in"></i>
-                </a>
-            </li>
-        </ul>
+      <h4>Register with social</h4>
+      <ul>
+        <li class="facebook">
+          <a href="#">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+        </li>
+        <li class="twitter">
+          <a href="#">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </li>
+        <li class="linkedin">
+          <a href="#">
+            <i class="fab fa-linkedin-in"></i>
+          </a>
+        </li>
+      </ul>
     </div>
     <div class="col-md-8 login-custom">
-        <h4>Register a new account</h4>
-        <div class="col-md-12">
-            <div class="row">
-                <div class="form-group">
-                    <input class="form-control" placeholder="Email*" type="email">
-                </div>
-            </div>
+      <h4>Register a new account</h4>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="form-group">
+            <input class="form-control" placeholder="Email*" type="email">
+          </div>
         </div>
-        <div class="col-md-12">
-            <div class="row">
-                <div class="form-group">
-                    <input class="form-control" placeholder="Username*" type="text">
-                </div>
-            </div>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="form-group">
+            <input class="form-control" placeholder="Username*" type="text">
+          </div>
         </div>
-        <div class="col-md-12">
-            <div class="row">
-                <div class="form-group">
-                    <input class="form-control" placeholder="Password*" type="text">
-                </div>
-            </div>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="form-group">
+            <input class="form-control" placeholder="Password*" type="text">
+          </div>
         </div>
-        <div class="col-md-12">
-            <div class="row">
-                <div class="form-group">
-                    <input class="form-control" placeholder="Repeat Password*" type="text">
-                </div>
-            </div>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+          <div class="form-group">
+            <input class="form-control" placeholder="Repeat Password*" type="text">
+          </div>
         </div>
-        <div class="col-md-12">
-            <div class="row">
-                <button type="submit">
-                    Sign up
-                </button>
-            </div>
+      </div>
+      <div class="col-md-12">
+        <div class="row">
+          <button type="submit">
+            Sign up
+          </button>
         </div>
-        <p class="link-bottom">Are you a member? <a href="#">Login now</a></p>
+      </div>
+      <p class="link-bottom">Are you a member? <a href="#">Login now</a></p>
     </div>
-</form>
-<!-- End Register Form -->
+  </form>
+  <!-- End Register Form -->
 
-@yield('content')
-<!-- Start Footer
+  @yield('content')
+  <!-- Start Footer
 ============================================= -->
-@include('layouts._footer')
-<!-- End Footer -->
+  @include('layouts._footer')
+  <!-- End Footer -->
 
-<!-- jQuery Frameworks
+  <!-- Chatbot AI Component -->
+  @include('components.chatbot')
+
+  <!-- jQuery Frameworks
 ============================================= -->
-<script src="{{asset('assets/js/jquery-1.12.4.min.js')}}"></script>
-<script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
-<script src="{{asset('assets/js/equal-height.min.js')}}"></script>
-<script src="{{asset('assets/js/jquery.appear.js')}}"></script>
-<script src="{{asset('assets/js/jquery.easing.min.js')}}"></script>
-<script src="{{asset('assets/js/jquery.magnific-popup.min.js')}}"></script>
-<script src="{{asset('assets/js/modernizr.custom.13711.js')}}"></script>
-<script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
-<script src="{{asset('assets/js/wow.min.js')}}"></script>
-<script src="{{asset('assets/js/isotope.pkgd.min.js')}}"></script>
-<script src="{{asset('assets/js/imagesloaded.pkgd.min.js')}}"></script>
-<script src="{{asset('assets/js/count-to.js')}}"></script>
-<script src="{{asset('assets/js/loopcounter.js')}}"></script>
-<script src="{{asset('assets/js/jquery.nice-select.min.js')}}"></script>
-<script src="{{asset('assets/js/bootsnav.js')}}"></script>
-<script src="{{asset('assets/js/main.js')}}"></script>
+  <script src="{{asset('assets/js/jquery-1.12.4.min.js')}}"></script>
+  <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
+  <script src="{{asset('assets/js/equal-height.min.js')}}"></script>
+  <script src="{{asset('assets/js/jquery.appear.js')}}"></script>
+  <script src="{{asset('assets/js/jquery.easing.min.js')}}"></script>
+  <script src="{{asset('assets/js/jquery.magnific-popup.min.js')}}"></script>
+  <script src="{{asset('assets/js/modernizr.custom.13711.js')}}"></script>
+  <script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
+  <script src="{{asset('assets/js/wow.min.js')}}"></script>
+  <script src="{{asset('assets/js/isotope.pkgd.min.js')}}"></script>
+  <script src="{{asset('assets/js/imagesloaded.pkgd.min.js')}}"></script>
+  <script src="{{asset('assets/js/count-to.js')}}"></script>
+  <script src="{{asset('assets/js/loopcounter.js')}}"></script>
+  <script src="{{asset('assets/js/jquery.nice-select.min.js')}}"></script>
+  <script src="{{asset('assets/js/bootsnav.js')}}"></script>
+  <script src="{{asset('assets/js/main.js')}}"></script>
 
-<!-- Carousel Fix JavaScript -->
-<script>
-$(document).ready(function() {
-    // Initialize carousel with proper settings
-    $('#bootcarousel').carousel({
+  <!-- Carousel Fix JavaScript -->
+  <script>
+    $(document).ready(function() {
+      // Initialize carousel with proper settings
+      $('#bootcarousel').carousel({
         interval: 3000,
         pause: 'hover',
         wrap: true
-    });
-    
-    // Ensure controls are clickable
-    $('.carousel-control-prev').on('click', function() {
+      });
+
+      // Ensure controls are clickable
+      $('.carousel-control-prev').on('click', function() {
         $('#bootcarousel').carousel('prev');
-    });
-    
-    $('.carousel-control-next').on('click', function() {
+      });
+
+      $('.carousel-control-next').on('click', function() {
         $('#bootcarousel').carousel('next');
-    });
-    
-    // Fix for carousel fade transition
-    $('#bootcarousel').on('slide.bs.carousel', function () {
+      });
+
+      // Fix for carousel fade transition
+      $('#bootcarousel').on('slide.bs.carousel', function() {
         $(this).find('.carousel-item').removeClass('active');
-    });
-    
-    $('#bootcarousel').on('slid.bs.carousel', function () {
+      });
+
+      $('#bootcarousel').on('slid.bs.carousel', function() {
         $(this).find('.carousel-item.active').addClass('active');
+      });
     });
-});
-</script>
+  </script>
 
 </body>
+
 </html>
