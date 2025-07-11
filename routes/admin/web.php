@@ -44,10 +44,10 @@ Route::middleware(['auth', 'role:admin|super_admin', 'localization', 'no_cache',
         //home
         Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-        //role routes
-        Route::get('/roles/data', [RoleController::class, 'data'])->name('roles.data');
-        Route::delete('/roles/bulk_delete', [RoleController::class, 'bulkDelete'])->name('roles.bulk_delete');
-        Route::resource('roles', RoleController::class);
+        //role routes - DISABLED
+        //Route::get('/roles/data', [RoleController::class, 'data'])->name('roles.data');
+        //Route::delete('/roles/bulk_delete', [RoleController::class, 'bulkDelete'])->name('roles.bulk_delete');
+        //Route::resource('roles', RoleController::class);
 
         //admin routes
         Route::get('/admin/switch_language', [AdminController::class, 'switchLanguage'])->name('admin.switch_language');
