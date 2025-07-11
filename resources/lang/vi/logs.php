@@ -7,4 +7,5 @@ return [
     'date' => 'Ngày',
     'user' => 'Người dùng',
     'logs_count' => 'Số lượng nhật ký',
+    'action_by_user' => 'Người thực hiện',
 ]; 

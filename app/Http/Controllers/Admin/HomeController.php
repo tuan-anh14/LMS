@@ -27,7 +27,14 @@ class HomeController extends Controller
         $books = Book::query()->count();
         $roles = Role::query()->count();
 
-        $examiners = User::query()->where('type', UserTypeEnum::EXAMINER)->count();
+        $examiners = User::query()
+            ->where(function($q) {
+                $q->where('type', UserTypeEnum::EXAMINER)
+                  ->orWhere(function($q2) {
+                      $q2->where('type', UserTypeEnum::TEACHER)
+                         ->where('is_examiner', true);
+                  });
+            })->count();
         $admins = User::query()->where('type', UserTypeEnum::ADMIN)->count();
         $teachers = User::query()->where('type', UserTypeEnum::TEACHER)->count();
         $students = User::query()->where('type', UserTypeEnum::STUDENT)->count();
