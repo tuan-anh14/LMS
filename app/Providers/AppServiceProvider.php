@@ -7,6 +7,7 @@ use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\Facades\DB;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,6 +28,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
+        // Thiết lập timezone mặc định cho PHP
+        date_default_timezone_set('Asia/Ho_Chi_Minh');
+
+        // Thiết lập timezone cho MySQL
+        DB::statement("SET time_zone = '+07:00'");
+
         Schema::defaultStringLength(191);
 
         if (Schema::hasTable('languages')) {
@@ -36,7 +43,6 @@ class AppServiceProvider extends ServiceProvider
             $this->setSupportedLocale($activeLanguages);
 
             View::share('activeLanguages', $activeLanguages);
-
         }
 
         ResponseFactory::macro('api', function ($data = null, $error = 0, $message = '') {
@@ -46,8 +52,7 @@ class AppServiceProvider extends ServiceProvider
                 'message' => $message,
             ]);
         });
-
-    }//end of boot
+    } //end of boot
 
     private function setSupportedLocale($activeLanguages)
     {
@@ -66,12 +71,11 @@ class AppServiceProvider extends ServiceProvider
 
                 $translatableLocales[] = $activeLanguage->code;
             }
-        }//end of for each
+        } //end of for each
 
         config(['localization.supportedLocales' => $supportedLocales]);
 
         config(['translatable.locales' => $translatableLocales]);
-
-    }// end of setSupportedLocale
+    } // end of setSupportedLocale
 
 }//end of app service provider
