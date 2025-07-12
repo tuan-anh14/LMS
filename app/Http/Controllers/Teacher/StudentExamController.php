@@ -11,6 +11,8 @@ use App\Models\StudentExam;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Yajra\DataTables\DataTables;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class StudentExamController extends Controller
 {
@@ -22,15 +24,23 @@ class StudentExamController extends Controller
 
     public function data()
     {
+        $currentUserId = auth()->user()->id;
+        $isExaminer = auth()->user()->is_examiner;
+        
         $exams = StudentExam::query()
             ->with(['teacher', 'student', 'section', 'project'])
-            //->whenTeacherId(request()->teacher_id)
-            ->whenExaminerId(request()->examiner_id)
+            ->where(function($query) use ($currentUserId, $isExaminer) {
+                $query->where('teacher_id', $currentUserId);
+                if ($isExaminer) {
+                    $query->orWhere('examiner_id', $currentUserId);
+                }
+            })
             ->whenStudentId(request()->student_id)
             ->whenSectionId(request()->section_id)
             ->whenProjectId(request()->project_id)
             ->whenStatus(request()->status)
-            ->whenAssessment(request()->assessment);
+            ->whenAssessment(request()->assessment)
+            ->whenAssignmentType(request()->assignment_type);
 
         return DataTables::of($exams)
             ->addColumn('teacher', function (StudentExam $exam) {
@@ -48,6 +58,21 @@ class StudentExamController extends Controller
             ->addColumn('section', function (StudentExam $exam) {
                 return $exam->section->name;
             })
+            ->addColumn('assignment_type', function (StudentExam $exam) {
+                // Kiểm tra xem có phải bài kiểm tra theo lớp không
+                $hasOtherExams = StudentExam::where('exam_id', $exam->exam_id)
+                    ->where('section_id', $exam->section_id)
+                    ->where('examiner_id', $exam->examiner_id)
+                    ->where('id', '!=', $exam->id)
+                    ->whereRaw('ABS(TIMESTAMPDIFF(MINUTE, created_at, ?)) <= 2', [$exam->created_at])
+                    ->exists();
+                
+                if ($hasOtherExams) {
+                    return '<span class="badge badge-primary">' . __('student_exams.assigned_by_class') . '</span>';
+                } else {
+                    return '<span class="badge badge-secondary">' . __('student_exams.assigned_individually') . '</span>';
+                }
+            })
             ->addColumn('status', function (StudentExam $exam) {
                 return __('student_exams.' . $exam->status);
             })
@@ -57,7 +82,7 @@ class StudentExamController extends Controller
             ->addColumn('actions', function (StudentExam $studentExam) {
                 return view('teacher.student_exams.data_table.actions', compact('studentExam'));
             })
-            ->rawColumns(['actions'])
+            ->rawColumns(['actions', 'assignment_type'])
             ->toJson();
 
     }// end of data
@@ -239,5 +264,103 @@ class StudentExamController extends Controller
         ]);
 
     }// end of destroy
+
+    /**
+     * Show bulk set datetime form (for teachers with is_examiner)
+     */
+    public function showBulkSetDateTime()
+    {
+        // Check if teacher has is_examiner flag
+        if (!auth()->user()->is_examiner) {
+            return redirect()->route('teacher.student_exams.index')
+                ->with('error', 'Bạn không có quyền truy cập chức năng này.');
+        }
+
+        // Get assignments grouped by exam and section for current teacher (as examiner)
+        $assignmentGroups = StudentExam::query()
+            ->with(['exam', 'section', 'project'])
+            ->where('examiner_id', auth()->id())
+            ->where('status', StudentExamStatusEnum::ASSIGNED_TO_EXAMINER)
+            ->whereNull('date_time')
+            ->get()
+            ->groupBy(function($studentExam) {
+                return $studentExam->exam_id . '_' . $studentExam->section_id;
+            })
+            ->map(function($group) {
+                $first = $group->first();
+                return [
+                    'exam' => $first->exam,
+                    'section' => $first->section,
+                    'project' => $first->project,
+                    'count' => $group->count(),
+                    'exam_id' => $first->exam_id,
+                    'section_id' => $first->section_id,
+                    'students' => $group->pluck('student.name')->join(', ')
+                ];
+            });
+
+        return view('teacher.student_exams.bulk_set_datetime', compact('assignmentGroups'));
+    }
+
+    /**
+     * Bulk set datetime for students (for teachers with is_examiner)
+     */
+    public function bulkSetDateTime(Request $request)
+    {
+        // Check if teacher has is_examiner flag
+        if (!auth()->user()->is_examiner) {
+            return redirect()->route('teacher.student_exams.index')
+                ->with('error', 'Bạn không có quyền truy cập chức năng này.');
+        }
+
+        $request->validate([
+            'exam_id' => 'required|exists:exams,id',
+            'section_id' => 'required|exists:sections,id',
+            'date_time' => 'required|date|after:now',
+        ], [
+            'date_time.required' => 'Vui lòng chọn thời gian kiểm tra.',
+            'date_time.date' => 'Định dạng thời gian không hợp lệ.',
+            'date_time.after' => 'Thời gian kiểm tra phải sau thời điểm hiện tại.',
+        ]);
+
+        try {
+            DB::transaction(function() use ($request) {
+                // Get all student exams for this exam and section
+                $studentExams = StudentExam::query()
+                    ->where('examiner_id', auth()->id())
+                    ->where('exam_id', $request->exam_id)
+                    ->where('section_id', $request->section_id)
+                    ->where('status', StudentExamStatusEnum::ASSIGNED_TO_EXAMINER)
+                    ->whereNull('date_time')
+                    ->get();
+
+                if ($studentExams->isEmpty()) {
+                    throw new \Exception('Không tìm thấy bài kiểm tra nào để cập nhật.');
+                }
+
+                // Update all student exams
+                foreach ($studentExams as $studentExam) {
+                    $studentExam->update([
+                        'date_time' => $request->date_time,
+                        'status' => StudentExamStatusEnum::DATE_TIME_SET,
+                    ]);
+
+                    // Add status record
+                    $studentExam->statuses()->create([
+                        'status' => StudentExamStatusEnum::DATE_TIME_SET
+                    ]);
+                }
+            });
+
+            return redirect()->route('teacher.student_exams.index')
+                ->with('success', 'Đã cập nhật thời gian kiểm tra cho tất cả sinh viên thành công.');
+
+        } catch (\Exception $e) {
+            Log::error('Teacher bulk set datetime error: ' . $e->getMessage());
+            return redirect()->back()
+                ->with('error', 'Có lỗi xảy ra khi cập nhật thời gian kiểm tra.')
+                ->withInput();
+        }
+    }
 
 }//end of controller

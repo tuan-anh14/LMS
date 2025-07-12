@@ -74,5 +74,6 @@ class Kernel extends HttpKernel
         'demo_mode' => \App\Http\Middleware\DemoMode::class,
         'demo_mode_middleware' => \App\Http\Middleware\DemoModeMiddleware::class,
         'is_examiner' => \App\Http\Middleware\IsExaminer::class,
+        'check_is_examiner' => \App\Http\Middleware\CheckIsExaminer::class,
     ];
 }

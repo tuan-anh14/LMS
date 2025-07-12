@@ -246,5 +246,7 @@ return [
     'entries' => 'mục nhập',
     'no_permission' => 'Bạn không có quyền truy cập trang này.',
     'go_to_dashboard' => 'Về trang chính',
+    'characters' => 'ký tự',
+    'instructions' => 'Hướng dẫn',
 
 ]; 

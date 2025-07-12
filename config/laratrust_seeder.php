@@ -37,6 +37,7 @@ return [
         'admin' => [],
         'teacher' => [
             'students' => 'r',
+            'sections' => 'r',
             'lectures' => 'c,r,u,d',
             'exams' => 'c,r,u,d',
         ],

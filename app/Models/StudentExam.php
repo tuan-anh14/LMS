@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\StudentExamStatusEnum;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class StudentExam extends Model
 {
@@ -121,6 +122,44 @@ class StudentExam extends Model
 
     }// end of scopeWhenDateRange
 
+    public function scopeWhenAssignmentType($query, $assignmentType)
+    {
+        return $query->when($assignmentType, function ($q) use ($assignmentType) {
+            if ($assignmentType === 'class') {
+                // Bài kiểm tra theo lớp: những bài được tạo hàng loạt
+                // Logic: có ít nhất 2 bài cùng exam_id, section_id và được tạo gần nhau (trong 2 phút)
+                return $q->whereIn('id', function($subQuery) {
+                    $subQuery->select('se1.id')
+                        ->from('student_exams as se1')
+                        ->whereExists(function($existsQuery) {
+                            $existsQuery->select(DB::raw(1))
+                                ->from('student_exams as se2')
+                                ->whereRaw('se2.exam_id = se1.exam_id')
+                                ->whereRaw('se2.section_id = se1.section_id')
+                                ->whereRaw('se2.examiner_id = se1.examiner_id')
+                                ->whereRaw('se2.id != se1.id')
+                                ->whereRaw('ABS(TIMESTAMPDIFF(MINUTE, se1.created_at, se2.created_at)) <= 2');
+                        });
+                });
+            } elseif ($assignmentType === 'individual') {
+                // Bài kiểm tra cá nhân: những bài không có bài nào khác cùng exam_id, section_id được tạo gần nhau
+                return $q->whereNotIn('id', function($subQuery) {
+                    $subQuery->select('se1.id')
+                        ->from('student_exams as se1')
+                        ->whereExists(function($existsQuery) {
+                            $existsQuery->select(DB::raw(1))
+                                ->from('student_exams as se2')
+                                ->whereRaw('se2.exam_id = se1.exam_id')
+                                ->whereRaw('se2.section_id = se1.section_id')
+                                ->whereRaw('se2.examiner_id = se1.examiner_id')
+                                ->whereRaw('se2.id != se1.id')
+                                ->whereRaw('ABS(TIMESTAMPDIFF(MINUTE, se1.created_at, se2.created_at)) <= 2');
+                        });
+                });
+            }
+        });
+    }// end of scopeWhenAssignmentType
+
     //rel
     public function exam()
     {
@@ -183,5 +222,85 @@ class StudentExam extends Model
             $this->teacher_id == auth()->id();
 
     }// end of canBeDeleted
+
+    /**
+     * Check if exam is already assigned to students in section
+     */
+    public static function isExamAssignedToSection($examId, $sectionId)
+    {
+        return self::where('exam_id', $examId)
+            ->where('section_id', $sectionId)
+            ->exists();
+    }
+
+    /**
+     * Get assigned students count for exam in section
+     */
+    public static function getAssignedStudentsCount($examId, $sectionId)
+    {
+        return self::where('exam_id', $examId)
+            ->where('section_id', $sectionId)
+            ->count();
+    }
+
+    /**
+     * Get the timestamp when exam was assigned to examiner
+     */
+    public function getAssignedAtAttribute()
+    {
+        $status = $this->statuses()->where('status', StudentExamStatusEnum::ASSIGNED_TO_EXAMINER)->first();
+        return $status ? $status->created_at : $this->created_at;
+    }
+
+    /**
+     * Get the timestamp when datetime was set
+     */
+    public function getDateTimeSetAtAttribute()
+    {
+        $status = $this->statuses()->where('status', StudentExamStatusEnum::DATE_TIME_SET)->first();
+        return $status ? $status->created_at : null;
+    }
+
+    /**
+     * Get the timestamp when assessment was added
+     */
+    public function getAssessmentAddedAtAttribute()
+    {
+        $status = $this->statuses()->where('status', StudentExamStatusEnum::ASSESSMENT_ADDED)->first();
+        return $status ? $status->created_at : null;
+    }
+
+    /**
+     * Get the timestamp when exam was submitted
+     */
+    public function getSubmittedAtAttribute()
+    {
+        $status = $this->statuses()->where('status', StudentExamStatusEnum::SUBMITTED)->first();
+        return $status ? $status->created_at : null;
+    }
+
+    /**
+     * Get formatted timeline of all statuses
+     */
+    public function getTimelineAttribute()
+    {
+        $timeline = [];
+        
+        $timeline[] = [
+            'status' => 'created',
+            'timestamp' => $this->created_at,
+            'label' => __('student_exams.created'),
+        ];
+
+        foreach ($this->statuses as $status) {
+            $timeline[] = [
+                'status' => $status->status,
+                'timestamp' => $status->created_at,
+                'label' => __('student_exams.' . $status->status),
+            ];
+        }
+
+        return collect($timeline)->sortBy('timestamp');
+    }
 
 }//end of model

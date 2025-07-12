@@ -35,6 +35,8 @@ Route::middleware(['auth', 'set_selected_center', 'is_examiner', 'localization',
         Route::put('/student_exams/{student_exam}/assessment', 'StudentExamController@updateAssessment')->name('student_exams.update_assessment');
         Route::get('/student_exams/{student_exam}/grade', 'StudentExamController@gradeExam')->name('student_exams.grade');
         Route::put('/student_exams/{student_exam}/grade', 'StudentExamController@updateGrade')->name('student_exams.update_grade');
+        Route::get('/student_exams/bulk_set_datetime', 'StudentExamController@showBulkSetDateTime')->name('student_exams.bulk_set_datetime');
+        Route::post('/student_exams/bulk_set_datetime', 'StudentExamController@bulkSetDateTime')->name('student_exams.bulk_set_datetime.store');
         Route::get('/student_exams/data', 'StudentExamController@data')->name('student_exams.data');
         Route::resource('student_exams', 'StudentExamController');
 

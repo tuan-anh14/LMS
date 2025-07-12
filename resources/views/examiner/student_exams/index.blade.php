@@ -35,15 +35,23 @@
                         <div class="card-body">
 
                             <div class="row">
+                                <div class="col-md-12 mb-3">
+                                    <a href="{{ route('examiner.student_exams.bulk_set_datetime') }}" class="btn btn-primary">
+                                        <i data-feather="clock"></i> @lang('student_exams.bulk_set_datetime')
+                                    </a>
+                                </div>
+                            </div>
 
-                                <div class="col-md-4">
+                            <div class="row">
+
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <input type="text" id="data-table-search" class="form-control" autofocus
                                                placeholder="@lang('site.search')">
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <select id="status" class="form-control select2" required>
                                             <option value="0">@lang('site.all') @lang('student_exams.statuses')</option>
@@ -54,7 +62,17 @@
                                     </div>
                                 </div>
 
-                                <div class="col-md-4">
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <select id="assignment_type" class="form-control select2">
+                                            <option value="">@lang('site.all') @lang('student_exams.assignment_types')</option>
+                                            <option value="class">@lang('student_exams.assigned_by_class')</option>
+                                            <option value="individual">@lang('student_exams.assigned_individually')</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
                                     <div class="form-group">
                                         <input type="text" id="date-range" class="form-control date-range-picker"
                                                value="" placeholder="@lang('site.choose') @lang('lectures.date')">
@@ -80,8 +98,11 @@
                                                 <th>@lang('users.mobile')</th>
                                                 <th>@lang('projects.project')</th>
                                                 <th>@lang('sections.section')</th>
+                                                <th>@lang('student_exams.assignment_type')</th>
                                                 <th>@lang('student_exams.status')</th>
                                                 <th>@lang('site.created_at')</th>
+                                                <th>@lang('student_exams.assigned_at')</th>
+                                                <th>@lang('student_exams.datetime_set_at')</th>
                                                 <th>@lang('student_exams.date_time')</th>
                                                 <th>@lang('site.action')</th>
                                             </tr>
@@ -115,6 +136,7 @@
 
             let examinerId = "{{auth()->user()->id}}";
             let status;
+            let assignmentType;
             let dateRange = {};
 
             let studentExamsTable = $('#student-exams-table').DataTable({
@@ -143,6 +165,7 @@
                     data: function (d) {
                         d.examiner_id = examinerId;
                         d.status = status;
+                        d.assignment_type = assignmentType;
                         d.date_range = dateRange;
                     }
                 },
@@ -153,12 +176,15 @@
                     {data: 'mobile', name: 'mobile', searchable: false, sortable: false},
                     {data: 'project', name: 'project', searchable: false, sortable: false},
                     {data: 'section', name: 'section', searchable: false, sortable: false},
+                    {data: 'assignment_type', name: 'assignment_type', searchable: false, sortable: false},
                     {data: 'status', name: 'status', searchable: false, sortable: false},
                     {data: 'created_at', name: 'created_at', searchable: false},
+                    {data: 'assigned_at', name: 'assigned_at', searchable: false, sortable: false},
+                    {data: 'datetime_set_at', name: 'datetime_set_at', searchable: false, sortable: false},
                     {data: 'date_time', name: 'date_time', searchable: false},
                     {data: 'actions', name: 'actions', searchable: false, sortable: false},
                 ],
-                order: [[6, 'desc']],
+                order: [[8, 'desc']],
                 drawCallback: function (settings) {
                     $('.record__select').prop('checked', false);
                     $('#record__select-all').prop('checked', false);
@@ -170,6 +196,11 @@
 
             $('#status').on('change', function () {
                 status = $(this).val();
+                studentExamsTable.ajax.reload()
+            });
+
+            $('#assignment_type').on('change', function () {
+                assignmentType = $(this).val();
                 studentExamsTable.ajax.reload()
             });
 

@@ -32,21 +32,41 @@
 
                         <div class="card-body">
 
+                            @if(auth()->user()->is_examiner)
+                                <div class="row">
+                                    <div class="col-md-12 mb-3">
+                                        <a href="{{ route('teacher.student_exams.bulk_set_datetime') }}" class="btn btn-primary">
+                                            <i data-feather="clock"></i> @lang('student_exams.bulk_set_datetime')
+                                        </a>
+                                    </div>
+                                </div>
+                            @endif
+
                             <div class="row">
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <input type="text" id="data-table-search" class="form-control" autofocus placeholder="@lang('site.search')">
                                     </div>
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
                                     <div class="form-group">
                                         <select id="status" class="form-control select2" required>
                                             <option value="0">@lang('site.all') @lang('student_exams.statuses')</option>
                                             @foreach (StudentExamStatusEnum::getConstants() as $status)
                                                 <option value="{{ $status }}">@lang('student_exams.' . $status)</option>
                                             @endforeach
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <select id="assignment_type" class="form-control select2">
+                                            <option value="">@lang('site.all') @lang('student_exams.assignment_types')</option>
+                                            <option value="class" {{ request('assignment_type') == 'class' ? 'selected' : '' }}>@lang('student_exams.assigned_by_class')</option>
+                                            <option value="individual" {{ request('assignment_type') == 'individual' ? 'selected' : '' }}>@lang('student_exams.assigned_individually')</option>
                                         </select>
                                     </div>
                                 </div>
@@ -67,6 +87,7 @@
                                                 <th>@lang('students.student')</th>
                                                 <th>@lang('projects.project')</th>
                                                 <th>@lang('sections.section')</th>
+                                                <th>@lang('student_exams.assignment_type')</th>
                                                 <th>@lang('student_exams.status')</th>
                                                 <th>@lang('site.created_at')</th>
                                                 <th>@lang('site.action')</th>
@@ -99,8 +120,8 @@
     <script>
         $(function () {
 
-            let examinerId = "{{auth()->user()->id}}";
             let status;
+            let assignmentType = "{{ request('assignment_type') }}";
 
             let studentExamsTable = $('#student-exams-table').DataTable({
                 dom: "tiplr",
@@ -126,8 +147,8 @@
                 ajax: {
                     url: '{{ route('teacher.student_exams.data') }}',
                     data: function (d) {
-                        d.examiner_id = examinerId;
                         d.status = status;
+                        d.assignment_type = assignmentType;
                     }
                 },
                 columns: [
@@ -136,11 +157,12 @@
                     {data: 'student', name: 'student', searchable: false, sortable: false},
                     {data: 'project', name: 'project', searchable: false, sortable: false},
                     {data: 'section', name: 'section', searchable: false, sortable: false},
+                    {data: 'assignment_type', name: 'assignment_type', searchable: false, sortable: false},
                     {data: 'status', name: 'status', searchable: false, sortable: false},
                     {data: 'created_at', name: 'created_at', searchable: false},
                     {data: 'actions', name: 'actions', searchable: false, sortable: false},
                 ],
-                order: [[6, 'desc']],
+                order: [[7, 'desc']],
                 drawCallback: function (settings) {
                     $('.record__select').prop('checked', false);
                     $('#record__select-all').prop('checked', false);
@@ -152,6 +174,11 @@
 
             $('#status').on('change', function () {
                 status = $(this).val();
+                studentExamsTable.ajax.reload()
+            });
+
+            $('#assignment_type').on('change', function () {
+                assignmentType = $(this).val();
                 studentExamsTable.ajax.reload()
             });
             

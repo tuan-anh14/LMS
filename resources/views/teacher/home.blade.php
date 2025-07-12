@@ -130,28 +130,44 @@
 
         @endif
 
-        @if (auth()->user()->isExaminer())
-
-            {{--assigned_to_examiner_exams_count--}}
-            <div class="col-md-4">
-
-                <div class="card">
-
-                    <div class="card-body">
-                        <p class="lead">@lang('exams.assigned_student_exams_count')</p>
-
-                        <div class="d-flex justify-content-between">
-                            <h3>{{ $assignedStudentExamsCount }}</h3>
-                            <a href="{{ route('teacher.student_exams.index') }}" wire:navigate>@lang('site.see_all')</a>
-                        </div>
-
+        {{--assigned_by_class_count--}}
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <p class="lead">@lang('student_exams.assigned_by_class_count')</p>
+                    <div class="d-flex justify-content-between">
+                        <h3>{{ $assignedByClassCount }}</h3>
+                        <a href="{{ route('teacher.student_exams.index', ['assignment_type' => 'class']) }}" wire:navigate>@lang('site.see_all')</a>
                     </div>
-
                 </div>
+            </div>
+        </div><!-- end of col -->
 
-            </div><!-- end of col -->
+        {{--assigned_individual_count--}}
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <p class="lead">@lang('student_exams.assigned_individual_count')</p>
+                    <div class="d-flex justify-content-between">
+                        <h3>{{ $assignedIndividualCount }}</h3>
+                        <a href="{{ route('teacher.student_exams.index', ['assignment_type' => 'individual']) }}" wire:navigate>@lang('site.see_all')</a>
+                    </div>
+                </div>
+            </div>
+        </div><!-- end of col -->
 
-        @endif
+        {{--total_assigned_count--}}
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <p class="lead">@lang('student_exams.total_assigned_count')</p>
+                    <div class="d-flex justify-content-between">
+                        <h3>{{ $assignedStudentExamsCount }}</h3>
+                        <a href="{{ route('teacher.student_exams.index') }}" wire:navigate>@lang('site.see_all')</a>
+                    </div>
+                </div>
+            </div>
+        </div><!-- end of col -->
 
     </div>
 

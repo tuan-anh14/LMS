@@ -43,13 +43,22 @@
                                             <td>{{ $exam->name }}</td>
                                             <td>{{ $exam->project->name ?? '' }}</td>
                                             <td>
-                                                <a href="{{ route('teacher.exams.edit', $exam->id) }}" class="btn btn-sm btn-warning">@lang('site.edit')</a>
-                                                <form action="{{ route('teacher.exams.destroy', $exam->id) }}" method="POST" style="display:inline-block" class="ajax-form">
+                                                <a href="{{ route('teacher.exams.edit', $exam->id) }}" class="btn btn-sm btn-warning">
+                                                    <i data-feather="edit"></i> @lang('site.edit')
+                                                </a>
+                                                <a href="{{ route('teacher.exams.assign', $exam->id) }}" class="btn btn-sm btn-success">
+                                                    <i data-feather="users"></i> @lang('exams.assign_to_class')
+                                                </a>
+                                                <a href="{{ route('teacher.exams.questions.index', $exam->id) }}" class="btn btn-sm btn-info">
+                                                    <i data-feather="help-circle"></i> @lang('exams.manage_questions')
+                                                </a>
+                                                <form action="{{ route('teacher.exams.destroy', $exam->id) }}" method="POST" style="display:inline-block; margin-top: 5px;" class="ajax-form">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-sm btn-danger delete">@lang('site.delete')</button>
+                                                    <button type="submit" class="btn btn-sm btn-danger delete">
+                                                        <i data-feather="trash-2"></i> @lang('site.delete')
+                                                    </button>
                                                 </form>
-                                                <a href="{{ route('teacher.exams.questions.index', $exam->id) }}" class="btn btn-sm btn-info">@lang('exams.manage_questions')</a>
                                             </td>
                                         </tr>
                                     @endforeach

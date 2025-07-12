@@ -12,6 +12,8 @@ use Yajra\DataTables\DataTables;
 use App\Models\Exam;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
 
 class ExamController extends Controller
 {
@@ -203,6 +205,156 @@ class ExamController extends Controller
             ]);
         }
         return redirect()->route('teacher.exams.index')->with('success', __('site.deleted_successfully'));
+    }
+
+    /**
+     * Hiển thị form assign exam to class
+     */
+    public function showAssignForm(Exam $exam)
+    {
+        // Kiểm tra authorization - Teacher có dạy project của exam không
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        
+        if (!$user->teachesProject($exam->project_id)) {
+            abort(403, 'Bạn không có quyền giao bài kiểm tra này.');
+        }
+
+        // Lấy các sections mà teacher đang dạy và thuộc cùng project với exam
+        $sections = $user->teacherSections()
+            ->wherePivot('center_id', session('selected_center')['id'])
+            ->where('project_id', $exam->project_id)
+            ->with(['students', 'project'])
+            ->get();
+
+        // Nếu không có sections nào, show error
+        if ($sections->isEmpty()) {
+            return redirect()->route('teacher.exams.index')
+                ->with('error', 'Bạn không có lớp học nào thuộc môn học này để giao bài kiểm tra.');
+        }
+
+        // Lấy danh sách examiners (users có role examiner hoặc is_examiner = 1)
+        $examiners = \App\Models\User::where(function($query) {
+                $query->where('is_examiner', 1)
+                      ->orWhereHas('roles', function($q) {
+                          $q->where('name', 'examiner');
+                      });
+            })
+            ->orderBy('first_name')
+            ->get();
+
+        return view('teacher.exams.assign', compact('exam', 'sections', 'examiners'));
+    }
+
+    /**
+     * Xử lý assign exam to class
+     */
+    public function assignToClass(Request $request, Exam $exam)
+    {
+        try {
+            // Kiểm tra authorization
+            /** @var \App\Models\User $user */
+            $user = auth()->user();
+            
+            if (!$user->teachesProject($exam->project_id)) {
+                abort(403, 'Bạn không có quyền giao bài kiểm tra này.');
+            }
+
+        // Validate input
+        $request->validate([
+            'section_id' => [
+                'required',
+                'exists:sections,id',
+                function ($attribute, $value, $fail) use ($user, $exam) {
+                    // Check if teacher teaches this section
+                    if (!$user->isTeacherForSectionIdInCenterId($value, session('selected_center')['id'])) {
+                        $fail('Bạn không có quyền giao bài cho lớp học này.');
+                    }
+                    
+                    // Check if section belongs to same project as exam
+                    $section = \App\Models\Section::find($value);
+                    if ($section && $section->project_id !== $exam->project_id) {
+                        $fail('Lớp học này không thuộc môn học của bài kiểm tra.');
+                    }
+                },
+            ],
+
+            'notes' => 'nullable|string|max:500',
+            'examiner_id' => [
+                'required',
+                'exists:users,id',
+                function ($attribute, $value, $fail) {
+                    $user = \App\Models\User::find($value);
+                    if (!$user || (!$user->is_examiner && !$user->hasRole('examiner'))) {
+                        $fail('Người dùng được chọn không phải là giám khảo.');
+                    }
+                },
+            ],
+        ], [
+            'section_id.required' => 'Vui lòng chọn lớp học.',
+            'section_id.exists' => 'Lớp học không tồn tại.',
+
+            'notes.max' => 'Ghi chú không được vượt quá 500 ký tự.',
+            'examiner_id.required' => 'Vui lòng chọn giám khảo.',
+            'examiner_id.exists' => 'Giám khảo không tồn tại.',
+        ]);
+
+        // Lấy thông tin section
+        $section = \App\Models\Section::findOrFail($request->section_id);
+        
+        // Lấy danh sách students trong section
+        $students = $section->students()
+            ->where('student_center_id', session('selected_center')['id'])
+            ->get();
+
+        if ($students->isEmpty()) {
+            return redirect()->back()
+                ->with('error', 'Lớp học này không có học sinh nào.')
+                ->withInput();
+        }
+
+        // Kiểm tra duplicate assignment
+        if (\App\Models\StudentExam::isExamAssignedToSection($exam->id, $section->id)) {
+            return redirect()->back()
+                ->with('error', 'Bài kiểm tra này đã được giao cho lớp học này rồi.')
+                ->withInput();
+        }
+
+        // Tạo StudentExam records cho mỗi student với transaction
+        DB::transaction(function () use ($students, $user, $request, $exam, $section) {
+            foreach ($students as $student) {
+                \App\Models\StudentExam::create([
+                    'student_id' => $student->id,
+                    'teacher_id' => $user->id,
+                    'examiner_id' => $request->examiner_id,
+                    'exam_id' => $exam->id,
+                    'center_id' => session('selected_center')['id'],
+                    'section_id' => $section->id,
+                    'project_id' => $exam->project_id,
+                    'status' => \App\Enums\StudentExamStatusEnum::ASSIGNED_TO_EXAMINER,
+                    'notes' => $request->notes,
+                ]);
+            }
+        });
+
+        // Đếm số lượng học sinh được giao bài
+        $assignedCount = $students->count();
+        $examiner = \App\Models\User::find($request->examiner_id);
+
+        return redirect()->route('teacher.exams.index')
+            ->with('success', "Đã giao bài kiểm tra '{$exam->name}' cho {$assignedCount} học sinh trong lớp '{$section->name}' với giám khảo '{$examiner->full_name}'.");
+        
+        } catch (\Exception $e) {
+            Log::error('Error in assignToClass: ' . $e->getMessage(), [
+                'exam_id' => $exam->id,
+                'user_id' => $user->id,
+                'request_data' => $request->all()
+            ]);
+            
+            return redirect()->back()
+                ->with('error', 'Có lỗi xảy ra khi giao bài kiểm tra. Vui lòng thử lại.')
+                ->withInput();
+        }
     }
 
 }//end of controller

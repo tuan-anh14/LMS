@@ -53,7 +53,7 @@
             @endif
 
             {{--sections--}}
-            @if (auth()->user()->hasPermission('read_sections', session('selected_center')['id']))
+            @if (auth()->user()->hasPermission('read_sections', session('selected_center')['id']) || auth()->user()->hasRole('teacher'))
                 <li class="{{ request()->is('*sections*') ? 'active' : '' }} nav-item">
                     <a class="d-flex align-items-center" href="{{ route('teacher.sections.index') }}" wire:navigate>
                         <i data-feather="bar-chart"></i><span class="menu-title text-truncate">@lang('sections.sections')</span>

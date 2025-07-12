@@ -57,6 +57,10 @@ Route::middleware(['auth', 'set_selected_center', 'role:teacher', 'localization'
         //exam routes
         Route::resource('exams', 'ExamController');
 
+        // Assign Exam to Class routes
+        Route::get('/exams/{exam}/assign', 'ExamController@showAssignForm')->name('exams.assign');
+        Route::post('/exams/{exam}/assign', 'ExamController@assignToClass')->name('exams.assign.store');
+
         // AI Question Generation routes
         Route::get('/exams/{exam}/questions/create-with-ai', 'QuestionController@createWithAI')->name('exams.questions.create_ai');
         Route::post('/exams/{exam}/questions/generate-with-ai', 'QuestionController@generateWithAI')->name('exams.questions.generate_ai');
@@ -73,6 +77,13 @@ Route::middleware(['auth', 'set_selected_center', 'role:teacher', 'localization'
         Route::put('/student_exams/{student_exam}/assessment', 'StudentExamController@updateAssessment')->name('student_exams.update_assessment');
         Route::get('/student_exams/{student_exam}/grade', 'StudentExamController@gradeExam')->name('student_exams.grade');
         Route::put('/student_exams/{student_exam}/grade', 'StudentExamController@updateGrade')->name('student_exams.update_grade');
+        
+        // Bulk set datetime routes for teachers with is_examiner - MOVED BEFORE data route
+        Route::middleware(['check_is_examiner'])->group(function () {
+            Route::get('/student_exams/bulk_set_datetime', 'StudentExamController@showBulkSetDateTime')->name('student_exams.bulk_set_datetime');
+            Route::post('/student_exams/bulk_set_datetime', 'StudentExamController@bulkSetDateTime')->name('student_exams.bulk_set_datetime.store');
+        });
+        
         Route::get('/student_exams/data', 'StudentExamController@data')->name('student_exams.data');
         Route::resource('student_exams', 'StudentExamController');
 

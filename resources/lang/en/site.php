@@ -251,4 +251,6 @@ return [
     'very_good' => 'Good (70-79%)',
     'good' => 'Average (60-69%)',
     'repeat' => 'Poor (<60%)',
+    'characters' => 'characters',
+    'instructions' => 'Instructions',
 ];
