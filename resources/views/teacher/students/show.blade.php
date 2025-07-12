@@ -43,8 +43,8 @@
 
                             <div class="btn-group d-flex" role="group" aria-label="Basic example">
                                 <button type="button" class="btn btn-primary ajax-data active" data-url="{{ route('teacher.students.details', $student->id) }}" style="border-bottom-left-radius: 0">@lang('students.details')</button>
-                                <button type="button" class="btn btn-primary ajax-data" data-url="{{ route('teacher.students.lectures', $student->id) }}" style="border-bottom-left-radius: 0">@lang('lectures.lectures')</button>
-                                <button type="button" class="btn btn-primary ajax-data" data-url="{{ route('teacher.students.pages', $student->id) }}" style="">@lang('pages.pages')</button>
+                                {{-- <button type="button" class="btn btn-primary ajax-data" data-url="{{ route('teacher.students.lectures', $student->id) }}" style="border-bottom-left-radius: 0">@lang('lectures.lectures')</button> --}}
+                                {{-- <button type="button" class="btn btn-primary ajax-data" data-url="{{ route('teacher.students.pages', $student->id) }}" style="">@lang('pages.pages')</button> --}}
                                 <button type="button" class="btn btn-primary ajax-data" data-url="{{ route('teacher.students.exams', $student->id) }}" style="">@lang('exams.exams')</button>
                             </div>
 
