@@ -54,7 +54,7 @@ class StudentExamController extends Controller
                 return $exam->created_at->format('Y-m-d');
             })
             ->editColumn('date_time', function (StudentExam $exam) {
-                return $exam->date_time ? $exam->date_time->format('H:i:s Y-m-d') : '';
+                return $exam->date_time ? $exam->date_time->format('Y-m-d H:i') : '';
             })
             ->addColumn('actions', function (StudentExam $studentExam) {
                 return view('student.student_exams.data_table.actions', compact('studentExam'));

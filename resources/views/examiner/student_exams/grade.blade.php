@@ -24,7 +24,7 @@
                     <div class="col-md-4">
                         <strong>Thời gian nộp:</strong> 
                         @if($studentExam->answers->first())
-                            {{ $studentExam->answers->first()->submitted_at->format('H:i:s d/m/Y') }}
+                            {{ $studentExam->answers->first()->submitted_at->format('H:i d/m/Y') }}
                         @else
                             Chưa nộp bài
                         @endif

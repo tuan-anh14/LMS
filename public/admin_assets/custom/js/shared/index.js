@@ -657,7 +657,7 @@ window.initDatePicker = () => {
         $(this).flatpickr({
             enableTime: true,
             noCalendar: true,
-            time_24hr: false,
+            time_24hr: true,
             locale: "vi",
             position: 'top right',
         });
@@ -668,7 +668,8 @@ window.initDatePicker = () => {
 
         $(this).flatpickr({
             enableTime: true,
-            dateFormat: "Y-m-d H:i K",
+            dateFormat: "Y-m-d H:i",
+            time_24hr: true,
             locale: "vi",
             position: 'top right',
         });

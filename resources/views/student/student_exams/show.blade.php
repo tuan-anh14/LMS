@@ -79,10 +79,10 @@
                                             <th>@lang('student_exams.' . $studentExam->status)</th>
                                         </tr>
 
-                                        <tr>
-                                            <th>@lang('student_exams.date_time')</th>
-                                            <th>{{ $studentExam->date_time?->translatedFormat('Y-m-d / h:i a') }}</th>
-                                        </tr>
+                                                                <tr>
+                            <th>@lang('student_exams.date_time')</th>
+                            <th>{{ $studentExam->date_time?->translatedFormat('Y-m-d H:i') }}</th>
+                        </tr>
 
                                         @php
                                             $totalPossibleScore = $studentExam->exam->questions->sum('points') ?? $studentExam->exam->questions->count();
@@ -138,12 +138,12 @@
                                             <th>@lang('site.created_at')</th>
                                         </tr>
 
-                                        @foreach ($studentExam->statuses as $status)
-                                            <tr>
-                                                <td>@lang('student_exams.' . $status->status)</td>
-                                                <td>{{ $status->created_at->translatedFormat('Y-m-d / h:i a') }}</td>
-                                            </tr>
-                                        @endforeach
+                                                                @foreach ($studentExam->statuses as $status)
+                            <tr>
+                                <td>@lang('student_exams.' . $status->status)</td>
+                                <td>{{ $status->created_at->translatedFormat('Y-m-d H:i') }}</td>
+                            </tr>
+                        @endforeach
 
                                     </table>
 

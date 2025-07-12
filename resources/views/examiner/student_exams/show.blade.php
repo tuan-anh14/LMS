@@ -99,10 +99,10 @@
                                             <th>@lang('student_exams.' . $studentExam->status)</th>
                                         </tr>
 
-                                        <tr>
-                                            <th>@lang('student_exams.date_time')</th>
-                                            <th>{{ $studentExam->date_time?->translatedFormat('Y-m-d / h:i a') }}</th>
-                                        </tr>
+                                                                <tr>
+                            <th>@lang('student_exams.date_time')</th>
+                            <th>{{ $studentExam->date_time?->translatedFormat('Y-m-d H:i') }}</th>
+                        </tr>
 
                                         <tr>
                                             <th>@lang('student_exams.assessment')</th>
@@ -135,12 +135,12 @@
                                             <th>@lang('site.created_at')</th>
                                         </tr>
 
-                                        @foreach ($studentExam->statuses as $status)
-                                            <tr>
-                                                <td>@lang('student_exams.' . $status->status)</td>
-                                                <td>{{ $status->created_at->translatedFormat('Y-m-d / h:i a') }}</td>
-                                            </tr>
-                                        @endforeach
+                                                                @foreach ($studentExam->statuses as $status)
+                            <tr>
+                                <td>@lang('student_exams.' . $status->status)</td>
+                                <td>{{ $status->created_at->translatedFormat('Y-m-d H:i') }}</td>
+                            </tr>
+                        @endforeach
 
                                     </table>
 
@@ -158,10 +158,10 @@
                                             </a>
 
                                         @elseif($studentExam->status == StudentExamStatusEnum::DATE_TIME_SET)
-                                            <div class="alert alert-success mb-2">
-                                                <i data-feather="clock"></i>
-                                                Đã đặt ngày giờ: <strong>{{ $studentExam->date_time?->translatedFormat('Y-m-d / h:i a') }}</strong>
-                                            </div>
+                                                                        <div class="alert alert-success mb-2">
+                                <i data-feather="clock"></i>
+                                Đã đặt ngày giờ: <strong>{{ $studentExam->date_time?->translatedFormat('Y-m-d H:i') }}</strong>
+                            </div>
                                             <a href=""
                                                class="btn btn-primary btn-block ajax-modal"
                                                data-url="{{ route('examiner.student_exams.edit_date_time', $studentExam->id) }}"

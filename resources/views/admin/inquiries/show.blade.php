@@ -53,10 +53,10 @@
                                             <td>{{ $inquiry->email }}</td>
                                         </tr>
 
-                                        <tr>
-                                            <th>@lang('inquiries.email')</th>
-                                            <td>{{ $inquiry->created_at->format('Y-m-d h:i a') }}</td>
-                                        </tr>
+                                                                <tr>
+                            <th>@lang('site.created_at')</th>
+                            <td>{{ $inquiry->created_at->format('Y-m-d H:i') }}</td>
+                        </tr>
 
                                     </table>
 
@@ -119,7 +119,7 @@
                 drawCallback: function (settings) {
                     $('.record__select').prop('checked', false);
                     $('#record__select-all').prop('checked', false);
-                    $('#record-ids').val();
+                    $('#record-ids').val('');
                     $('#bulk-delete').attr('disabled', true);
                 }
             });
