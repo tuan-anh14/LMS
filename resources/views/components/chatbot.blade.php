@@ -163,7 +163,7 @@
 
     <!-- Input Area -->
     <div class="border-t border-gray-100 bg-white p-6 rounded-b-2xl">
-      <form @submit.prevent="sendMessage()" class="flex items-end space-x-4">
+      <form @submit.prevent="sendMessage()" class="flex items-center space-x-4">
         <div class="flex-1 relative">
           <textarea x-model="currentMessage"
             placeholder="Nhập câu hỏi của bạn..."
