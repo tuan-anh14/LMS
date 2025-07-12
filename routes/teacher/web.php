@@ -55,6 +55,8 @@ Route::middleware(['auth', 'set_selected_center', 'role:teacher', 'localization'
         Route::resource('student_lectures', 'StudentLectureController');
 
         //exam routes
+        Route::get('/exams/{exam}/assign-to-class', 'ExamController@assignToClass')->name('exams.assign_to_class');
+        Route::post('/exams/{exam}/assign-to-class', 'ExamController@storeAssignToClass')->name('exams.store_assign_to_class');
         Route::resource('exams', 'ExamController');
 
         // AI Question Generation routes
