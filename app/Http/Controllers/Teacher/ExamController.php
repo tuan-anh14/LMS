@@ -26,7 +26,18 @@ class ExamController extends Controller
 
     public function index()
     {
-        $exams = Exam::with('project')->whereIn('project_id', session('selected_center')->projects->pluck('id'))->get();
+        // Lấy user hiện tại với type hint
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        
+        // Lấy project IDs mà giảng viên đang dạy
+        $teacherProjectIds = $user->getTeacherProjectIds();
+
+        // Chỉ lấy các bài kiểm tra thuộc projects mà giảng viên đang dạy
+        $exams = Exam::with('project')
+            ->whereIn('project_id', $teacherProjectIds)
+            ->get();
+            
         return view('teacher.exams.index', compact('exams'));
     }
 
@@ -75,38 +86,116 @@ class ExamController extends Controller
 
     public function create()
     {
-        $projects = session('selected_center')->projects;
+        // Lấy user hiện tại với type hint
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        
+        // Lấy các sections mà giảng viên đang dạy trong center hiện tại
+        $teacherSections = $user->teacherSections()
+            ->wherePivot('center_id', session('selected_center')['id'])
+            ->with('project')
+            ->get();
+
+        // Lấy các projects từ sections, loại bỏ duplicate
+        $projects = $teacherSections
+            ->pluck('project')
+            ->unique('id')
+            ->filter() // Loại bỏ null values
+            ->values(); // Reset array keys
+
         return view('teacher.exams.create', compact('projects'));
     }
 
     public function store(Request $request)
     {
+        // Lấy các project IDs mà giảng viên đang dạy
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        $teacherProjectIds = $user->getTeacherProjectIds();
+
         $request->validate([
             'name' => 'required|string|max:255',
-            'project_id' => 'required|exists:projects,id',
+            'project_id' => [
+                'required',
+                'exists:projects,id',
+                'in:' . implode(',', $teacherProjectIds)
+            ],
+        ], [
+            'project_id.in' => 'Bạn chỉ có thể tạo bài kiểm tra cho môn học mà bạn đang dạy.'
         ]);
+
         Exam::create($request->only('name', 'project_id'));
         return redirect()->route('teacher.exams.index')->with('success', __('site.added_successfully'));
     }
 
     public function edit(Exam $exam)
     {
-        $projects = session('selected_center')->projects;
+        // Kiểm tra authorization
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        
+        if (!$user->teachesProject($exam->project_id)) {
+            abort(403, 'Bạn không có quyền chỉnh sửa bài kiểm tra này.');
+        }
+
+        // Lấy các sections mà giảng viên đang dạy trong center hiện tại
+        $teacherSections = $user->teacherSections()
+            ->wherePivot('center_id', session('selected_center')['id'])
+            ->with('project')
+            ->get();
+
+        // Lấy các projects mà giảng viên đang dạy
+        $projects = $teacherSections
+            ->pluck('project')
+            ->unique('id')
+            ->filter()
+            ->values();
+
         return view('teacher.exams.edit', compact('exam', 'projects'));
     }
 
     public function update(Request $request, Exam $exam)
     {
+        // Kiểm tra authorization trước khi validate
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        
+        if (!$user->teachesProject($exam->project_id)) {
+            abort(403, 'Bạn không có quyền chỉnh sửa bài kiểm tra này.');
+        }
+
+        $teacherProjectIds = $user->getTeacherProjectIds();
+
         $request->validate([
             'name' => 'required|string|max:255',
-            'project_id' => 'required|exists:projects,id',
+            'project_id' => [
+                'required',
+                'exists:projects,id',
+                'in:' . implode(',', $teacherProjectIds)
+            ],
+        ], [
+            'project_id.in' => 'Bạn chỉ có thể chỉnh sửa bài kiểm tra cho môn học mà bạn đang dạy.'
         ]);
+
         $exam->update($request->only('name', 'project_id'));
         return redirect()->route('teacher.exams.index')->with('success', __('site.updated_successfully'));
     }
 
     public function destroy(Exam $exam)
     {
+        // Kiểm tra authorization
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        
+        if (!$user->teachesProject($exam->project_id)) {
+            if (request()->ajax()) {
+                return response()->json([
+                    'error_message' => 'Bạn không có quyền xóa bài kiểm tra này.'
+                ], 403);
+            }
+            abort(403, 'Bạn không có quyền xóa bài kiểm tra này.');
+        }
+
         $exam->delete();
         if (request()->ajax()) {
             return response()->json([

@@ -19,11 +19,24 @@ class StudentExamRequest extends FormRequest
             ->where('id', $this->student_id)
             ->firstOrFail();
 
+        // Lấy exam IDs mà giảng viên có thể tạo (thuộc projects họ dạy)
+        /** @var \App\Models\User $teacher */
+        $teacher = auth()->user();
+        $teacherProjectIds = $teacher->getTeacherProjectIds(session('selected_center')['id']);
+        
+        // Lấy exams thuộc student project và thuộc teacher projects
+        $availableExamIds = $student->studentProject->exams()
+            ->whereIn('project_id', $teacherProjectIds)
+            ->pluck('id')
+            ->toArray();
+
         $rules = [
             'student_id' => 'required|integer|exists:users,id',
             'exam_id' => [
-                'required', 'integer',
-                'in:' . implode(',', $student->studentProject->exams->pluck('id')->toArray()),
+                'required', 
+                'integer',
+                'exists:exams,id',
+                'in:' . implode(',', $availableExamIds),
             ],
             'examiner_id' => [
                 'required', 'integer',
@@ -53,6 +66,13 @@ class StudentExamRequest extends FormRequest
         return $rules;
 
     }//end of rules
+
+    public function messages()
+    {
+        return [
+            'exam_id.in' => 'Bạn chỉ có thể giao bài kiểm tra cho môn học mà bạn đang dạy và học sinh đang học.',
+        ];
+    }
 
     public function prepareForValidation()
     {

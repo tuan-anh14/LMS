@@ -377,6 +377,31 @@ class User extends Authenticatable
 
     }// end of isExaminer
 
+    /**
+     * Lấy danh sách project IDs mà giảng viên đang dạy trong center hiện tại
+     */
+    public function getTeacherProjectIds($centerId = null)
+    {
+        $centerId = $centerId ?? session('selected_center')['id'];
+        
+        return $this->teacherSections()
+            ->wherePivot('center_id', $centerId)
+            ->with('project')
+            ->get()
+            ->pluck('project.id')
+            ->unique()
+            ->filter()
+            ->toArray();
+    }
+
+    /**
+     * Kiểm tra xem giảng viên có đang dạy project này không
+     */
+    public function teachesProject($projectId, $centerId = null)
+    {
+        return in_array($projectId, $this->getTeacherProjectIds($centerId));
+    }
+
     protected static function booted()
     {
         static::created(function (User $user) {

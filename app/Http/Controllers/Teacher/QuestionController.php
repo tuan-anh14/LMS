@@ -19,20 +19,39 @@ class QuestionController extends Controller
         $this->openAIService = $openAIService;
     }
 
+    /**
+     * Kiểm tra xem bài kiểm tra có thuộc project mà giảng viên đang dạy không
+     */
+    private function checkExamAuthorization(Exam $exam)
+    {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        
+        if (!$user->teachesProject($exam->project_id)) {
+            abort(403, 'Bạn không có quyền quản lý câu hỏi cho bài kiểm tra này.');
+        }
+    }
+
     public function index(Exam $exam)
     {
+        $this->checkExamAuthorization($exam);
+        
         $questions = $exam->questions;
         return view('teacher.questions.index', compact('exam', 'questions'));
     }
 
     public function create(Exam $exam)
     {
+        $this->checkExamAuthorization($exam);
+        
         $questionTypes = QuestionTypeEnum::getLabels();
         return view('teacher.questions.create', compact('exam', 'questionTypes'));
     }
 
     public function store(Request $request, Exam $exam)
     {
+        $this->checkExamAuthorization($exam);
+        
         // Dynamic validation rules based on question type
         $rules = [
             'content' => 'required|string',
@@ -93,12 +112,16 @@ class QuestionController extends Controller
 
     public function edit(Exam $exam, Question $question)
     {
+        $this->checkExamAuthorization($exam);
+        
         $questionTypes = QuestionTypeEnum::getLabels();
         return view('teacher.questions.edit', compact('exam', 'question', 'questionTypes'));
     }
 
     public function update(Request $request, Exam $exam, Question $question)
     {
+        $this->checkExamAuthorization($exam);
+        
         // Dynamic validation rules based on question type
         $rules = [
             'content' => 'required|string',
@@ -159,6 +182,8 @@ class QuestionController extends Controller
 
     public function destroy(Exam $exam, Question $question)
     {
+        $this->checkExamAuthorization($exam);
+        
         $question->delete();
         if (request()->ajax()) {
             return response()->json([
@@ -173,6 +198,8 @@ class QuestionController extends Controller
      */
     public function createWithAI(Exam $exam)
     {
+        $this->checkExamAuthorization($exam);
+        
         return view('teacher.questions.create_with_ai', compact('exam'));
     }
 
@@ -181,6 +208,8 @@ class QuestionController extends Controller
      */
     public function generateWithAI(Request $request, Exam $exam)
     {
+        $this->checkExamAuthorization($exam);
+        
         $request->validate([
             'topic' => 'required|string|max:255',
             'count' => 'required|integer|min:1|max:' . config('services.openai.max_questions', 10),
@@ -215,6 +244,8 @@ class QuestionController extends Controller
      */
     public function previewAI(Exam $exam)
     {
+        $this->checkExamAuthorization($exam);
+        
         $questions = session('generated_questions');
         $sessionExamId = session('exam_id');
 
@@ -231,6 +262,8 @@ class QuestionController extends Controller
      */
     public function saveAI(Request $request, Exam $exam)
     {
+        $this->checkExamAuthorization($exam);
+        
         $questions = session('generated_questions');
         $sessionExamId = session('exam_id');
 
@@ -265,6 +298,8 @@ class QuestionController extends Controller
      */
     public function cancelAI(Exam $exam)
     {
+        $this->checkExamAuthorization($exam);
+        
         session()->forget(['generated_questions', 'exam_id']);
         return redirect()->route('teacher.exams.questions.index', $exam->id);
     }
